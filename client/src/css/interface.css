@@ -1,0 +1,141 @@
+body {
+    font-family: 'Roboto', sans-serif;
+    margin: 0;
+    padding: 0;
+    background-color: #f4f4f4;
+  }
+  
+  .header {
+    background-color: #4caf50;
+    color: white;
+    padding: 15px 20px;
+    text-align: center;
+  }
+  
+  .container {
+    display: flex;
+  }
+  
+  .sidebar {
+    width: 250px;
+    background-color: #333;
+    color: white;
+    height: 100vh;
+    padding-top: 20px;
+  }
+  
+  .sidebar .profile {
+    display: flex;
+    align-items: center;
+    padding: 10px 15px;
+  }
+  
+  .sidebar .profile img {
+    border-radius: 50%;
+    margin-right: 10px;
+  }
+  
+  .sidebar h2 {
+    padding: 10px 15px;
+    text-decoration: none;
+    color: white;
+    display: block;
+    background-color: #333;
+    margin: 0;
+    cursor: pointer;
+    font-size: 18px;
+  }
+  
+  .sidebar h2:hover {
+    background-color: #575757;
+  }
+  
+  .content {
+    flex: 1;
+    padding: 20px;
+  }
+  
+  .card {
+    background-color: white;
+    padding: 20px;
+    margin-bottom: 20px;
+    border-radius: 5px;
+    box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+  }
+  
+  .card h2 {
+    margin-top: 0;
+  }
+  
+  .card h3 {
+    margin-top: 20px;
+    font-weight: 600;
+  }
+  
+  .card table {
+    width: 100%;
+    border-collapse: collapse;
+  }
+  
+  .card table, .card th, .card td {
+    border: 1px solid #ddd;
+  }
+  
+  .card th, .card td {
+    padding: 8px;
+    text-align: left;
+  }
+  
+  .card th {
+    background-color: #f2f2f2;
+  }
+  
+  .btn {
+    background-color: #4caf50;
+    color: white;
+    padding: 10px 15px;
+    text-decoration: none;
+    border-radius: 5px;
+    display: inline-block;
+    margin-right: 10px;
+    cursor: pointer;
+  }
+  
+  .btn:hover {
+    background-color: #45a049;
+  }
+  
+  .edit-btn {
+    background-color: #4caf50;
+  }
+  
+  .edit-btn:hover {
+    background-color: #45a049;
+  }
+  
+  .delete-btn {
+    background-color: #f44336;
+  }
+  
+  .delete-btn:hover {
+    background-color: #e53935;
+  }
+  
+  .profile span {
+    font-weight: bold;
+  }
+  
+  .users {
+    background-color: #4caf50;
+    padding: 5px 10px;
+    cursor: pointer;
+    font-size: 18px;
+    display: inline-block;
+    border-radius: 5px;
+    margin-top: 20px;
+  }
+
+  .users:hover{
+    background-color :#45a049
+  }
+  
