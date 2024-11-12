@@ -1,26 +1,33 @@
 import React, { useState, useEffect } from 'react';
-// import axios from 'axios';
+import axios from 'axios';
 
 const App = () => {
   const [users, setUsers] = useState([]);
   const [show, setShow] = useState(false);
 
-  const dummyUsers = [
-    { id: 1, name: 'John Doe', email: 'john.doe@example.com' },
-    { id: 2, name: 'Jane Smith', email: 'jane.smith@example.com' },
-    { id: 3, name: 'Alice Johnson', email: 'alice.johnson@example.com' },
-    { id: 4, name: 'Bob Brown', email: 'bob.brown@example.com' },
-  ];
+  useEffect(() => {
+    axios.get("http://127.0.01:3000/api/").then((res)=>{
+      console.log(res.data);
+      setUsers(res.data)
+      
+    })
+    .catch((err)=>{
+      console.log(err);
+    })
+  }, []);
 
-
-  const handleDelete = ()=>{
-
+  
+  const handleDelete = (user)=>{
+    axios.delete(`http://127.0.01:3000/api/${user.idusers}`).then(()=>{
+      console.log("deleted");
+    })
+    .catch((err)=>{
+      console.log(err);
+      
+    })
   }
 
 
-  useEffect(() => {
-    setUsers(dummyUsers);
-  }, []);
 
   return (
     <div>
@@ -32,7 +39,7 @@ const App = () => {
           <div className="profile">
             <img
               alt="Profile picture of the admin"
-              // src="https://storage.googleapis.com/a1aa/image/qlFqqULTK9Y3JJrbn07eVCvKnIEw4n3OQpPOgfToNkSF0AwTA.jpg"
+              src="https://storage.googleapis.com/a1aa/image/qlFqqULTK9Y3JJrbn07eVCvKnIEw4n3OQpPOgfToNkSF0AwTA.jpg"
               width="50"
               height="50"
             />
@@ -60,13 +67,13 @@ const App = () => {
                 </thead>
                 <tbody>
                   {users.map((user) => (
-                    <tr key={user.id}>
-                      <td>{user.id}</td>
+                    <tr key={user.idusers}>
+                      <td>{user.idusers}</td>
                       <td>{user.name}</td>
                       <td>{user.email}</td>
                       <td>
                         <button className="btn edit-btn">Edit</button>
-                        <button className="btn delete-btn" onClick={()=>{handleDelete()}}>Delete</button>
+                        <button className="btn delete-btn" onClick={()=>{handleDelete(user)}}>Delete</button>
                       </td>
                     </tr>
                   ))}

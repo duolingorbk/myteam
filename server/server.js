@@ -8,8 +8,8 @@ const userRouter = require("./routes/adminUserRoute")
 
 
 app.use(cors());
-app.use(express.static(__dirname + "../react-client/index.jsx"));
 app.use(express.json());
+app.use(express.static(__dirname + "../react-client/index.jsx"));
 app.use("/api",userRouter)
 
 

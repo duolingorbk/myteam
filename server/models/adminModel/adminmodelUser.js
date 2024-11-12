@@ -6,12 +6,12 @@ const getAllUsers=(callback)=>{
 }
 
 const deleteUser = (id , callback )=>{
-    connection.query('delete from users where id = ? ' , id , callback)
+    connection.query('delete from users where idusers = ? ' , [id] , callback)
 }
 
 
 const updateUser = (value , id , callback)=>{
-    connection.query('update users set ? where id = ? ' , [value , id ], callback)
+    connection.query('update users set ? where idusers = ? ' , [value , id ], callback)
 }
 
 

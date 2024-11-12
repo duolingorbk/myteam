@@ -31,6 +31,13 @@ CREATE TABLE IF NOT EXISTS `speakeasy`.`users` (
   PRIMARY KEY (`idusers`))
 ENGINE = InnoDB;
 
+INSERT INTO `speakeasy`.`users` (name, email, password, image, progress, type)
+VALUES
+  ('John Doe', 'john.doe@example.com', NULL, NULL, NULL, 'user'),
+  ('Jane Smith', 'jane.smith@example.com', NULL, NULL, NULL, 'user'),
+  ('Alice Johnson', 'alice.johnson@example.com', NULL, NULL, NULL, 'user'),
+  ('Bob Brown', 'bob.brown@example.com', NULL, NULL, NULL, 'user');
+
 
 -- -----------------------------------------------------
 -- Table `speakeasy`.`lessons`
@@ -89,3 +96,8 @@ ENGINE = InnoDB;
 SET SQL_MODE=@OLD_SQL_MODE;
 SET FOREIGN_KEY_CHECKS=@OLD_FOREIGN_KEY_CHECKS;
 SET UNIQUE_CHECKS=@OLD_UNIQUE_CHECKS;
+
+
+
+
+
