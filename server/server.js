@@ -1,19 +1,11 @@
 const express = require("express");
 const cors = require("cors");
-const bcrypt = require('bcryptjs');
-const jwt = require('jsonwebtoken');
-const dotenv = require('dotenv');
-const authRoutes = require('./routes/signup_and_login_routes/auth');
-
-dotenv.config();
 
 const app = express();
-
-const PORT = process.env.PORT || 3000;
-
 app.use(cors());
 app.use(express.json());
 require("./database/index")
+const PORT = 3000;
 const userroute = require("./routes/user")
 const lessonroute = require("./routes/lesson")
 app.use("/user" , userroute)
