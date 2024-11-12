@@ -26,8 +26,9 @@ app.use("/lesson" , lessonroute)
 
 
 
-
-
+app.use('/Lessons',routeLessons)
+app.use('/Questions',routeQuestions)
+app.use('/Answers',routeAnswers)
 
 app.listen(PORT, () => {
   console.log(`Listening on port ${PORT}`);
