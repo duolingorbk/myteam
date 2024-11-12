@@ -1,7 +1,7 @@
 module.exports = {
     host: 'localhost',
     user: 'root',
-    password: 'sazitoun',
+    password: '23707560eya',
     database: 'speakeasy'
   };
 
