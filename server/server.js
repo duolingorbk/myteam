@@ -2,13 +2,20 @@ const express = require("express");
 const cors = require("cors");
 
 const app = express();
-const PORT = 3000;
-const  routeLessons=require("./routes/lessonsAndQ/lessonsrouter.js")
-const  routeQuestions=require("./routes/lessonsAndQ/questions.js")
-const  routeAnswers=require("./routes/lessonsAndQ/answers.js")
 app.use(cors());
-app.use(express.static(__dirname + "../react-client/index.jsx"));
 app.use(express.json());
+require("./database/index")
+const PORT = 3000;
+const userroute = require("./routes/user")
+const lessonroute = require("./routes/lesson")
+app.use("/user" , userroute)
+
+app.use("/lesson" , lessonroute)
+
+
+
+
+
 
 
 app.use('/Lessons',routeLessons)
