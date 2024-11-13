@@ -6,7 +6,7 @@ const Questions = sequelize.define('Questions', {
         type: DataTypes.STRING,
         allowNull: true,
     }
-}  , { timestamps: false })
+}  , { timestamps: false })  ///=> this tell sequelize to not cerate automatically   the to  keys the update and the create 
 return Questions
 }
 
