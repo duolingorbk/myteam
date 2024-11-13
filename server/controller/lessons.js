@@ -2,7 +2,7 @@ const db = require("../database/index")
 
 
 
-const getAlllessons = async (req, res) => {
+const getAllLessons = async (req, res) => {
     try {
         const lesson = await db.Lessons.findAll()
         console.log(lesson);
@@ -17,5 +17,5 @@ const getAlllessons = async (req, res) => {
 
 
 module.exports = {
-    getAlllessons
+    getAllLessons
 }

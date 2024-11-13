@@ -4,17 +4,9 @@ const db = require("../database/index")
 
 const signup = async (req, res) => {
     try {
-        const {
-            email,
-            password,
-            name
-        } = req.body
-        console.log(req.body);
-
+        const { email, password, name} = req.body
         const getuser = await db.User.findOne({
-            where: {
-                email: email
-            }
+            where: {email: email  }
         })
         if (getuser) {
             res.send(getuser)
