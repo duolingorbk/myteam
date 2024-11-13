@@ -14,7 +14,6 @@ const userroute = require("./routes/user")
 const lessonroute = require("./routes/lesson")
 
 app.use("/user" , userroute)
-
 app.use("/lesson" , lessonroute)
 
 

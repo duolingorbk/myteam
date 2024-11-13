@@ -42,3 +42,4 @@ db.Answers.belongsTo(db.Questions)
 
 module.exports= db
 
+

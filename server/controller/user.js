@@ -51,7 +51,6 @@ const login = async (req, res) => {
             password,
         } = req.body;
 
-        // Changed User to db.User to match your database import
         const user = await db.User.findOne({ where: { email } });
 
         if (!user) {
@@ -75,7 +74,8 @@ const login = async (req, res) => {
             user: {
                 id: user.id,
                 name: user.name,
-                email: user.email
+                email: user.email,
+                token:user.token
             },
             token
         });
@@ -85,55 +85,5 @@ const login = async (req, res) => {
         res.status(500).send(error);
     }
 };
-const invalidatedTokens = new Set();
 
-const verifyToken = (req, res, next) => {
-    try {
-        const token = req.headers.authorization?.split(' ')[1];
-
-        if (!token) {
-            return res.status(401).json({ message: 'No token provided' });
-        }
-
-        // Check if token is in invalidated list
-        if (invalidatedTokens.has(token)) {
-            return res.status(401).json({ message: 'Token is no longer valid' });
-        }
-
-        // Verify the token
-        const decoded = jwt.verify(token, JWT_SECRET);
-        req.user = decoded;
-        next();
-
-    } catch (error) {
-        return res.status(401).json({ message: 'Invalid token' });
-    }
-};
-
-const logout = async (req, res) => {
-    try {
-        const token = req.headers.authorization?.split(' ')[1];
-
-        if (!token) {
-            return res.status(401).json({ message: 'No token provided' });
-        }
-
-        // Add the token to the invalidated tokens list
-        invalidatedTokens.add(token);
-
-        // Send only one response
-        return res.status(200).json({
-            message: 'Logout successful'
-        });
-
-    } catch (error) {
-        // Send only one error response
-        return res.status(500).json({
-            message: 'Error during logout',
-            error: error.message
-        });
-    }
-};
-
-// Fixed the exports syntax
-module.exports = { signup, login ,verifyToken, logout};
+module.exports = { signup, login };

@@ -5,7 +5,6 @@ const userroute = express.Router()
 
 userroute.post("/signup" , signup)
 userroute.post("/login",login)
-userroute.post("/logout",verifyToken,logout)
 
 
 module.exports = userroute
