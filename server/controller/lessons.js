@@ -1,7 +1,9 @@
 const db = require("../database/index");
 
+
 const getAllLessons = async (req, res) => {
     try {
+
         const lessons = await db.Lessons.findAll({
             where: { language: req.query.language }  // Filter by language
         });
@@ -13,3 +15,6 @@ const getAllLessons = async (req, res) => {
 };
 
 module.exports = { getAllLessons };
+
+      
+
