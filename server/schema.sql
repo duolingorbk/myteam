@@ -52,7 +52,7 @@ ENGINE = InnoDB;
 
 
 -- -----------------------------------------------------
--- Table `speakeasy`.`questions`
+-- Table `speakeasy`.`questions` 
 -- -----------------------------------------------------
 CREATE TABLE IF NOT EXISTS `speakeasy`.`questions` (
   `idquestions` INT NOT NULL AUTO_INCREMENT,
@@ -75,7 +75,7 @@ CREATE TABLE IF NOT EXISTS `speakeasy`.`answers` (
   `idanswers` INT NOT NULL AUTO_INCREMENT,
   `content` LONGTEXT NULL,
   `status` TINYINT NULL,
-  `questions_idquestions` INT NOT NULL,
+  `questions_idquestions` INT NOT NULL,  ---- fogrign key ----- 
   PRIMARY KEY (`idanswers`),
   INDEX `fk_answers_questions1_idx` (`questions_idquestions` ASC) VISIBLE,
   CONSTRAINT `fk_answers_questions1`

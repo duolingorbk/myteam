@@ -1,18 +1,21 @@
 import { useState } from 'react'
-import reactLogo from './assets/react.svg'
-import viteLogo from '/vite.svg'
 import './App.css'
+import {Route,Routes} from 'react-router-dom'
+
+
+
+import ChooseLanguage from './components/lessons pages/ChooseLanguage'
 
 function App() {
- 
+  
+   const [lessons, setlessons] = useState([]);
+   
 
   return (
-    <>
-      <div>
-       
-      </div>
-     
-    </>
+    <Routes>
+      <Route path='/' element={<ChooseLanguage lessons={lessons}/>}/>
+      <Route />
+    </Routes>
   )
 }
 
