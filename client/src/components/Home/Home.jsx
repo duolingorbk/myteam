@@ -1,68 +1,105 @@
 import React from 'react';
-import "../Home/Home.css";
+import "../Home/Home.css"
 
-function Home() {
+const Home = () => {
   return (
-    <div className="container">
-      <div className="header">
-        <img
-          alt="speakeasy logo"
-          height="40"
-          src="https://storage.googleapis.com/a1aa/image/eEElFBiXezkNH0RojjIsHwrBqlptPleq7YSHuJDQIfFtc8fdC.jpg"
-          width="100"
-        />
-        <div className="buttons">
-          <a href="#">Apprends gratuitement</a>
-          <a href="#">S'identifier</a>
+    <div>
+      <header className="header">
+        <div className="logo">
+          <img
+            alt="speakeasy"
+            height="40"
+            src="https://storage.googleapis.com/a1aa/image/oDNgct07CLaSJxMXnAWw4zCeiNbCh7gKoZyTTo2pOopvRQ4JA.jpg"
+            width="40"
+          />
+          <div>
+            <h1>speakeasy</h1>
+          </div>
         </div>
-      </div>
-      <div className="main-content">
-        <h1>Parle une nouvelle langue en 10 minutes par jour</h1>
+      </header>
+      <main className="main">
+        <h2>Speak a new language in 10 minutes a day</h2>
         <p>
-          Fixe-toi des objectifs réalistes. Bénéficie de conseils de locuteurs
-          natifs. Fais de réels progrès. Découvre un champ de possibilités en
-          apprenant une autre langue.
+          Set realistic goals. Get advice from native speakers. Make real progress. Discover a world of opportunities by learning another language.
         </p>
-        <a className="cta-button" href="#">
-          Apprends gratuitement
+        <a className="cta" href="#">
+          Learn for free
         </a>
         <div className="rating">
-          <span>Excellent</span>
           <i className="fas fa-star"></i>
           <i className="fas fa-star"></i>
           <i className="fas fa-star"></i>
           <i className="fas fa-star"></i>
           <i className="fas fa-star-half-alt"></i>
-          <span>16 364 avis sur</span>
-          <span>Trustpilot</span>
+        </div>
+        <div className="illustration">
+          <div className="speech-bubble">Hello!</div>
+          <img
+            alt="Person with Hello speech bubble"
+            height="100"
+            src="https://storage.googleapis.com/a1aa/image/u1s5zDgpCQq0KRDIo3zWDdqub9YIf8a6c95Owmla4lfHWgwTA.jpg"
+            width="100"
+          />
+          <div className="speech-bubble">Hello!</div>
+          <img
+            alt="Person with Hello speech bubble"
+            height="100"
+            src="https://storage.googleapis.com/a1aa/image/7RqsPi87jSImI90PzednlqwnWb9WQarEIJZn3op6npUCLQ4JA.jpg"
+            width="100"
+          />
+          <div className="speech-bubble">Ciao!</div>
+          <img
+            alt="Person with Ciao speech bubble"
+            height="100"
+            src="https://storage.googleapis.com/a1aa/image/hRfpuQXOtyQVWqHJ5qv2lIeZxmBWJDia3SQRL8k7ClmGWgwTA.jpg"
+            width="100"
+          />
+          <div className="speech-bubble">Hello</div>
+          <img
+            alt="Person with Hello speech bubble"
+            height="100"
+            src="https://storage.googleapis.com/a1aa/image/rTtrI2Pq4KooB9XVnBg9pvHKoC71JgcefbqwOSBAaG6FWgwTA.jpg"
+            width="100"
+          />
+        </div>
+      </main>
+      <div className="container">
+      <div className="title">
+        I want to learn
+      </div>
+      <div className="languages">
+        <div className="arrow">
+          &lt;
+        </div>
+        <div className="language">
+          <img 
+            alt="UK flag" 
+            height="60" 
+            src="https://storage.googleapis.com/a1aa/image/OylZYRhN2qZHPNW3cRC7uCEXrSTQvzMDUt6di6sgtkNIKI8E.jpg" 
+            width="60" 
+          />
+          <p>
+            English
+          </p>
+        </div>
+        <div className="language">
+          <img 
+            alt="French flag" 
+            height="60" 
+            src="https://storage.googleapis.com/a1aa/image/hKXxIf4hnVVCF6JoWwqFUfIZ80Vig3Y3ZCYSdHHDUEKiogwTA.jpg" 
+            width="60" 
+          />
+          <p>
+            French
+          </p>
+        </div>
+        <div className="arrow">
+          &gt;
         </div>
       </div>
-      <div className="illustration">
-        <div className="speech-bubble">Bonjour!</div>
-        <img
-          alt="Person with phone"
-          height="100"
-          src="https://storage.googleapis.com/a1aa/image/Q6l3AdDOffmFmUsumLalXG9dW05PJJ4bX0NYbX6fGn5ZOefdC.jpg"
-          width="100"
-        />
-        <div className="speech-bubble">Hello!</div>
-        <img
-          alt="Person with laptop"
-          height="100"
-          src="https://storage.googleapis.com/a1aa/image/TcbJzwQqh1LsGBWbIu4duopyMAxb4FIJNcY8HVqxQybzxf3JA.jpg"
-          width="100"
-        />
-        <div className="speech-bubble">Ciao!</div>
-        <img
-          alt="Person with phone"
-          height="100"
-          src="https://storage.googleapis.com/a1aa/image/Q6l3AdDOffmFmUsumLalXG9dW05PJJ4bX0NYbX6fGn5ZOefdC.jpg"
-          width="100"
-        />
-        <div className="speech-bubble">你好</div>
-      </div>
+    </div>
     </div>
   );
-}
+};
 
 export default Home;
