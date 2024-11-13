@@ -40,7 +40,7 @@ const Home = () => {
             src="https://storage.googleapis.com/a1aa/image/u1s5zDgpCQq0KRDIo3zWDdqub9YIf8a6c95Owmla4lfHWgwTA.jpg"
             width="100"
           />
-          <div className="speech-bubble">Hello!</div>
+          <div className="speech-bubble">Salut!</div>
           <img
             alt="Person with Hello speech bubble"
             height="100"
@@ -52,13 +52,6 @@ const Home = () => {
             alt="Person with Ciao speech bubble"
             height="100"
             src="https://storage.googleapis.com/a1aa/image/hRfpuQXOtyQVWqHJ5qv2lIeZxmBWJDia3SQRL8k7ClmGWgwTA.jpg"
-            width="100"
-          />
-          <div className="speech-bubble">Hello</div>
-          <img
-            alt="Person with Hello speech bubble"
-            height="100"
-            src="https://storage.googleapis.com/a1aa/image/rTtrI2Pq4KooB9XVnBg9pvHKoC71JgcefbqwOSBAaG6FWgwTA.jpg"
             width="100"
           />
         </div>
