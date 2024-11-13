@@ -4,26 +4,13 @@ import "../Home/Home.css"
 const Home = () => {
   return (
     <div>
-      <header className="header">
-        <div className="logo">
-          <img
-            alt="speakeasy"
-            height="40"
-            src="https://storage.googleapis.com/a1aa/image/oDNgct07CLaSJxMXnAWw4zCeiNbCh7gKoZyTTo2pOopvRQ4JA.jpg"
-            width="40"
-          />
-          <div>
-            <h1>speakeasy</h1>
-          </div>
-        </div>
-      </header>
       <main className="main">
         <h2>Speak a new language in 10 minutes a day</h2>
         <p>
           Set realistic goals. Get advice from native speakers. Make real progress. Discover a world of opportunities by learning another language.
         </p>
         <a className="cta" href="#">
-          Learn for free
+          Start learning
         </a>
         <div className="rating">
           <i className="fas fa-star"></i>

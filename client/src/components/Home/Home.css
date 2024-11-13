@@ -16,47 +16,15 @@ body {
     align-items: center;
 }
 
-.header .logo {
-    display: flex;
-    align-items: center;
-}
 
-.header .logo img {
-    height: 40px;
-    margin-right: 10px;
-}
 
-.header .logo h1 {
-    margin: 0;
-    font-size: 24px;
-}
 
-.header .logo p {
-    margin: 0;
-    font-size: 12px;
-}
 
-.header .nav {
-    display: flex;
-    align-items: center;
-}
 
-.header .nav a {
-    color: white;
-    text-decoration: none;
-    margin-left: 20px;
-    padding: 10px 20px;
-    border: 1px solid white;
-    border-radius: 20px;
-}
 
-.header .nav a:first-child {
-    background-color: white;
-    color: #4a00e0;
-}
 
 .main {
-    flex: 1; /* Allow the main section to grow and fill available space */
+    flex: 1; 
     background: linear-gradient(90deg, #4a00e0, #8e2de2);
     color: white;
     text-align: center;
