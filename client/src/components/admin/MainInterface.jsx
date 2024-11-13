@@ -6,19 +6,22 @@ const App = () => {
   const [show, setShow] = useState(false);
 
   useEffect(() => {
-    axios.get("http://127.0.01:3000/api/").then((res)=>{
-      console.log(res.data);
+    axios.get("http://127.0.01:3000/user/allusers").then((res)=>{
       setUsers(res.data)
       
     })
     .catch((err)=>{
       console.log(err);
     })
-  }, []);
+  }, [users]);
 
   
   const handleDelete = (user)=>{
-    axios.delete(`http://127.0.01:3000/api/${user.idusers}`).then(()=>{
+    console.log(user);
+    
+    axios.delete(`http://127.0.01:3000/user/deleteUser/${user.id}`).then(()=>{
+  
+    
       console.log("deleted");
     })
     .catch((err)=>{
@@ -39,7 +42,7 @@ const App = () => {
           <div className="profile">
             <img
               alt="Profile picture of the admin"
-              src="https://storage.googleapis.com/a1aa/image/qlFqqULTK9Y3JJrbn07eVCvKnIEw4n3OQpPOgfToNkSF0AwTA.jpg"
+              src="https://as1.ftcdn.net/v2/jpg/01/12/09/12/1000_F_112091233_xghsriqmHzk4sq71lWBL4q0e7n9QJKX6.jpg"
               width="50"
               height="50"
             />
@@ -67,8 +70,8 @@ const App = () => {
                 </thead>
                 <tbody>
                   {users.map((user) => (
-                    <tr key={user.idusers}>
-                      <td>{user.idusers}</td>
+                    <tr key={user.id}>
+                      <td>{user.id}</td>
                       <td>{user.name}</td>
                       <td>{user.email}</td>
                       <td>

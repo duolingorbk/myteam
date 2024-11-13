@@ -33,4 +33,47 @@ const signup = async (req, res) => {
 }
 
 
-module.exports = signup
+const findAllUsers = async (req, res) => {
+    try {
+        const users = await db.User.findAll();
+        res.send(users);
+    } catch (error) {
+        res.send(error);
+    }
+}
+
+
+const deleteUser = async (req, res) => {
+    try {
+        const { id } = req.params;
+        await db.User.destroy({
+            where: { id: id }
+        });
+
+        res.send("Deleted");
+    } catch (error) {
+        res.send(error);
+    }
+}
+
+const updateUser = async (req, res) => {
+    try {
+        const { id } = req.params;
+        const { email, password, name } = req.body;
+
+        const user = await db.User.update(
+            { email, password, name },
+            { where: { id } }
+        );
+
+        res.send(user);
+    } catch (error) {
+        res.send(error);
+    }
+}
+
+
+
+
+
+module.exports = {signup,findAllUsers , deleteUser , updateUser }
