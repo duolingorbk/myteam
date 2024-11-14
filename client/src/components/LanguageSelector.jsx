@@ -1,6 +1,6 @@
 import React from 'react';
 import { useNavigate } from 'react-router-dom';
-
+import '../../src/App.css'
 function LanguageSelector({ setLanguage }) {
   const navigate = useNavigate();
 
@@ -12,8 +12,8 @@ function LanguageSelector({ setLanguage }) {
   return (
     <div>
       <h2>Select Language</h2>
-      <button onClick={() => handleLanguageSelect('english')}>English</button>
-      <button onClick={() => handleLanguageSelect('french')}>French</button>
+      <button  className ="eng"onClick={() => handleLanguageSelect('english')}>English</button>
+      <button   className='fr' onClick={() => handleLanguageSelect('french')}>French</button>
     </div>
   );
 }

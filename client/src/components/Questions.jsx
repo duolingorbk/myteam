@@ -1,7 +1,7 @@
 import React, { useState, useEffect } from 'react';
 import axios from 'axios';
 import { useParams } from 'react-router-dom';
-
+import '../../src/App.css'
 function Questions() {
   const { lessonId } = useParams();
   const [questions, setQuestions] = useState([]);

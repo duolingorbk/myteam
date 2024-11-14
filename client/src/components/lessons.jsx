@@ -1,7 +1,7 @@
 import React, { useState, useEffect } from 'react';
 import axios from 'axios';
 import { useNavigate } from 'react-router-dom';
-
+import '../../src/App.css'
 function Lessons({ language }) {
   const [lessons, setLessons] = useState([]);
   const [loading, setLoading] = useState(true);
