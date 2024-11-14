@@ -1,0 +1,130 @@
+.profile-container {
+    max-width: 900px;
+    margin: 40px auto;
+    padding: 20px;
+    background-color: #ffffff;
+    border-radius: 15px;
+    box-shadow: 0 0 20px rgba(0, 0, 0, 0.1);
+  }
+  
+  .profile-header {
+    text-align: center;
+    margin-bottom: 40px;
+  }
+  
+  .profile-avatar {
+    margin-bottom: 20px;
+    width: 150px;  
+    height: 150px; 
+    border-radius: 50%;
+    position: relative;
+    margin: 0 auto;    
+    background: #f0f0f0;
+  }
+  
+  .profile-avatar img {
+    width: 100%;
+    height: 100%;
+    border-radius: 50%;
+    border: 4px solid #4a90e2;
+    object-fit: cover;
+    position: absolute;
+    top: 0;
+    left: 0;
+  }
+  
+  .profile-header h1 {
+    margin: 10px 0;
+    color: #333;
+  }
+  
+  .email {
+    color: #666;
+    font-size: 1.1em;
+  }
+  
+  .profile-stats {
+    display: flex;
+    justify-content: space-around;
+    margin: 40px 0;
+    flex-wrap: wrap;
+    gap: 20px;
+  }
+  
+  .stat-card {
+    background-color: #f8f9fa;
+    padding: 20px;
+    border-radius: 10px;
+    text-align: center;
+    min-width: 200px;
+    box-shadow: 0 2px 5px rgba(0, 0, 0, 0.05);
+  }
+  
+  .stat-card i {
+    font-size: 24px;
+    color: #4a90e2;
+    margin-bottom: 10px;
+  }
+  
+  .stat-card h3 {
+    margin: 10px 0;
+    color: #555;
+    font-size: 1.1em;
+  }
+  
+  .stat-card p {
+    color: #333;
+    font-size: 1.2em;
+    font-weight: bold;
+  }
+  
+  .profile-details {
+    margin-top: 40px;
+  }
+  
+  .languages-section, .progress-section {
+    margin-bottom: 30px;
+  }
+  
+  .languages-section h2, .progress-section h2 {
+    color: #333;
+    margin-bottom: 20px;
+    border-bottom: 2px solid #4a90e2;
+    padding-bottom: 10px;
+  }
+  
+  .language-list {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 10px;
+  }
+  
+  .language-tag {
+    background-color: #4a90e2;
+    color: white;
+    padding: 8px 15px;
+    border-radius: 20px;
+    font-size: 0.9em;
+  }
+  
+  .progress-info {
+    background-color: #f8f9fa;
+    padding: 20px;
+    border-radius: 10px;
+  }
+  
+  .progress-bar {
+    background-color: #e9ecef;
+    height: 20px;
+    border-radius: 10px;
+    margin-top: 10px;
+    overflow: hidden;
+  }
+  
+  .progress {
+    background-color: #4a90e2;
+    height: 100%;
+    border-radius: 10px;
+    transition: width 0.3s ease;
+  }
+  
