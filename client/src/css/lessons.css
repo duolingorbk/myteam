@@ -1,79 +1,83 @@
-body {
-    font-family: Arial, sans-serif;
-    background-color: #f5f5f5;
-    margin: 0;
-    padding: 0;
-    display: flex;
-    justify-content: center;
-    align-items: flex-start;
-    height: 100vh;
-    overflow: hidden;
-  }
-  
-  .page-container {
-    width: 100%;
-    height: 100%;
-    display: flex;
-    flex-direction: column;
-    justify-content: flex-start;
-    align-items: center;
-    padding: 20px;
-    box-sizing: border-box;
-  }
-  
-  .lessons-container {
-    display: flex;
-    justify-content: space-between;
-    width: 100%;
-    max-width: 1200px;
-    gap: 20px;
-    margin-top: 20px;
-    margin-bottom: 20px;
-  }
-  
-  .lesson {
-    background-color: #28a745;
-    color: white;
-    padding: 40px;
-    border-radius: 10px;
-    text-align: center;
-    flex: 1;
-    cursor: pointer;
-    position: relative;
-    min-width: 250px;
-    font-size: 24px;
-    font-weight: bold;
-    transition: transform 0.3s ease;
-  }
-  
-  .lesson:hover {
-    transform: scale(1.05);
-  }
-  
-  .choices {
-    display: block;
-    position: absolute;
-    top: 100%;
-    left: 0;
-    right: 0;
-    background-color: #28a745;
-    border-radius: 0 0 10px 10px;
-    z-index: 1;
-  }
-  
-  .choice {
-    background-color: #218838;
-    color: white;
-    padding: 20px;
-    border-radius: 0 0 10px 10px;
-    text-align: center;
-    margin-top: 5px;
-    cursor: pointer;
-  }
-  
+.main-content {
+  padding: 20px;
+  background-color: #f4f4f4;
+  height: 100vh;
+}
 
-  .choice:hover {
-    background-color: #1e7e34; 
-    border: 2px solid white;  
-  }
-  
+.card {
+  background-color: white;
+  padding: 20px;
+  border-radius: 5px;
+  box-shadow: 0 2px 5px rgba(0, 0, 0, 0.1);
+}
+
+.card h2 {
+  margin-top: 0;
+}
+
+.language-buttons {
+  display: flex;
+  gap: 10px;
+}
+
+.language-container {
+  position: relative;
+  flex: 1;
+}
+
+.language-buttons button {
+  width: 100%;
+  padding: 20px;
+  border: none;
+  border-radius: 5px;
+  color: white;
+  font-size: 20px;
+  cursor: pointer;
+  transition: opacity 0.2s;
+}
+
+.language-buttons .english {
+  background-color: #f44336; /* Red */
+}
+
+.language-buttons .french {
+  background-color: #2196F3; /* Blue */
+}
+
+.language-buttons button:hover {
+  opacity: 0.9;
+}
+
+.dropdown {
+  position: absolute;
+  top: 100%;
+  left: 0;
+  width: 100%;
+  border-radius: 5px;
+  box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+  z-index: 1000;
+  background-color: inherit; 
+}
+
+#english-dropdown {
+  background-color: #f44336; 
+}
+
+#french-dropdown {
+  background-color: #2196F3; 
+}
+
+.lesson-choice {
+  padding: 10px 20px;
+  color: white; 
+  background-color: transparent; 
+  border: none;
+  cursor: pointer;
+  transition: background-color 0.2s;
+  font-weight: bolder;
+}
+
+.lesson-choice:hover {
+  background-color: rgba(0, 0, 0, 0.1);
+  border: 2px;
+}
