@@ -143,3 +143,8 @@ button[type="button"]:active {
   border-bottom: 0;
   margin-top: 4px;
 }
+.error-message {
+  color: red;
+  font-weight: bold;
+  font-size: 14px;
+}
