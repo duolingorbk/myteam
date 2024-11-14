@@ -1,26 +1,15 @@
-const db = require("../database/index")
-
-
-
+const db = require("../database/index");
 
 const getAllLessons = async (req, res) => {
     try {
-        const lesson = await db.Lessons.findAll()
-        console.log(lesson);
+        const lessons = await db.Lessons.findAll({
+            where: { language: req.query.language }  // Filter by language
+        });
+        res.send(lessons);
+    } catch (error) {
+        console.error("Error fetching lessons:", error);
+        res.status(500).send(error);
+    }
+};
 
-
-res.send(lesson)
-}
-catch(error) {
-res.send(error)
-}
-
-
-}
-
-
-
-module.exports = {
-    getAllLessons
-}
-
+module.exports = { getAllLessons };
