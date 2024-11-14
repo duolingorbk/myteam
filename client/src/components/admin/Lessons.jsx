@@ -8,7 +8,7 @@ const Languages = () => {
 
   useEffect(() => {
     axios
-      .get('http://127.0.0.1:3000/lesson/All') 
+      .get('http://127.0.0.1:3000/lesson/allLessons') 
       .then((res) => {
         setLessons(res.data);
       })
