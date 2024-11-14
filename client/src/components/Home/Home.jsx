@@ -1,7 +1,9 @@
 import React from 'react';
 import "../Home/Home.css"
+import { useNavigate } from 'react-router-dom';
 
 const Home = () => {
+    const navigate=useNavigate()
   return (
     <div>
       <main className="main">
@@ -9,7 +11,7 @@ const Home = () => {
         <p>
           Set realistic goals. Get advice from native speakers. Make real progress. Discover a world of opportunities by learning another language.
         </p>
-        <a className="cta" href="#">
+        <a className="cta" href="#" onClick={()=>navigate("Selectlanguage")}>
           Start learning
         </a>
         <div className="rating">

@@ -2,9 +2,16 @@
 import React, { useEffect, useState } from 'react';
 import { jwtDecode } from 'jwt-decode'
 import './Profile.css';
+import { useNavigate } from 'react-router-dom';
 
 const Profile = () => {
+    const navigate=useNavigate()
   const [user, setuser] = useState(null);
+
+  const handleLogout = () => {
+    localStorage.removeItem('token');
+    navigate("/login")
+  };
 
   useEffect(() => {
     const token = localStorage.getItem('token');    
@@ -80,6 +87,9 @@ const Profile = () => {
           </div>
         </div>
       </div>
+      <button className="logout-button" onClick={handleLogout}>
+          <i></i> Logout
+        </button>
     </div>
   );
 };
