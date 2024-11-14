@@ -44,6 +44,22 @@ const signup = async (req, res) => {
     }
 };
 
+const checkEmail = async (req, res) => {
+    try {
+        const { email } = req.body;
+        
+        const user = await db.User.findOne({
+            where: { email }
+        });
+
+        return res.json({
+            exists: !!user
+        });
+    } catch (error) {
+        console.log(error);
+        res.status(500).send(error);
+    }
+}
 const login = async (req, res) => {
     try {
         const {
@@ -75,7 +91,7 @@ const login = async (req, res) => {
                 id: user.id,
                 name: user.name,
                 email: user.email,
-                token:user.token
+                type: user.type
             },
             token
         });
@@ -86,4 +102,4 @@ const login = async (req, res) => {
     }
 };
 
-module.exports = { signup, login };
+module.exports = { signup, login ,checkEmail};
