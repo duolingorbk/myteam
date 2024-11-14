@@ -11,9 +11,19 @@ function App() {
   const [language, setLanguage] = useState(null);  // Track selected language
 
   return (
-<div>
-  
-</div>
+    <Router>
+      <div className="app-container">
+        <Routes>
+          <Route path="/" element={<LanguageSelector setLanguage={setLanguage} />} />
+          {language && <Route path="/lessons" element={<Lessons language={language} />} />}
+          <Route path="/questions/:lessonId" element={<Questions />} />
+          <Route path="/user/signup" element={<Signup/>}/>
+          <Route path="/user/login" element={<Login/>}/>
+
+         
+        </Routes>
+      </div>
+    </Router>
   );
 }
 
