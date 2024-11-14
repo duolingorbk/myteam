@@ -27,9 +27,22 @@ const getQuestionsByLessonId = async (req, res) => {
       res.status(500).send({ message: "Error fetching questions" });
     }
   };
-  
+
+  const getQuestionsAndAnswersByLessonId = async (req, res) => {
+    try {
+      const lessonId = req.params.lessonId;
+      const questions = await db.Questions.findAll({
+        where: { LessonId: lessonId },
+        include: [{ model: db.Answers }] 
+      });
+      res.json(questions); 
+    } catch (error) {
+      console.error("Error fetching questions:", error);
+      res.status(500).send({ message: "Error fetching questions" });
+    }
+  };
 
 module.exports = {
-    getAllQuestions , getQuestionsByLessonId 
+    getAllQuestions , getQuestionsByLessonId  , getQuestionsAndAnswersByLessonId
 };
 

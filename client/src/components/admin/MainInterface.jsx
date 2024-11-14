@@ -5,59 +5,40 @@ const App = () => {
   const [users, setUsers] = useState([]);
   const [show, setShow] = useState(false);
 
+  // Fetch users data from the API
   useEffect(() => {
-    axios.get("http://127.0.01:3000/user/allusers").then((res)=>{
-      setUsers(res.data)
-      
-    })
-    .catch((err)=>{
-      console.log(err);
-    })
+    axios
+      .get("http://127.0.0.1:3000/user/allusers")
+      .then((res) => {
+        setUsers(res.data);
+      })
+      .catch((err) => {
+        console.log(err);
+      });
   }, [users]);
 
-  
-  const handleDelete = (user)=>{
-    console.log(user);
-    
-    axios.delete(`http://127.0.01:3000/user/deleteUser/${user.id}`).then(()=>{
-  
-    
-      console.log("deleted");
-    })
-    .catch((err)=>{
-      console.log(err);
-      
-    })
-  }
-
-
+  const handleDelete = (user) => {
+    // Delete user logic
+    axios
+      .delete(`http://127.0.0.1:3000/user/deleteUser/${user.id}`)
+      .then(() => {
+        console.log("User deleted");
+      })
+      .catch((err) => {
+        console.log(err);
+      });
+  };
 
   return (
     <div>
-      <div className="header">
-        <h1>Mini Language Learning Admin Interface</h1>
-      </div>
-      <div className="container">
-        <div className="sidebar">
-          <div className="profile">
-            <img
-              alt="Profile picture of the admin"
-              src="https://as1.ftcdn.net/v2/jpg/01/12/09/12/1000_F_112091233_xghsriqmHzk4sq71lWBL4q0e7n9QJKX6.jpg"
-              width="50"
-              height="50"
-            />
-            <span>Admin</span>
-          </div>
-          <h2>Dashboard</h2>
-          <h2>Languages</h2>
-          <h2>Settings</h2>
-          <h2>Logout</h2>
-        </div>
+      
+      <div className="container">        
+        {/* Main content */}
         <div className="content">
           <div className="card" id="dashboard">
             <h2>Dashboard</h2>
             <p>Welcome to the admin interface. Use the sidebar to navigate through different sections.</p>
-            <h3 onClick={() => setShow(!show)} className='users'>Users</h3>
+            <h3 onClick={() => setShow(!show)} className="users">Users</h3>
             {show && (
               <table>
                 <thead>
@@ -76,7 +57,9 @@ const App = () => {
                       <td>{user.email}</td>
                       <td>
                         <button className="btn edit-btn">Edit</button>
-                        <button className="btn delete-btn" onClick={()=>{handleDelete(user)}}>Delete</button>
+                        <button className="btn delete-btn" onClick={() => handleDelete(user)}>
+                          Delete
+                        </button>
                       </td>
                     </tr>
                   ))}

@@ -1,6 +1,5 @@
 .main-content {
   padding: 20px;
-  background-color: #f4f4f4;
   height: 100vh;
 }
 
@@ -9,6 +8,7 @@
   padding: 20px;
   border-radius: 5px;
   box-shadow: 0 2px 5px rgba(0, 0, 0, 0.1);
+  
 }
 
 .card h2 {
@@ -27,6 +27,7 @@
 
 .language-buttons button {
   width: 100%;
+  margin-right: 20px;
   padding: 20px;
   border: none;
   border-radius: 5px;
@@ -55,7 +56,6 @@
   width: 100%;
   border-radius: 5px;
   box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
-  z-index: 1000;
   background-color: inherit; 
 }
 

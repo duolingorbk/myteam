@@ -1,7 +1,9 @@
 import React, { useState, useEffect } from 'react';
 import axios from 'axios';
+import { useNavigate } from 'react-router-dom';
 
 const Languages = () => {
+ const navigate = useNavigate()
   const [lessons, setLessons] = useState([]);
   const [showEnglish, setShowEnglish] = useState(false);
   const [showFrench, setShowFrench] = useState(false);
@@ -20,10 +22,10 @@ const Languages = () => {
   const toggleDropdown = (language) => {
     if (language === 'english') {
       setShowEnglish(!showEnglish);
-      setShowFrench(false); 
+      // setShowFrench(false); 
     } else if (language === 'french') {
       setShowFrench(!showFrench);
-      setShowEnglish(false); 
+      // setShowEnglish(false); 
     }
   };
 
@@ -44,7 +46,7 @@ const Languages = () => {
             {showEnglish && (
               <div className="dropdown" id="english-dropdown">
                 {lessons.filter((lesson) => lesson.language === 'english').map((lesson) => (
-                  <div key={lesson.id} className="lesson-choice">
+                  <div key={lesson.id} className="lesson-choice"  onClick={()=>{navigate(`/adminquestions/${lesson.id}`)}} >
                     {lesson.title}
                   </div>
                 ))}
@@ -62,7 +64,7 @@ const Languages = () => {
             {showFrench && (
               <div className="dropdown" id="french-dropdown">
                 {lessons.filter(lesson => lesson.language === 'french').map((lesson) => (
-                  <div key={lesson.id} className="lesson-choice">
+                  <div key={lesson.id} className="lesson-choice" onClick={()=>{navigate(`/adminquestions/${lesson.id}`)}}>
                     {lesson.title}
                   </div>
                 ))}
