@@ -117,6 +117,11 @@ const Signup = () => {
           Sign Up
         </button>
       </form>
+      <div className="signup-link">
+                    <p>
+                        You already have an account? <a  className="login-link-text" onClick={()=>navigate("/user/login")}>Login</a>
+                    </p>
+                </div>
     </div>
   );
 };
