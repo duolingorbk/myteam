@@ -8,6 +8,8 @@ import Profile from './components/Home/Profile.jsx';
 import Navbar from './components/Home/Navbar.jsx';
 import Signup from "./components/signup/Signup.jsx"
 import Login from "./components/signup/Login.jsx"
+import Admin from './components/signup/Admin.jsx';
+import ProtectedRoute from './components/signup/ProtectedRoute.jsx';
 
 import './App.css';
 function App() {
@@ -26,6 +28,23 @@ function App() {
         <Route path="/Selectlanguage" element={<LanguageSelector setLanguage={setLanguage} />} />
           {language && <Route path="/lessons" element={<Lessons language={language} />} />}
           <Route path="/questions/:lessonId" element={<Questions />} />
+    
+          <Route 
+                path="/admin-dashboard"  
+                element={
+                    <ProtectedRoute>
+                        <Admin />
+                    </ProtectedRoute>
+                } 
+            />
+            <Route 
+                path="/admin/manage-users" 
+                element={
+                    <ProtectedRoute>
+                        <Admin />
+                    </ProtectedRoute>
+                } 
+            />
         </Routes>
       </div>
     </Router>

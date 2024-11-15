@@ -4,34 +4,22 @@ const jwt = require('jsonwebtoken');//to generate the token
 const dotenv = require('dotenv').config
 
 const validateStrongPassword = (password) => {
-
     const minLength = 8;
-    const hasUpperCase = /[A-Z]/.test(password);
-    const hasLowerCase = /[a-z]/.test(password);
-    const hasNumbers = /\d/.test(password);
-    const hasSpecialCharacters = /[!@#$%^&*(),.?":{}|<>]/.test(password);
+    const passwordCheck = /^(?=.*[a-z])(?=.*[A-Z])(?=.*\d)(?=.*[!@#$%^&*(),.?":{}|<>])[a-zA-Z\d!@#$%^&*(),.?":{}|<>]{8,}$/;
 
     const errors = [];
 
     if (password.length < minLength) {
-        errors.push(`Password must be at least ${minLength} characters long`);
+        errors.push(`Password must be at least ${minLength} characters long`);//this is shown when the password length is below 8 
     }
-    if (!hasUpperCase) {
-        errors.push("Password must contain at least one uppercase letter");
-    }
-    if (!hasLowerCase) {
-        errors.push("Password must contain at least one lowercase letter");
-    }
-    if (!hasNumbers) {
-        errors.push("Password must contain at least one number");
-    }
-    if (!hasSpecialCharacters) {
-        errors.push("Password must contain at least one special character");
+
+    if (!passwordCheck.test(password)) {//if the entered password does not include any of the above password check,this error will appear
+        errors.push("Password must contain at least one uppercase letter, one lowercase letter, one number, and one special character");
     }
 
     return {
-        isValid: errors.length === 0,
-        errors: errors
+        isValid: errors.length === 0,//this is a returned oject that shows if the password is valid the errors array will have 0 length
+        errors: errors//this is an array that includes all of the above errors if any of them is not included in the password 
     };
 };
 const signup = async (req, res) => {
@@ -106,7 +94,7 @@ const login = async (req, res) => {
             return res.status(400).json({ message: 'Invalid credentials' });//if the password is not the same, it displays an error 
         }
 
-        const token = jwt.sign(//json web token
+        const token = jwt.sign(//json web token to give a token to the user once they are logged in 
             { id: user.id, name: user.name, email: user.email },
             process.env.JWT_SECRET,
             { expiresIn: '1h' }
@@ -114,7 +102,7 @@ const login = async (req, res) => {
 
         return res.status(200).json({
             message: 'Login successful',
-            user: {
+            user: {//the token will include all these 
                 id: user.id,
                 name: user.name,
                 image: user.image,
