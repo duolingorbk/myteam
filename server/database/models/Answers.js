@@ -13,6 +13,7 @@ module.exports =  (sequelize , DataTypes)  => {
         allowNull: true,
     }
 
+
 } , { timestamps: false }) //for the time columns that sequelize generate AUTO
 
 

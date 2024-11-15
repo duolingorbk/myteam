@@ -1,17 +1,16 @@
 const db = require("../database/index");
 
-const getAllQuestions = async (req, res) => {
+const getQuestionsByLessonId = async (req, res) => {
     try {
-        const questions = await db.Questions.findAll();  // fetch all questions
-        console.log(questions);  // log the fetched data
-
-        res.send(questions);  // send the data in response
+        const questions = await db.Questions.findAll({
+            where: { lessonId: req.params.lessonId },
+            include: [{ model: db.Answers }] 
+        });
+        res.send(questions);
     } catch (error) {
-        console.error("Error fetching questions:", error);  // log any errors
-        res.status(500).send(error);  // send a 500 error if something goes wrong
+        console.error("Error fetching questions:", error);
+        res.status(500).send(error);
     }
 };
 
-module.exports = {
-    getAllQuestions
-};
+module.exports = { getQuestionsByLessonId };

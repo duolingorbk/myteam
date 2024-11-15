@@ -3,6 +3,6 @@ const express = require("express");
 
 const answerRoute = express.Router();
 
-answerRoute.get("/all", getAllAnswers);  // Set up a route to get all answers
+answerRoute.get("/all/:QuestionId", getAllAnswers);  // Set up a route to get all answers
 
 module.exports = answerRoute;
