@@ -10,7 +10,7 @@ const Profile = () => {
 
   const handleLogout = () => {
     localStorage.removeItem('token');
-    navigate("/login")
+    navigate("/user/login")
   };
 
   useEffect(() => {

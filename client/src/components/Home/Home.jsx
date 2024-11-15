@@ -4,6 +4,14 @@ import { useNavigate } from 'react-router-dom';
 
 const Home = () => {
     const navigate=useNavigate()
+    const handlenavigate =() =>{
+        const token = localStorage.getItem('token');    
+    if (token) {
+        navigate("/Selectlanguage")
+    } else{
+        navigate("/user/signup")
+    }
+    }
   return (
     <div>
       <main className="main">
@@ -11,7 +19,7 @@ const Home = () => {
         <p>
           Set realistic goals. Get advice from native speakers. Make real progress. Discover a world of opportunities by learning another language.
         </p>
-        <a className="cta" href="#" onClick={()=>navigate("Selectlanguage")}>
+        <a className="cta" href="#" onClick={handlenavigate}>
           Start learning
         </a>
         <div className="rating">
