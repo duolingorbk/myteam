@@ -1,9 +1,11 @@
 import React, { useState, useEffect } from 'react';
 import axios from 'axios';
+import "../../css/interface.css"
 
 const App = () => {
   const [users, setUsers] = useState([]);
   const [show, setShow] = useState(false);
+  const [refresh, setrefresh] = useState(false)
 
   // Fetch users data from the API
   useEffect(() => {
@@ -15,7 +17,7 @@ const App = () => {
       .catch((err) => {
         console.log(err);
       });
-  }, [users]);
+  }, [refresh]);
 
   const handleDelete = (user) => {
     // Delete user logic
@@ -24,16 +26,15 @@ const App = () => {
       .then(() => {
         console.log("User deleted");
       })
-      .catch((err) => {
+      .catch((err) => { 
         console.log(err);
       });
   };
 
   return (
     <div>
-      
+
       <div className="container">        
-        {/* Main content */}
         <div className="content">
           <div className="card" id="dashboard">
             <h2>Dashboard</h2>
@@ -56,8 +57,7 @@ const App = () => {
                       <td>{user.name}</td>
                       <td>{user.email}</td>
                       <td>
-                        <button className="btn edit-btn">Edit</button>
-                        <button className="btn delete-btn" onClick={() => handleDelete(user)}>
+                        <button className="btn delete-btn" onClick={() => {handleDelete(user) , setrefresh(!refresh)}}>
                           Delete
                         </button>
                       </td>

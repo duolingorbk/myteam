@@ -1,26 +1,21 @@
 .main-content {
   padding: 20px;
   height: 100vh;
-}
-
-.card {
-  background-color: white;
-  padding: 20px;
-  border-radius: 5px;
-  box-shadow: 0 2px 5px rgba(0, 0, 0, 0.1);
-  
-}
+ }
 
 .card h2 {
   margin-top: 0;
 }
 
 .language-buttons {
+ width: 100%;  
   display: flex;
   gap: 10px;
 }
 
 .language-container {
+  margin-right: 50px;
+  width: 80%;
   position: relative;
   flex: 1;
 }
@@ -38,11 +33,11 @@
 }
 
 .language-buttons .english {
-  background-color: #f44336; /* Red */
+  background-color: #e93427; 
 }
 
 .language-buttons .french {
-  background-color: #2196F3; /* Blue */
+  background-color: #0c77ce; 
 }
 
 .language-buttons button:hover {
@@ -80,4 +75,12 @@
 .lesson-choice:hover {
   background-color: rgba(0, 0, 0, 0.1);
   border: 2px;
+}
+.language-Box{
+  position: fixed;
+  width: 60%;
+  background-color: white;
+  padding: 25px; 
+  padding-bottom: 2%;  
+  box-shadow: 10px 5px 5px 5px rgba(0, 0, 0, 0.1);
 }

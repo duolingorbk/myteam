@@ -5,7 +5,6 @@ const Sidebar = () => {
     const navigate= useNavigate()
   return (
     <div>
-      {/* Sidebar with profile and navigation links */}
       <div className="sidebar">
         <div className="profile">
           <img
@@ -16,7 +15,6 @@ const Sidebar = () => {
           />
           <span>Admin</span>
         </div>
-        {/* Sidebar Navigation Links */}
         <h2 onClick={()=>{navigate("/")}}>Dashboard</h2>
         <h2>Users</h2>
         <h2 onClick={()=>{navigate("/adminLanguages")}}>Languages</h2>

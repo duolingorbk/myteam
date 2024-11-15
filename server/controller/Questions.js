@@ -42,7 +42,20 @@ const getQuestionsByLessonId = async (req, res) => {
     }
   };
 
+  const deleteQuestion = async (req, res) => {
+    try {
+      const { id } = req.params;
+      await db.Questions.destroy({
+        where: { id: id }
+      });
+      res.send("Question Deleted");
+    } catch (error) {
+      res.status(500).send(error.message);
+    }
+  };
+  
+
 module.exports = {
-    getAllQuestions , getQuestionsByLessonId  , getQuestionsAndAnswersByLessonId
+    getAllQuestions , getQuestionsByLessonId  , getQuestionsAndAnswersByLessonId , deleteQuestion
 };
 

@@ -14,7 +14,7 @@ const getAnswersByQuestion = async (req, res) => {
     try {
       const questionId = req.params.questionId;
       const answers = await db.Answers.findAll({
-        where: { question_id: questionId }
+        where: { QuestionId: questionId }
       });
   
       res.send(answers);
@@ -24,6 +24,19 @@ const getAnswersByQuestion = async (req, res) => {
     }
   }
 
+  const deleteAnswer = async (req, res) => {
+    try {
+      const { id } = req.params;
+      await db.Answers.destroy({
+        where: { id: id }
+      });
+      res.send("Answer Deleted");
+    } catch (error) {
+      res.status(500).send(error.message);
+    }
+  };
+  
+
 module.exports = {
-    getAllAnswers , getAnswersByQuestion
+    getAllAnswers , getAnswersByQuestion , deleteAnswer
 };
