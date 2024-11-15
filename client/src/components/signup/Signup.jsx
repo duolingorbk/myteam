@@ -12,6 +12,37 @@ const Signup = () => {
   const [error, setError] = useState("");
 
   const navigate = useNavigate();
+  const validateStrongPassword = (password) => {
+
+    const minLength = 8;
+    const hasUpperCase = /[A-Z]/.test(password);
+    const hasLowerCase = /[a-z]/.test(password);
+    const hasNumbers = /\d/.test(password);
+    const hasSpecialCharacters = /[!@#$%^&*(),.?":{}|<>]/.test(password);
+
+    const errors = [];
+
+    if (password.length < minLength) {
+        errors.push(`Password must be at least ${minLength} characters long`);
+    }
+    if (!hasUpperCase) {
+        errors.push("Password must contain at least one uppercase letter");
+    }
+    if (!hasLowerCase) {
+        errors.push("Password must contain at least one lowercase letter");
+    }
+    if (!hasNumbers) {
+        errors.push("Password must contain at least one number");
+    }
+    if (!hasSpecialCharacters) {
+        errors.push("Password must contain at least one special character");
+    }
+
+    return {
+        isValid: errors.length === 0, //this is a returned oject that shows if the password is valid the errors array will have 0 length
+        errors: errors//this is an array that includes all of the above errors if any of them is not included in the password 
+    };
+};
 
   const handleImageUpload = async (e) => {
     e.preventDefault();
@@ -31,6 +62,14 @@ const Signup = () => {
 
   const handleAddUser = async () => {
     try {
+
+      const passwordValidation = validateStrongPassword(password);
+      if (!passwordValidation.isValid) {
+        setError("Password is too weak:");
+        passwordValidation.errors.forEach((err) => setError((prev) => prev + " \n " + err));
+        return;
+      }
+
       const response = await axios.post("http://localhost:3000/user/signup", {
         name,
         email,
@@ -38,7 +77,6 @@ const Signup = () => {
         imageUrl,
       }, { headers: { 'Content-Type': 'application/json' } });
 
-      localStorage.setItem("userData", JSON.stringify({ ...response.data, imageUrl }));
 
       console.log(response.data);
       setError("");
