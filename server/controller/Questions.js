@@ -53,9 +53,27 @@ const getQuestionsByLessonId = async (req, res) => {
       res.status(500).send(error.message);
     }
   };
+
+  const updateQuestion = async (req, res) => {
+    try {
+      const questionId = req.params.id;
+      const { content } = req.body;
+  
+      await db.Questions.update(
+        { content },
+        { where: { id: questionId } }
+      );
+  
+      res.send({ message: 'Question updated successfully' });
+    } catch (error) {
+      console.error(error);
+      res.status(500).send({ message: 'Error updating question' });
+    }
+  };
+  
   
 
 module.exports = {
-    getAllQuestions , getQuestionsByLessonId  , getQuestionsAndAnswersByLessonId , deleteQuestion
+    getAllQuestions , getQuestionsByLessonId  , getQuestionsAndAnswersByLessonId , deleteQuestion , updateQuestion
 };
 

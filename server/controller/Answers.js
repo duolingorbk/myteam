@@ -10,6 +10,20 @@ const getAllAnswers = async (req, res) => {
     }
 }
 
+
+const getAnswers = async (req, res) => {
+  try {
+      const answers = await db.Answers.findAll();  // fetch all questions
+  // log the fetched data
+
+      res.send(answers);  // send the data in response
+  } catch (error) {
+      console.error("Error fetching questions:", error);  // log any errors
+      res.status(500).send(error);  // send a 500 error if something goes wrong
+  }
+};
+
+
 const getAnswersByQuestion = async (req, res) => {
     try {
       const questionId = req.params.questionId;
@@ -35,8 +49,24 @@ const getAnswersByQuestion = async (req, res) => {
       res.status(500).send(error.message);
     }
   };
+
+  const updateAnswer = async (req, res) => {
+    try {
+        const { content, status } = req.body;
+        const { id } = req.params; 
+
+        const updatedAnswer = await db.Answers.update(
+            { content, status },
+            { where: { id } }
+        );
+
+        res.send(updatedAnswer);
+    } catch (error) {
+        res.send(error);
+    }
+}
   
 
 module.exports = {
-    getAllAnswers , getAnswersByQuestion , deleteAnswer
+    getAllAnswers , getAnswersByQuestion , deleteAnswer , updateAnswer , getAnswers
 };

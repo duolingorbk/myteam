@@ -33,12 +33,13 @@ db.Questions.belongsTo(db.Lessons)
 db.Questions.hasMany(db.Answers)
 db.Answers.belongsTo(db.Questions)
 
-
-//  sequelize.sync({alter : true}).then(() => {
-//   console.log(' table created successfully!');
-// }).catch((error) => {
+//   sequelize.sync({alter : true}).then(() => {
+//  console.log(' table created successfully!');
+//  }).catch((error) => {
 //   console.error('Unable to create table : ', error);
-// });
+//  });
 
 
 module.exports= db
+
+
