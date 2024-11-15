@@ -22,6 +22,7 @@ const Login = () => {
                 const { token, user } = response.data;
 
                 localStorage.setItem("token", token);
+                console.log(token)
 
                 if (user.type === 'admin') {
                     localStorage.setItem("admin", JSON.stringify(user));
@@ -32,6 +33,7 @@ const Login = () => {
                 }
                 setError("")//(to remove the error if the written password is correct)
             }
+            navigate("/")
         } catch (err) {
             console.error(err);
 
@@ -81,16 +83,17 @@ const Login = () => {
                     </div>
                 )}
 
-                <button type="submit" className="login-button">Login</button>
+                <button type="submit" className="login-button"  >Login</button>
 
               
 
-                <div className="signup-link">
+               
+            </form>
+            <div className="signup-link">
                     <p>
-                        Don't have an account? <a onClick={() => navigate("/user/signup")} className="signup-link-text">Sign up</a>
+                        Don't have an account? <a  className="signup-link-text" onClick={()=>navigate("/user/signup")}>Sign up</a>
                     </p>
                 </div>
-            </form>
         </div>
     );
 };
