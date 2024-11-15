@@ -6,7 +6,6 @@ import './Lessons.css';
 function Lessons({ language }) {
     const [lessons, setLessons] = useState({ easy: [], medium: [], hard: [] });
     const [loading, setLoading] = useState(true);
-    const [error, setError] = useState(null);
     const navigate = useNavigate();
 
     useEffect(() => {
@@ -36,7 +35,7 @@ function Lessons({ language }) {
     };
 
     if (loading) return <p>Loading lessons...</p>;
-    if (error) return <p>{error}</p>;
+
 
     return (
         <div className="lessons-container">
