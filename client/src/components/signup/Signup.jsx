@@ -19,6 +19,7 @@ const Signup = () => {
     data.append('file', image);
     data.append('upload_preset', 'speakeasy');
     data.append('cloud_name', 'dog9364lq');
+    console.log(image)
 
     try {
       const response = await axios.post("https://api.cloudinary.com/v1_1/dog9364lq/image/upload", data);
@@ -43,7 +44,7 @@ const Signup = () => {
       setError("");
 
       navigate("/user/login");
-      
+
     } catch (error) {
       if (error.response.data === "User already exists") {
         setError("Email address is already registered. Please use a different email.");
