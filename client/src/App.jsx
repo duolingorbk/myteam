@@ -1,9 +1,11 @@
+// App.js
 import React, { useState } from 'react';
 import { BrowserRouter as Router, Route, Routes } from 'react-router-dom';
-import LanguageSelector from './components/LanguageSelector';
-import Lessons from './components/Lessons.jsx';
-import Questions from './components/Questions';
+import LanguageSelector from './components/lesonss&&questions/LanguageSelector';
+import Lessons from './components/lesonss&&questions/Lessons';
+import Questions from './components/lesonss&&questions/Questions';
 import './App.css';
+
 function App() {
   const [language, setLanguage] = useState(null);  // Track selected language
 

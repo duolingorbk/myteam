@@ -3,7 +3,7 @@ const express = require("express")
 
 const lessonroute = express.Router()
 
-lessonroute.get("/all" ,getAllLessons)
+lessonroute.get("/all/:language" ,getAllLessons)
 
 
 module.exports = lessonroute

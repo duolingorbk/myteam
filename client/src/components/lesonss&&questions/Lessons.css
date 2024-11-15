@@ -1,0 +1,55 @@
+.button-border {
+  border: 8px solid #ffae70;
+  outline: 4px solid;
+  border-radius: 100%;
+}
+
+.button-base {
+  background-color: #75221c;
+  outline: 2px solid black;
+  position: relative; 
+  border-radius: 100%;
+}
+
+.button {
+  border-radius: 100%;
+  font-size: 16px;
+  outline: 2px solid black;
+  border: 4px solid;
+  border-left-color: #e7b8b4;
+  border-top-color: #f8c9c5;
+  border-bottom-color: #4e1814;
+  border-right-color: #79241e;
+  background-color: #e64539;
+  cursor: pointer;
+  color: #ffee83;
+  padding: 20px 30px;
+  transform: translateY(-20%);
+  width: 100%;
+  text-align: center;
+  position: relative;
+  transition: all 0.3s ease;
+}
+
+.button:hover {
+  transform: translateY(-10%);
+}
+
+.button:active {
+  transform: translateY(0);
+}
+
+.lesson-item {
+  margin-bottom: 20px;
+}
+
+.button-base {
+  background-color: #00b164;
+  color: white;
+  width: 100%;
+  border-radius: 50px;
+}
+
+.button-base:disabled {
+  background-color: #ddd;
+}
