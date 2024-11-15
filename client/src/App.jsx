@@ -8,7 +8,6 @@ import Profile from './components/Home/Profile.jsx';
 import Navbar from './components/Home/Navbar.jsx';
 import Signup from "./components/signup/Signup.jsx"
 import Login from "./components/signup/Login.jsx"
-import AdminInterface from './components/admin/JsxAdmin/MainInterface.jsx';
 
 import './App.css';
 function App() {
@@ -20,8 +19,6 @@ function App() {
       <Navbar />
       <div className="app-container">
         <Routes>
-        <Route path="/admin-dashboard" element={<AdminInterface />} />
-        
         <Route path="/user/signup" element={<Signup/>}/>
         <Route path="/user/login" element={<Login/>}/>
         <Route path="/" element={<Home/>} />

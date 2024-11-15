@@ -5,7 +5,6 @@ import "./App.css"
 
 createRoot(document.getElementById('root')).render(
   <StrictMode>
-    {/* <CreateLesson/> */}
     <App/>
   </StrictMode>
 )
