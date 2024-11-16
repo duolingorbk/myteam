@@ -7,7 +7,6 @@ module.exports =  (sequelize , DataTypes)  => {
         allowNull: true,
     },
 
-
     status: {
         type: DataTypes.TINYINT ,
         allowNull: true,

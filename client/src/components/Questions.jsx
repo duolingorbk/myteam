@@ -5,15 +5,28 @@ import { useParams, useLocation, useNavigate } from 'react-router-dom';
 export default function Ques() {
   const { lessonId } = useParams();
   const location = useLocation();
+  const { lessons } = location.state ||[] /// console.log this when this compoenet is rendered inside my app.jsx
+
   const navigate = useNavigate();
+  console.log("lessons 😒😒😒😒 :", lessons);
 
   // const { language } = location.state;  // Retrieve language and lessonId from location.state
 
   const [questions, setQuestions] = useState([]);
   const [answers, setAnswers] = useState([]);
   const [currentQuestionIndex, setCurrentQuestionIndex] = useState(0);
-  const [lessonIDD, setlessonIDD] = useState(2);
-  const [newStatus, setnewStatus] = useState();
+  const [lessonIDD, setlessonIDD] = useState(1);
+  const [progress, setprogress] = useState(0);
+  const [resultProgress, setresultProgress] = useState(0)
+
+  // console.log('progress :', progress)
+  console.log('resultProgress :', resultProgress)
+
+  const [allLessonsProgress, setallLessonsProgress] = useState(0);
+  
+
+  console.log('allLessonsProgress ', allLessonsProgress)
+  
 
 
   // Fetch questions for the lesson based on lessonId
@@ -47,8 +60,7 @@ export default function Ques() {
   useEffect(() => {
     if (questions.length > 0) {
       fetchAnswers(questions[currentQuestionIndex].id);
-
-      console.log("this is id",questions[currentQuestionIndex].id)
+      percentageProgress();
     }
   }, [currentQuestionIndex, questions]);
 
@@ -57,30 +69,76 @@ export default function Ques() {
   // Handle incrementing to the next question
   const incrementQuestion = () => {
     if (currentQuestionIndex < questions.length - 1) {
-      setCurrentQuestionIndex(prevIndex => prevIndex + 1);
-    } 
+      setCurrentQuestionIndex((prevIndex) => prevIndex + 1);
+    } else {
+      setlessonIDD((prev) => prev + 1);
+      setCurrentQuestionIndex(0);
+      setprogress(0); // Reset for the new lesson
+      setresultProgress(0); // Reset progress percentage
+      ProgressAllLessons(); // Update overall progress
+    }
   };
   
+
+  /// adding progress /////////////////////////////////////////////////////////////////////////////////////////////////
+  const progressForLesson = function(answerId) {
+    const answer = answers.find(elem => elem.id === answerId);
+    if (answer && answer.status === 1) {
+      setprogress(prev => prev + 1);
+    }
+  };
   
-  //// update the status later 
-  const updateAnswer = function() {
-    axios.put(`link ${id}`, {status:newStatus} )
-    .then((res)=>{
-      
-    })
-    .catch((err)=>{
-      console.log('error updating status of answer 😖', err)
-    })
-  }
+  const hundleProgress = function(id) {
+    progressForLesson(id);
+  };
   
-  // console.log('lessonIDD 🤦‍♀️: ', lessonIDD) 
-  console.log('currentQuestionIndex 🤦‍♀️🤦‍♀️: ', currentQuestionIndex) 
+  const percentageProgress = function() {
+    if (answers.length > 0) {
+      const result = (progress / answers.length) * 100; /// I'm using progress here to calculate the reslt progress 
+      setresultProgress(result);
+    }
+  };
+
+  //////////////////////////////////////////////////////////////////////////////////// adding progress /////////
+
+
+
+  // const ProgressAllLessons = function(progPerLesson) {
+  //    var ProgAll = 0;
+  //    var resultAllProg = 0
+  //    const FacDivAllLessons = lessons.lenght * 100;
+
+  //    ProgAll = ProgAll + progPerLesson ; 
+  //    resultAllProg = ProgAll / FacDivAllLessons ;
+  //    setallLessonsProgress(resultAllProg)
+    
+  //    return 
+     
+  // }
+
+
+  const ProgressAllLessons = function() {
+    if (!lessons || lessons.length === 0) return; // Avoid errors
+    
+    // Total progress across all lessons
+    const overallProgress = (lessonIDD - 1) * 100 + resultProgress; // Completed lessons + current progress
+    const totalLessonsProgress = overallProgress / (lessons.length * 100); // Normalize to percentage
+    
+    setallLessonsProgress(totalLessonsProgress);
+  };
+  
+
+
+
+
 
   // Render the current question and its answers
   return (
     <div className=''>
+      
       <h2>Questions for Lesson {lessonIDD}</h2>
-      {currentQuestionIndex < questions.length -1 ? (
+      <h2>Progress {resultProgress} %</h2>
+      {questions.length? (
         <>
           <h1 className='question-number-render'>
             Question {currentQuestionIndex + 1}
@@ -88,21 +146,37 @@ export default function Ques() {
           <h3 className='question-render'>{questions[currentQuestionIndex].content}</h3>
           
           {answers.map((answer, index) => (
-            <button className='answer-render' key={index} onClick={()=>{
-              incrementQuestion()
-            }}>
-              {answer.content}
-            </button>
+            <button 
+            className="answer-render" 
+            key={index} 
+            onClick={() => {
+              incrementQuestion();
+              hundleProgress(answer.id);
+              percentageProgress();
+            }}
+          >
+            {answer.content}
+          </button>
+          
           ))}
         </>
       ) : (
         <>
         <div>
          <h2>You've completed this lesson!</h2>
-         <button onClick={()=>{
-          setlessonIDD(prev => prev + 1)
-          setCurrentQuestionIndex(7)
-         }}>Go to Next Lesson</button>
+         <button onClick={() => {
+             if (lessonIDD < lessons.length) {
+               setlessonIDD((prev) => prev + 1);
+               setprogress(0); // Reset progress for new lesson
+               setresultProgress(0); // Reset progress percentage
+               ProgressAllLessons(); // Update overall progress
+             } else {
+               console.log("No more lessons");
+             }
+           }}>
+             Go to Next Lesson
+        </button>
+
        </div>
         </>
       )}

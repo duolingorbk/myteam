@@ -10,4 +10,7 @@ const getAllAnswers = async (req, res) => {
     }
 };
 
+
+
+
 module.exports = { getAllAnswers };

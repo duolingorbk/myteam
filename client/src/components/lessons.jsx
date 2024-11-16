@@ -6,6 +6,7 @@ function Lessons({ language }) {
   const [lessons, setLessons] = useState([]);
   const [loading, setLoading] = useState(true);
   const [error, setError] = useState(null);
+  
   const navigate = useNavigate();
 
   useEffect(() => {
@@ -24,7 +25,7 @@ function Lessons({ language }) {
   }, [language]);
 
   const handleLessonClick = (lessonId) => {
-    navigate(`/questions/${lessonId}`, { state: {lessonId} });
+    navigate(`/questions/${lessonId}`, { state: {lessonId , lessons} });
   };
 
   if (loading) return <p>Loading lessons...</p>;
