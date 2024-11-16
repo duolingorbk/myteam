@@ -1,7 +1,7 @@
 import React, { useState } from 'react';
 import axios from 'axios';
-import { Plus, Minus, Send } from 'lucide-react';
-import Swal from 'sweetalert2';
+//import { Plus, Minus, Send } from 'lucide-react';
+//import Swal from 'sweetalert2';
 import '../css/CreateLesson.css'; // Import the CSS file
 
 const CreateLesson = ({ refresh, setrefresh }) => {
