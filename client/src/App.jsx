@@ -1,7 +1,7 @@
 import React, { useState } from 'react';
 import { BrowserRouter as Router, Route, Routes } from 'react-router-dom';
 import LanguageSelector from './components/LanguageSelector';
-import Lessons from './components/Lessons.jsx';
+import Lessons from './components/lessons.jsx';
 import Questions from './components/Questions';
 import ToNextLesson from './components/lessons pages/ToNextLesson.jsx';
 import './App.css';

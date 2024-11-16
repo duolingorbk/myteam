@@ -2,7 +2,7 @@ import React, { useState, useEffect } from 'react';
 import axios from 'axios';
 import { useParams, useLocation, useNavigate } from 'react-router-dom';
 
-export default function Ques() {
+export default function Questions() {
   const { lessonId } = useParams();
   const location = useLocation();
   const { lessons } = location.state ||[] /// console.log this when this compoenet is rendered inside my app.jsx
@@ -135,7 +135,7 @@ export default function Ques() {
   // Render the current question and its answers
   return (
     <div className=''>
-      
+      <h1>ALL lessons Progress {allLessonsProgress} %</h1>
       <h2>Questions for Lesson {lessonIDD}</h2>
       <h2>Progress {resultProgress} %</h2>
       {questions.length? (
