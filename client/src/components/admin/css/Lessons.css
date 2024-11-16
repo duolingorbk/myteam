@@ -1,0 +1,77 @@
+/* Lessons Page Layout */
+.lessonsInterface {
+  width: 100%;
+  padding: 100px;
+  height: 93vh;
+
+}
+
+.language-Box {
+  position: fixed;
+  width: 70%;
+  margin: 0 auto;
+  background-color: white;
+  padding: 25px;
+  padding-bottom: 2%;
+  box-shadow: 10px 5px 5px rgba(0, 0, 0, 0.1);
+}
+
+.language-buttons {
+  display: flex;
+  justify-content: space-between;
+}
+
+.language-buttons .language-container {
+  width: 48%;
+}
+
+.language-buttons button {
+  width: 100%;
+  margin-right: 20px;
+  padding: 20px;
+  border: none;
+  border-radius: 5px;
+  color: white;
+  font-size: 20px;
+  font-weight: 600;
+}
+
+.language-buttons .english {
+  background-color: #e93427;
+}
+
+.language-buttons .french {
+  background-color: #0c77ce;
+}
+
+.language-buttons button:hover {
+  opacity: 0.9;
+}
+
+.dropdown {
+  width: 100%;
+  border-radius: 5px;
+  box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+}
+
+#english-dropdown {
+  background-color: #f44336;
+}
+
+#french-dropdown {
+  background-color: #2196F3;
+}
+
+.lesson-choice {
+  padding: 10px 20px;
+  color: white;
+  background-color: transparent;
+  border: none;
+  cursor: pointer;
+  transition: background-color 0.2s;
+  font-weight: bolder;
+}
+
+.lesson-choice:hover {
+  background-color: rgba(0, 0, 0, 0.1);
+}

@@ -1,13 +1,13 @@
 import { Navigate } from 'react-router-dom';
 
-const ProtectedRoute = ({ privateRoutes }) => {
+const ProtectedRoute = ({ element }) => {
     try {
         const user = JSON.parse(localStorage.getItem('user'))
 
         if (user.type !== 'admin') {
             return <Navigate to="/" replace />;
         }
-        return privateRoutes
+        return element
         
     } catch (error) {
         return <Navigate to="/" replace />;

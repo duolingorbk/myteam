@@ -21,16 +21,18 @@ const Login = () => {
             if (response.status === 200) {
                 const { token, user } = response.data;
                 localStorage.setItem("token", token);
+            
                 
                 // Store all users with 'user' key for consistency
                 localStorage.setItem("user", JSON.stringify(user));
                 
                 // Redirect based on user type
-                if (user.type === 'admin') {
+                if (user.type === 'admin') {                    
                     navigate("/admin-dashboard");
-                    return; // Add return to prevent the next navigate
+                    window.location.reload()
                 } else {
                     navigate("/");
+                    window.location.reload()
                 }
                 
                 setError("");

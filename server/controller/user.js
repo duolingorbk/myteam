@@ -2,12 +2,15 @@ const db = require("../database/index");
 const bcrypt = require('bcryptjs'); //to hash the pasword
 const jwt = require('jsonwebtoken');//to generate the token
 const dotenv = require('dotenv').config
+JWT_SECRET='ascefbth,plnihcdxuwy'
+
+
 
 
 const validatePassword=(password)=>{
     const errors=[]
     const passwordChecking=/^(?=.*[a-z])(?=.*[A-Z])(?=.*\d)(?=.*[!@#$%^&*(),.?":{}|<>])[a-zA-Z\d!@#$%^&*(),.?":{}|<>]{8,}$/;
-    if(password.length<8){
+    if(password.length < 8){
         errors.push("Password must contain at least 8 characters.")
     }
     if(!passwordChecking.test(password)){
@@ -71,6 +74,46 @@ const signup = async (req, res) => {
 };
 
 
+const findAllUsers = async (req, res) => {
+    try {
+        const users = await db.User.findAll();
+        res.send(users);
+    } catch (error) {
+        res.send(error);
+    }
+}
+
+
+const deleteUser = async (req, res) => {
+    try {
+        const { id } = req.params;
+        await db.User.destroy({
+            where: { id: id }
+        });
+
+        res.send("Deleted");
+    } catch (error) {
+        res.send(error);
+    }
+}
+
+const updateUser = async (req, res) => {
+    try {
+        const { id } = req.params;
+        const { email, password, name } = req.body;
+
+        const user = await db.User.update(
+            { email, password, name },
+            { where: { id } }
+        );
+
+        res.send(user);
+    } catch (error) {
+        res.send(error);
+    }
+}
+
+
 const login = async (req, res) => {
     try {
         const {
@@ -92,7 +135,7 @@ const login = async (req, res) => {
 
         const token = jwt.sign(//json web token to give a token to the user once they are logged in 
             { id: user.id, name: user.name, email: user.email },
-            process.env.JWT_SECRET,
+            JWT_SECRET,
             { expiresIn: '1h' }
         );
 
@@ -114,6 +157,7 @@ const login = async (req, res) => {
     }
 };
 
-module.exports = { signup, login };
 
 
+
+module.exports = { signup, login , findAllUsers , deleteUser , updateUser };
