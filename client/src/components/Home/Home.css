@@ -1,0 +1,157 @@
+body {
+    font-family: 'Roboto', sans-serif;
+    margin: 0;
+    min-height: 100vh;
+    background-color: #fff;
+    display: flex;
+    flex-direction: column; 
+}
+
+.header {
+    background: linear-gradient(90deg, #4a00e0, #8e2de2);
+    color: white;
+    padding: 20px;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+}
+
+
+
+
+
+
+
+
+.main {
+    flex: 1; 
+    background: linear-gradient(90deg, #4a00e0, #8e2de2);
+    color: white;
+    text-align: center;
+    padding: 50px 20px;
+}
+
+.main h2 {
+    font-size: 36px;
+    margin: 0 0 20px;
+}
+
+.main p {
+    font-size: 18px;
+    margin: 0 0 30px;
+}
+
+.main .cta {
+    background-color: #00e676;
+    color: #4a00e0;
+    padding: 15px 30px;
+    border-radius: 30px;
+    text-decoration: none;
+    font-weight: bold;
+}
+
+.main .rating {
+    margin-top: 20px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+}
+
+.main .rating i {
+    color: #00e676;
+}
+
+.main .rating span {
+    margin-left: 10px;
+}
+
+.main .rating a {
+    color: #00e676;
+    text-decoration: none;
+    margin-left: 5px;
+}
+
+.illustration {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    margin-top: 30px;
+}
+
+.illustration img {
+    width: 100px;
+    height: 100px;
+    border-radius: 50%;
+    margin: 0 10px;
+}
+
+.illustration .speech-bubble {
+    position: relative;
+    background: white;
+    border-radius: 5px;
+    padding: 10px;
+    color: #4a00e0;
+    font-weight: bold;
+}
+
+.illustration .speech-bubble::after {
+    content: '';
+    position: absolute;
+    bottom: 100%;
+    left: 50%;
+    margin-left: -5px;
+    border-width: 5px;
+    border-style: solid;
+    border-color: transparent transparent white transparent;
+}
+
+.container {
+    text-align: center;
+    padding: 40px 20px;
+    width: 100%;
+    max-width: 1200px;
+    margin: 0 auto;
+}
+
+.title {
+    font-size: 24px;
+    font-weight: bold;
+    margin-bottom: 20px;
+}
+
+.languages {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
+
+.language {
+    margin: 0 15px;
+    text-align: center;
+}
+
+.language img {
+    width: 60px;
+    height: 60px;
+    border-radius: 50%;
+}
+
+.language p {
+    margin-top: 10px;
+   
+}
+
+.arrow {
+    font-size: 24px;
+    color: #e0e0e0;
+    cursor: pointer;
+}
+
+
+
+
+
+
+
+
+

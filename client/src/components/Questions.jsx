@@ -3,19 +3,20 @@ import axios from "axios";
 import { useParams, useLocation, useNavigate } from "react-router-dom";
 
 export default function Questions() {
-  const { lessonId } = useParams();
+   const { lessonId } = useParams();
   const location = useLocation();
   const { lessons } = location.state || []; /// console.log this when this compoenet is rendered inside my app.jsx
-
+  
+  
   const navigate = useNavigate();
-  console.log("lessons 😒😒😒😒 :", lessons);
-
+  console.log("lessons id 😒😒😒😒 :", lessonId);
+  
   // const { language } = location.state;  // Retrieve language and lessonId from location.state
 
   const [questions, setQuestions] = useState(lessons);
   const [answers, setAnswers] = useState([]);
   const [currentQuestionIndex, setCurrentQuestionIndex] = useState(0);
-  const [lessonIDD, setlessonIDD] = useState(1);
+  const [lessonIDD, setlessonIDD] = useState(lessonId); // instead of 1 
   const [progress, setprogress] = useState(0);
   const [resultProgress, setresultProgress] = useState(0);
 
