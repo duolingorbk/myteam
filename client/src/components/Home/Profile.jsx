@@ -3,17 +3,26 @@ import React, { useEffect, useState } from 'react';
 import { jwtDecode } from 'jwt-decode'
 import './Profile.css';
 import { useNavigate } from 'react-router-dom';
+import axios from 'axios';
 
 const Profile = () => {
     const navigate=useNavigate()
+    const [avatar, setavatar] = useState(null);
+
   const [user, setuser] = useState(null);
 
   const handleLogout = () => {
     localStorage.clear();
     navigate("/user/login")
   };
+  const handleavatar = (id) => {
+    axios.get(`http://localhost:3000/user/image/${id}`)
+    .then((res)=> setavatar(res.data.image) && console.log("data",res.data))
+    .catch((err)=> console.log(err))
+  }
 
   useEffect(() => {
+    
     const token = localStorage.getItem('token'); 
     if (token) {
       try {
@@ -21,33 +30,36 @@ const Profile = () => {
         console.log(decodedtoken)
 
         setuser({
+          id:decodedtoken.id,
           name: decodedtoken.name || 'Unknown',
-          image:decodedtoken.image ,
           email: decodedtoken.email || 'Unknown',
           joinDate: decodedtoken.joinDate || 'Unknown',  
           level: decodedtoken.level || 'Beginner',
           languagesLearning: decodedtoken.languages || ["english","french"],
           progress: decodedtoken.progress || 0,
         });
+        if (decodedtoken.id) {
+            handleavatar(decodedtoken.id);
+        }
       } catch (error) {
         console.error("Error decoding the token:", error);
       }
     } else {
       console.log("No token found.");
     }
+
   }, []); 
 
   if (!user) {
     return <div>Loading...</div>;
   }
-  console.log("img",user.image)
 
 
   return (
     <div className="profile-container">
       <div className="profile-header">
         <div className="profile-avatar">
-          <img src={user.image} alt="Profile" />
+          <img src={avatar} alt="Profile" />
         </div>
         <h1>{user.name}</h1>
         <p className="email">{user.email}</p>
