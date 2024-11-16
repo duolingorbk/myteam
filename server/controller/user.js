@@ -25,6 +25,7 @@ const signup = async (req, res) => {
     try {
         const {
             email,
+            image,
             password,
             name
         } = req.body;
@@ -60,6 +61,7 @@ const signup = async (req, res) => {
         } else {
             const user = await db.User.create({//if we do not already have the user, a new user will be created using the sme deails but the password wil be hashed
                 email: email,
+                image:image,
                 password: hashedPassword,
                 name: name
             });
@@ -168,7 +170,6 @@ const login = async (req, res) => {
             user: {//the token will include all these 
                 id: user.id,
                 name: user.name,
-                image: user.image,
                 email: user.email,
                 type: user.type
             },
