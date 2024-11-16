@@ -74,6 +74,30 @@ const signup = async (req, res) => {
         res.status(500).send(error);
     }
 };
+const getUserImage = async (req, res) => {
+    try {
+      const { id } = req.params;
+      
+      const user = await db.User.findOne({
+        where: { id: id },
+        attributes: ['image'] // Only fetch the image field
+      });
+  
+      if (!user) {
+        return res.status(404).json({ message: 'User not found' });
+      }
+  
+      if (!user.image) {
+        return res.status(404).json({ message: 'No image found for this user' });
+      }
+  
+      res.status(200).json({ image: user.image });
+    } catch (error) {
+      console.error('Error fetching user image:', error);
+      res.status(500).json({ message: 'Error fetching user image', error: error.message });
+    }
+  };
+  
 
 
 const findAllUsers = async (req, res) => {
@@ -161,4 +185,4 @@ const login = async (req, res) => {
 
 
 
-module.exports = { signup, login , findAllUsers , deleteUser , updateUser };
+module.exports = { signup, login , findAllUsers , deleteUser , updateUser , getUserImage};
