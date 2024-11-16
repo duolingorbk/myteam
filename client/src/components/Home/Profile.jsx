@@ -9,7 +9,7 @@ const Profile = () => {
   const [user, setuser] = useState(null);
 
   const handleLogout = () => {
-    localStorage.removeItem('token');
+    localStorage.clear();
     navigate("/user/login")
   };
 

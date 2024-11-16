@@ -12,13 +12,27 @@ const Signup = () => {
   const [error, setError] = useState("");
 
   const navigate = useNavigate();
-
+  const validatePassword=(password)=>{
+    const errors=[]
+    const passwordChecking=/^(?=.*[a-z])(?=.*[A-Z])(?=.*\d)(?=.*[!@#$%^&*(),.?":{}|<>])[a-zA-Z\d!@#$%^&*(),.?":{}|<>]{8,}$/;
+    if(password.length<8){
+        errors.push("Password must contain at least 8 characters.")
+    }
+    if(!passwordChecking.test(password)){
+        errors.push("Password must contain at least one upper case, one lower case, and one symbol")
+    }
+    return {
+        isValid:errors.length===0,
+        errors:errors
+    }
+}
   const handleImageUpload = async (e) => {
     e.preventDefault();
     const data = new FormData();
     data.append('file', image);
     data.append('upload_preset', 'speakeasy');
     data.append('cloud_name', 'dog9364lq');
+    console.log(image)
 
     try {
       const response = await axios.post("https://api.cloudinary.com/v1_1/dog9364lq/image/upload", data);
@@ -31,20 +45,27 @@ const Signup = () => {
 
   const handleAddUser = async () => {
     try {
+
+      const passwordValidation = validatePassword(password);
+      if (!passwordValidation.isValid) {
+        setError("Password is too weak:");
+        passwordValidation.errors.forEach((err) => setError((prev) => prev + " \n " + err));
+        return;
+      }
+
       const response = await axios.post("http://localhost:3000/user/signup", {
         name,
         email,
         password,
-        imageUrl,
+        image: imageUrl,
       }, { headers: { 'Content-Type': 'application/json' } });
 
-      localStorage.setItem("userData", JSON.stringify({ ...response.data, imageUrl }));
 
       console.log(response.data);
       setError("");
 
       navigate("/user/login");
-      
+
     } catch (error) {
       if (error.response.data === "User already exists") {
         setError("Email address is already registered. Please use a different email.");
@@ -117,6 +138,11 @@ const Signup = () => {
           Sign Up
         </button>
       </form>
+      <div className="signup-link">
+                    <p>
+                        You already have an account? <a  className="login-link-text" onClick={()=>navigate("/user/login")}>Login</a>
+                    </p>
+                </div>
     </div>
   );
 };
