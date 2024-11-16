@@ -23,6 +23,7 @@ const Signup = () => {
     try {
       const response = await axios.post("https://api.cloudinary.com/v1_1/dog9364lq/image/upload", data);
       setImageUrl(response.data.secure_url);
+      console.log(imageUrl)
     } catch (error) {
       console.error('Error uploading image to Cloudinary:', error);
     }

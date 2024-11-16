@@ -14,13 +14,15 @@ const Profile = () => {
   };
 
   useEffect(() => {
-    const token = localStorage.getItem('token');    
+    const token = localStorage.getItem('token'); 
     if (token) {
       try {
         const decodedtoken = jwtDecode(token);
+        console.log(decodedtoken)
 
         setuser({
           name: decodedtoken.name || 'Unknown',
+          image:decodedtoken.image ,
           email: decodedtoken.email || 'Unknown',
           joinDate: decodedtoken.joinDate || 'Unknown',  
           level: decodedtoken.level || 'Beginner',
@@ -38,12 +40,14 @@ const Profile = () => {
   if (!user) {
     return <div>Loading...</div>;
   }
+  console.log("img",user.image)
+
 
   return (
     <div className="profile-container">
       <div className="profile-header">
         <div className="profile-avatar">
-          <img src="https://via.placeholder.com/150" alt="Profile" />
+          <img src={user.image} alt="Profile" />
         </div>
         <h1>{user.name}</h1>
         <p className="email">{user.email}</p>
