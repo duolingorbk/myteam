@@ -9,7 +9,7 @@ function FakeApp() {
   return (
     <div>
     <Router>
-      <div className="app-container">
+      <div className="Adminapp-container">
         <Sidebar />
         <div className="main-content">
           <div className="header">

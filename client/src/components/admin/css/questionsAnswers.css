@@ -2,16 +2,21 @@
 .admin {
     padding: 20px;
     background-color: #f4f4f4;
+    
   }
   
   /* Card for content */
   .mainTable {
-    width: 100%;
+    margin-top: -15px;
+    width: 102%;
     background-color: white;
-    padding: 20px;
+    padding: 40px;
+    padding-right: -50px;
+  
     border-radius: 5px;
     box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
     margin-bottom: 30px;
+    
   }
   
   /* Table styles */
@@ -19,6 +24,7 @@
     width: 100%;
     border-collapse: collapse;
     margin-bottom: 30px;
+    
   }
   
   .table th, .table td {
@@ -70,5 +76,13 @@
   /* Question card */
   .question {
     margin-bottom: 30px;
+  }
+
+  .saveUpdate{
+    padding: 6px 12px;
+    background: linear-gradient(90deg, #4a00e0, #8e2de2);
+    color: white;
+    border-radius: 5px;
+    cursor: pointer;
   }
   

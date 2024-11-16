@@ -11,7 +11,7 @@ const Languages = () => {
 
   useEffect(() => {
     axios
-      .get('http://127.0.0.1:3000/lesson/allLessons') 
+      .get('http://127.0.0.1:3000/lesson/allLessons')
       .then((res) => {
         setLessons(res.data);
       })
@@ -29,14 +29,14 @@ const Languages = () => {
   };
 
   return (
-    <div className="main-content">
-        <button onClick={()=>{navigate("/createLesson")}}>Add New Lesson</button>
+    <div className="lessonsInterface">
+      <button onClick={() => navigate("/createLesson")}>Add New Lesson</button>
       <div className="language-Box">
         <h2>Languages</h2>
         <div className="language-buttons">
           <div className="language-container">
-            <button 
-              className="english" 
+            <button
+              className="english"
               onClick={() => toggleDropdown('english')}
             >
               English
@@ -44,9 +44,9 @@ const Languages = () => {
             {showEnglish && (
               <div className="dropdown" id="english-dropdown">
                 {lessons.filter((lesson) => lesson.language === 'english').map((lesson) => (
-                  <div key={lesson.id} 
-                    className="lesson-choice" 
-                    onClick={() => navigate(`/adminquestions/${lesson.id}`)} 
+                  <div key={lesson.id}
+                    className="lesson-choice"
+                    onClick={() => navigate(`/adminquestions/${lesson.id}`)}
                   >
                     {lesson.title}
                   </div>
@@ -56,8 +56,8 @@ const Languages = () => {
           </div>
 
           <div className="language-container">
-            <button 
-              className="french" 
+            <button
+              className="french"
               onClick={() => toggleDropdown('french')}
             >
               French
@@ -65,8 +65,8 @@ const Languages = () => {
             {showFrench && (
               <div className="dropdown" id="french-dropdown">
                 {lessons.filter(lesson => lesson.language === 'french').map((lesson) => (
-                  <div key={lesson.id} 
-                    className="lesson-choice" 
+                  <div key={lesson.id}
+                    className="lesson-choice"
                     onClick={() => navigate(`/adminquestions/${lesson.id}`)}
                   >
                     {lesson.title}

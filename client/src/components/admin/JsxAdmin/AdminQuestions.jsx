@@ -162,12 +162,7 @@ const AdminQuestions = () => {
               </table>
               {showUpdate && selectedQuestionId === question.id && (
                 <div>
-                  <button onClick={()=>handleQuestionUpdate(question.id)}>Save Changes</button>
-                </div>
-              )}
-              {showUpdate && selectedAnswerId && (
-                <div>
-                  <button onClick={()=>{handleAnswerUpdate(selectedAnswerId) , console.log("========>" , answer)}}>Save Answer Changes</button>
+                  <button className='saveUpdate' onClick={()=>handleQuestionUpdate(question.id)}>Save Changes</button>
                 </div>
               )}
             </div>

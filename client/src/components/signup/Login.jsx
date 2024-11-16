@@ -1,4 +1,4 @@
-import React, { useState } from 'react';
+import React, { useEffect, useState } from 'react';
 import axios from 'axios';
 import { useNavigate } from 'react-router-dom';
 import "./Login.css";
@@ -10,41 +10,42 @@ const Login = () => {
     const navigate = useNavigate();
 
     const handleLogin = async (e) => {
-        e.preventDefault()
-
+        e.preventDefault();
+    
         try {
             const response = await axios.post("http://localhost:3000/user/login", {
                 email,
                 password
             });
-
+    
             if (response.status === 200) {
                 const { token, user } = response.data;
-
                 localStorage.setItem("token", token);
-                console.log(token)
-
-                if (user.type === 'admin') {
-                    localStorage.setItem("admin", JSON.stringify(user));
-                    navigate("/admin-dashboard")
+            
+                
+                // Store all users with 'user' key for consistency
+                localStorage.setItem("user", JSON.stringify(user));
+                
+                // Redirect based on user type
+                if (user.type === 'admin') {                    
+                    navigate("/admin-dashboard");
+                    window.location.reload()
                 } else {
-                    localStorage.setItem("user", JSON.stringify(user));
-                    //navigate("/")
+                    navigate("/");
+                    window.location.reload()
                 }
-                setError("")//(to remove the error if the written password is correct)
+                
+                setError("");
             }
-            navigate("/")
         } catch (err) {
             console.error(err);
-
-            if (err.response.data.message === "Invalid credentials") {
+            if (err.response?.data?.message === "Invalid credentials") {
                 setError("Incorrect password. Please try again.");
             } else {
                 setError("An error occurred during login. Please try again later.");
             }
         }
     };
-
     return (
         <div className="login-container">
             <h2 className="login-title">Login</h2>
