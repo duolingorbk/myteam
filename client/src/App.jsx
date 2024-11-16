@@ -30,7 +30,7 @@ function App() {
           <Route path="/questions/:lessonId" element={<Questions />} />
     
           <Route 
-                path="/admin-dashboard"  
+                path="/admin-dashboard"  // This should match the path in your Login component
                 element={
                     <ProtectedRoute>
                         <Admin />
