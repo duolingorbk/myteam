@@ -28,9 +28,9 @@ db.Questions = require("./models/Questions")(sequelize , Sequelize)
 
 db.User.hasMany(db.Lessons)
 db.Lessons.belongsTo(db.User)
-db.Lessons.hasMany(db.Questions)
+db.Lessons.hasMany(db.Questions )
 db.Questions.belongsTo(db.Lessons)
-db.Questions.hasMany(db.Answers)
+db.Questions.hasMany(db.Answers ) 
 db.Answers.belongsTo(db.Questions)
 
 //   sequelize.sync({alter : true}).then(() => {

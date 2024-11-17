@@ -31,6 +31,7 @@ function App() {
 
   {user &&user.type === "user"  ? (
      <>
+
      <Navbar />
      <div className="app-container">
        <Routes>
@@ -47,9 +48,9 @@ function App() {
     <>
     <Sidebar />
     <div className="main-content">
-    <div className="Admin-header">
+       <div className="Admin-header">
             <h1>Mini Language Learning Admin Interface</h1>
-          </div>
+        </div>
      <Routes>
   <Route path="/admin-dashboard" element={<AdminInterface />} />
         <Route path="/adminquestions/:lessonId" element={<AdminQuestions />} />

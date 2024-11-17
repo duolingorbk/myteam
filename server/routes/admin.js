@@ -1,9 +1,8 @@
-const createLesson = require("../controller/admin")
-const express = require("express")
+const express = require("express");
+const createLesson = require("../controller/admin"); 
 
-const admincreateroute = express.Router()
+const admincreateroute = express.Router();
 
-admincreateroute.post("/createlesson" ,createLesson)
+admincreateroute.post("/createlesson", createLesson);
 
-
-module.exports = admincreateroute
+module.exports = admincreateroute;

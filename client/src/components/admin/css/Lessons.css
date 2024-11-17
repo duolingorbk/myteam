@@ -10,10 +10,10 @@
   position: fixed;
   width: 70%;
   margin: 0 auto;
-  background-color: white;
+  background-color: rgb(255, 255, 255);
   padding: 25px;
   padding-bottom: 2%;
-  box-shadow: 10px 5px 5px rgba(0, 0, 0, 0.1);
+  box-shadow: 10px 5px 5px 10px rgba(0, 0, 0, 0.1);
 }
 
 .language-buttons {
@@ -38,10 +38,14 @@
 
 .language-buttons .english {
   background-color: #e93427;
+    color: white;
+    cursor: pointer;
 }
 
 .language-buttons .french {
   background-color: #0c77ce;
+  color: white;
+  cursor: pointer;
 }
 
 .language-buttons button:hover {
@@ -74,4 +78,17 @@
 
 .lesson-choice:hover {
   background-color: rgba(0, 0, 0, 0.1);
+}
+
+
+.newLesson{
+  background: linear-gradient(90deg, #4a00e0, #8e2de2);
+  padding: 5px 10px;
+  cursor: pointer;
+  font-size: 18px;
+  display: inline-block;
+  border-radius: 5px;
+  margin-left: -1400px; 
+  color: rgb(255, 255, 255);
+
 }

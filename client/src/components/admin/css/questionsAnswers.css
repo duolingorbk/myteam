@@ -1,21 +1,22 @@
 /* Overall admin container */
 .admin {
     padding: 20px;
-    background-color: #f4f4f4;
+    background-color: #ffffff;
     
   }
   
   /* Card for content */
   .mainTable {
     margin-top: -15px;
-    width: 102%;
+    width: 100%;
     background-color: white;
     padding: 40px;
     padding-right: -50px;
-  
+    margin-left: -20px ; 
     border-radius: 5px;
     box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
     margin-bottom: 30px;
+    height: 100%
     
   }
   
@@ -39,7 +40,8 @@
   }
 
   /* Button styles */
-  .delete {
+  .delete ,
+  .cancel{
     padding: 6px 12px;
     background-color: #f44336;
     color: white;
@@ -86,3 +88,17 @@
     cursor: pointer;
   }
   
+
+  .updateInput{
+      width: 100%;
+      background: #fff;
+      border-radius: 12px;
+      font-size: 0.9rem;
+      box-shadow: none;
+      font-weight: bold;
+    }
+
+    .updateInput:focus {
+      box-shadow: none;
+    }
+    
