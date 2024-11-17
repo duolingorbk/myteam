@@ -1,0 +1,179 @@
+body {
+  font-family: 'Roboto', sans-serif;
+  font-weight: bolder;
+  margin: 0;
+  padding: 0;
+  background-color: #f4f4f4;
+}
+
+.Admin-header {
+  align-content: center;
+  background: linear-gradient(90deg, #4a00e0, #8e2de2);
+  color: white;
+  padding: 10px 20px;
+  text-align: center;
+  position: fixed;
+  top: 0;
+  left: 0;
+  width: 100%;
+  z-index: 100;
+}
+
+.sidebar {
+  height: 100%;
+  width: 300px;
+  background-color: #333;
+  color: white;
+  position: fixed;
+  padding-top: 20px;
+  margin-top: 50px;
+  z-index: 100;
+}
+
+.sidebar .profile {
+  display: flex;
+  align-items: center;
+  padding: 10px 0;
+}
+
+.sidebar .profile img {
+  margin-top: 50px;
+  border-radius: 50%;
+  margin-left: 10px;
+}
+
+.sidebar .profile span {
+  margin-top: 50px;
+  border-radius: 50%;
+  margin-left: 20px;
+  font-weight: bold;
+}
+
+.sidebar h2 {
+  text-decoration: none;
+  color: white;
+  background-color: #333;
+  cursor: pointer;
+  font-size: 25px;
+  margin-left: 10px;
+}
+
+.sidebar h2:hover {
+  background-color: #575757;
+}
+
+.main-content {
+  margin-left: 300px; /* Ensure the content is pushed to the right of the sidebar */
+  padding-top: 60px;
+  background-color: #fff;
+  padding-left: 30px; /* Add padding on the left so content doesn't touch sidebar */
+  padding-right: 30px; /* Add some padding on the right */
+}
+
+.content {
+  width: 100%;
+  padding: 20px;
+  background-color: #fff;
+  height: 100%;
+}
+
+.adminCard {
+  
+  width: 100%;
+  height: 93vh;
+  background-color: white;
+  padding: 100px 0 0 20px ;
+  margin-bottom: 20px;
+  border-radius: 5px;
+  box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+}
+
+.adminCard h2 {
+  margin-top: 0;
+}
+
+.adminCard h3 {
+  margin-top: 20px;
+  font-weight: 600;
+}
+
+.adminCard table {
+  width: 80%;
+  border-collapse: collapse;
+}
+
+.adminCard table,
+.adminCard th,
+.adminCard td {
+  border: 1px solid #ddd;
+}
+
+.adminCard th,
+.adminCard td {
+  padding: 8px;
+  text-align: left;
+}
+
+.adminCard th {
+  background-color: #f2f2f2;
+}
+
+.btn {
+  background-color: #4caf50;
+  color: white;
+  padding: 10px 15px;
+  text-decoration: none;
+  border-radius: 5px;
+  display: inline-block;
+  margin-right: 10px;
+  cursor: pointer;
+}
+
+.btn:hover {
+  background-color: #45a049;
+}
+
+.edit-btn {
+  background-color: #4caf50;
+}
+
+.edit-btn:hover {
+  background-color: #45a049;
+}
+
+.delete-btn {
+  background-color: #f44336;
+}
+
+.delete-btn:hover {
+  background-color: #e53935;
+}
+
+.users {
+  background: linear-gradient(90deg, #4a00e0, #8e2de2);
+  padding: 5px 10px;
+  cursor: pointer;
+  font-size: 18px;
+  display: inline-block;
+  border-radius: 5px;
+  margin-left: -1400px; 
+
+}
+
+.users:hover {
+  background-color: #45a049;
+}
+
+.welc {
+  font-weight: bolder;
+  text-align: left;
+  font-size: 16px;
+  margin-left: 30px; /* Ensure it's not touching the sidebar */
+}
+
+.dashboard {
+  font-weight: bolder;
+  margin-top: 0;
+  text-align: left;
+  margin-left: 30px; /* Ensure the dashboard title is not touching the sidebar */
+}

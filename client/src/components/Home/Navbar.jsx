@@ -14,7 +14,7 @@ const Navbar = () => {
     <div className="navbar">
       <div className="nav-links">
         <a onClick={()=>navigate("/")}>Home</a>
-        <a onClick={()=>{handleLessonsClick()}}>Lessons</a>
+        <a onClick={()=>handleLessonsClick ("/lessons")}>Lessons</a>
       </div>
       <div className="profile-icon" onClick={()=>navigate("/Profile")} >
         <FontAwesomeIcon icon={faUserCircle} />

@@ -1,0 +1,131 @@
+/* Container styles */
+.create-lesson-container {
+  max-width: 800px;
+  height: 60%;
+  margin: 0 auto;
+  margin-top: 60px;
+  padding: 2rem;
+  background-color: #f9fafb;
+  border-radius: 8px;
+  box-shadow: 0 4px 10px rgba(0, 0, 0, 0.1);
+}
+
+/* Form container and inputs */
+.form-container {
+  display: flex;
+  flex-direction: column;
+  gap: 1.5rem;
+}
+
+.form-control {
+  width: 100%;
+  padding: 0.75rem;
+  border: 1px solid #e2e8f0;
+  border-radius: 0.375rem;
+  font-size: 1rem;
+}
+
+.form-control:focus {
+  outline: none;
+  border-color: #3b82f6;
+  box-shadow: 0 0 0 1px #3b82f6;
+}
+
+.input-flex {
+  display: flex;
+  gap: 1rem;
+  align-items: center;
+  justify-content: space-between;
+}
+
+.input-flex input,
+.input-flex select {
+  flex: 1;
+}
+
+.input-flex button {
+  background: transparent;
+  border: none;
+  color: #ef4444;
+  cursor: pointer;
+}
+
+.answers-container {
+  padding-left: 1rem;
+}
+
+.add-btn,
+.remove-btn {
+  padding: 0.5rem 1rem;
+  border-radius: 0.25rem;
+  cursor: pointer;
+  transition: background-color 0.3s ease;
+}
+
+.add-btn {
+  display: flex;
+  align-items: center;
+  color: #3b82f6;
+  gap: 0.5rem;
+}
+
+.remove-btn {
+  color: #ef4444;
+}
+
+.add-btn:hover {
+  background-color: #eff6ff;
+}
+
+.remove-btn:hover {
+  background-color: #fee2e2;
+}
+
+/* Button styles */
+.submit-btn {
+  background-color: #3b82f6;
+  color: white;
+  padding: 0.75rem;
+  font-size: 1rem;
+  width: 100%;
+  border-radius: 0.375rem;
+  cursor: pointer;
+}
+
+.submit-btn:disabled {
+  background-color: #93c5fd;
+  cursor: not-allowed;
+}
+
+.submit-btn:hover {
+  background-color: #2563eb;
+}
+
+/* Success and error messages */
+.success-message,
+.error-message {
+  padding: 1rem;
+  border-radius: 0.375rem;
+}
+
+.success-message {
+  background-color: #dcfce7;
+  color: #15803d;
+}
+
+.error-message {
+  background-color: #fee2e2;
+  color: #b91c1c;
+}
+
+#answerOne{
+  margin-left: -15px;
+  margin-bottom: 25px;
+
+}
+
+
+#control{
+  margin-top: -25px;
+ 
+}
