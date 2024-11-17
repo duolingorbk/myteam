@@ -14,15 +14,23 @@
   color: #333;
 }
 
+.language-buttons {
+  display: flex;
+  flex-direction: column;
+  gap: 1rem;
+}
+
 .language-selector .btn {
   display: flex;
   align-items: center;
   justify-content: center;
   margin: 0.5rem;
   padding: 0.8rem 1.5rem;
-  font-size: 1rem;
+  font-size: 1.2rem;
   border-radius: 5px;
   text-transform: capitalize;
+  transition: transform 0.3s ease;
+  cursor: pointer;
 }
 
 .language-selector .btn i {
@@ -37,6 +45,7 @@
 
 .language-selector .btn-english:hover {
   background-color: #0056b3;
+  transform: scale(1.05);
 }
 
 .language-selector .btn-french {
@@ -47,4 +56,14 @@
 
 .language-selector .btn-french:hover {
   background-color: #5a6268;
+  transform: scale(1.05);
+}
+
+.language-selector .btn span {
+  margin-right: 0.5rem;
+  font-size: 1.5rem; /* Increase emoji size */
+}
+
+.language-selector .btn:hover span {
+  transform: rotate(10deg); /* Rotate emoji slightly on hover */
 }
