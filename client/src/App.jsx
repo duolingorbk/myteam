@@ -1,8 +1,8 @@
 import React , {useState}  from 'react';
 import { BrowserRouter as Router, Route, Routes , Navigate } from 'react-router-dom';
-import LanguageSelector from './components/LanguageSelector';
-import Lessons from './components/Lessons.jsx';
-import Questions from './components/Questions';
+import LanguageSelector from '../src/components/lesonss&&questions/LanguageSelector.jsx';
+import Lessons from '../src/components/lesonss&&questions/lessons.jsx';
+import Questions from '../src/components/lesonss&&questions/Questions.jsx';
 import Home from './components/Home/Home.jsx';
 import Profile from './components/Home/Profile.jsx';
 import Navbar from './components/Home/Navbar.jsx';

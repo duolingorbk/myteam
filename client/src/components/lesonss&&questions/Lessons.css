@@ -1,0 +1,105 @@
+.lessons-container {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  margin: 20px 0;
+  font-family: Arial, sans-serif; /* Set a clear and readable font */
+}
+
+.lesson-path {
+  display: flex;
+  flex-direction: row;
+  align-items: center;
+  justify-content: center;
+  position: relative;
+  margin-top: 20px;
+}
+
+.lesson-item {
+  background-color: #f1f1f1;
+  padding: 20px;
+  border-radius: 50%;
+  box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+  width: 100px;
+  height: 100px;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  cursor: pointer;
+  transition: transform 0.3s ease-in-out;
+  font-size: 16px;
+  font-weight: bold;
+  color: #333; /* Dark text color for better readability */
+  text-align: center;
+  position: relative;
+  transition: transform 0.5s ease;
+}
+
+.lesson-item:hover {
+  transform: scale(1.1);
+  background-color: #6c63ff;
+  color: white;
+}
+
+.lesson-item.completed {
+  background-color: #6c63ff;
+  color: white;
+}
+
+.lesson-item button {
+  background-color: transparent;
+  border: none;
+  color: inherit;
+  cursor: pointer;
+  font-size: inherit;
+}
+
+.lesson-tail {
+  height: 4px;
+  width: 60px;
+  background-color: #6c63ff; /* Bright, clear color for the tail */
+  position: absolute;
+  top: 50%;
+  left: 100%;
+  transform: translateY(-50%);
+}
+
+.lesson-path .lesson-item:last-child .lesson-tail {
+  display: none;
+}
+
+/* Zigzag positioning for lesson items */
+.lesson-path .lesson-item:nth-child(odd) {
+  transform: translateY(-20px); /* Move up for odd items */
+}
+
+.lesson-path .lesson-item:nth-child(even) {
+  transform: translateY(20px); /* Move down for even items */
+}
+
+.lesson-status {
+  font-size: 18px;
+  font-weight: bold;
+  margin-top: 20px;
+  color: #6c63ff; /* Keep the theme consistent */
+  text-align: center;
+}
+
+h2 {
+  font-size: 28px;
+  font-weight: bold;
+  margin-bottom: 20px;
+  color: #333; /* Dark color for the header */
+}
+
+h3 {
+  font-size: 22px;
+  font-weight: bold;
+  margin-bottom: 15px;
+  color: #333; /* Dark color for the level title */
+}
+
+.lesson-path {
+  padding: 20px 0;
+  margin-bottom: 20px;
+}

@@ -9,9 +9,14 @@ const Lessons = sequelize.define('Lessons', {
         type: DataTypes.ENUM('english', 'french'),
         allowNull: false,
     },
+    level: {
+        type: DataTypes.ENUM('easy', 'medium', 'hard'),
+        allowNull: false,
+    },
   progress: {
         type: DataTypes.INTEGER,
         allowNull: true,
+        defaultValue: 0,
     }
 
 } , { timestamps: false })
