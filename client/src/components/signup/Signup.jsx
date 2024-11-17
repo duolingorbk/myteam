@@ -12,38 +12,20 @@ const Signup = () => {
   const [error, setError] = useState("");
 
   const navigate = useNavigate();
-  const validateStrongPassword = (password) => {
-
-    const minLength = 8;
-    const hasUpperCase = /[A-Z]/.test(password);
-    const hasLowerCase = /[a-z]/.test(password);
-    const hasNumbers = /\d/.test(password);
-    const hasSpecialCharacters = /[!@#$%^&*(),.?":{}|<>]/.test(password);
-
-    const errors = [];
-
-    if (password.length < minLength) {
-        errors.push(`Password must be at least ${minLength} characters long`);
+  const validatePassword=(password)=>{
+    const errors=[]
+    const passwordChecking=/^(?=.*[a-z])(?=.*[A-Z])(?=.*\d)(?=.*[!@#$%^&*(),.?":{}|<>])[a-zA-Z\d!@#$%^&*(),.?":{}|<>]{8,}$/;
+    if(password.length<8){
+        errors.push("Password must contain at least 8 characters.")
     }
-    if (!hasUpperCase) {
-        errors.push("Password must contain at least one uppercase letter");
+    if(!passwordChecking.test(password)){
+        errors.push("Password must contain at least one upper case, one lower case, and one symbol")
     }
-    if (!hasLowerCase) {
-        errors.push("Password must contain at least one lowercase letter");
-    }
-    if (!hasNumbers) {
-        errors.push("Password must contain at least one number");
-    }
-    if (!hasSpecialCharacters) {
-        errors.push("Password must contain at least one special character");
-    }
-
     return {
-        isValid: errors.length === 0, //this is a returned oject that shows if the password is valid the errors array will have 0 length
-        errors: errors//this is an array that includes all of the above errors if any of them is not included in the password 
-    };
-};
-
+        isValid:errors.length===0,
+        errors:errors
+    }
+}
   const handleImageUpload = async (e) => {
     e.preventDefault();
     const data = new FormData();
@@ -55,6 +37,7 @@ const Signup = () => {
     try {
       const response = await axios.post("https://api.cloudinary.com/v1_1/dog9364lq/image/upload", data);
       setImageUrl(response.data.secure_url);
+      console.log(imageUrl)
     } catch (error) {
       console.error('Error uploading image to Cloudinary:', error);
     }
@@ -63,7 +46,7 @@ const Signup = () => {
   const handleAddUser = async () => {
     try {
 
-      const passwordValidation = validateStrongPassword(password);
+      const passwordValidation = validatePassword(password);
       if (!passwordValidation.isValid) {
         setError("Password is too weak:");
         passwordValidation.errors.forEach((err) => setError((prev) => prev + " \n " + err));
@@ -74,7 +57,7 @@ const Signup = () => {
         name,
         email,
         password,
-        imageUrl,
+        image: imageUrl,
       }, { headers: { 'Content-Type': 'application/json' } });
 
 
@@ -96,7 +79,7 @@ const Signup = () => {
   return (
     <div className="signup-container">
       <h3>Join us!</h3>
-      <form>
+      <form className='signup-form'>
         <div>
           <label htmlFor="fullName"></label>
           <input

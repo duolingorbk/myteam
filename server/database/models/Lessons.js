@@ -12,6 +12,7 @@ const Lessons = sequelize.define('Lessons', {
   progress: {
         type: DataTypes.INTEGER,
         allowNull: true,
+        defaultValue: 0,
     }
 
 } , { timestamps: false })

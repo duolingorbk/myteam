@@ -1,104 +1,104 @@
 /* Overall admin container */
 .admin {
-    padding: 20px;
-    background-color: #ffffff;
-    
-  }
+  padding: 20px;
+  background-color: #ffffff;
   
-  /* Card for content */
-  .mainTable {
-    margin-top: -15px;
+}
+
+/* Card for content */
+.mainTable {
+  margin-top: -15px;
+  width: 100%;
+  background-color: white;
+  padding: 40px;
+  padding-right: -50px;
+  margin-left: -20px ; 
+  border-radius: 5px;
+  box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+  margin-bottom: 30px;
+  height: 100%
+  
+}
+
+/* Table styles */
+.table {
+  width: 100%;
+  border-collapse: collapse;
+  margin-bottom: 30px;
+  
+}
+
+.table th, .table td {
+  padding: 12px;
+  text-align: left;
+  border: 1px solid #ddd;
+}
+
+.table th {
+  background-color: #f2f2f2;
+  width: 30%;
+}
+
+/* Button styles */
+.delete ,
+.cancel{
+  padding: 6px 12px;
+  background-color: #f44336;
+  color: white;
+  border-radius: 5px;
+  cursor: pointer;
+  margin-right: 10px;
+}
+
+.delete:hover {
+  background-color: #e53935;
+}
+
+.update {
+  padding: 6px 12px;
+  background-color: #4caf50;
+  color: white;
+  border-radius: 5px;
+  cursor: pointer;
+}
+
+.update:hover {
+  background-color: #45a049;
+}
+
+/* Row styles */
+.question-row {
+  background-color: #e0f7fa;
+}
+
+.answer {
+  background-color: #f9fbe7;
+}
+
+/* Question card */
+.question {
+  margin-bottom: 30px;
+}
+
+.saveUpdate{
+  padding: 6px 12px;
+  background: linear-gradient(90deg, #4a00e0, #8e2de2);
+  color: white;
+  border-radius: 5px;
+  cursor: pointer;
+}
+
+
+.updateInput{
     width: 100%;
-    background-color: white;
-    padding: 40px;
-    padding-right: -50px;
-    margin-left: -20px ; 
-    border-radius: 5px;
-    box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
-    margin-bottom: 30px;
-    height: 100%
-    
-  }
-  
-  /* Table styles */
-  .table {
-    width: 100%;
-    border-collapse: collapse;
-    margin-bottom: 30px;
-    
-  }
-  
-  .table th, .table td {
-    padding: 12px;
-    text-align: left;
-    border: 1px solid #ddd;
-  }
-  
-  .table th {
-    background-color: #f2f2f2;
-    width: 30%;
+    background: #fff;
+    border-radius: 12px;
+    font-size: 0.9rem;
+    box-shadow: none;
+    font-weight: bold;
   }
 
-  /* Button styles */
-  .delete ,
-  .cancel{
-    padding: 6px 12px;
-    background-color: #f44336;
-    color: white;
-    border-radius: 5px;
-    cursor: pointer;
-    margin-right: 10px;
+  .updateInput:focus {
+    box-shadow: none;
   }
   
-  .delete:hover {
-    background-color: #e53935;
-  }
-  
-  .update {
-    padding: 6px 12px;
-    background-color: #4caf50;
-    color: white;
-    border-radius: 5px;
-    cursor: pointer;
-  }
-  
-  .update:hover {
-    background-color: #45a049;
-  }
-  
-  /* Row styles */
-  .question-row {
-    background-color: #e0f7fa;
-  }
-  
-  .answer {
-    background-color: #f9fbe7;
-  }
-  
-  /* Question card */
-  .question {
-    margin-bottom: 30px;
-  }
-
-  .saveUpdate{
-    padding: 6px 12px;
-    background: linear-gradient(90deg, #4a00e0, #8e2de2);
-    color: white;
-    border-radius: 5px;
-    cursor: pointer;
-  }
-  
-
-  .updateInput{
-      width: 100%;
-      background: #fff;
-      border-radius: 12px;
-      font-size: 0.9rem;
-      box-shadow: none;
-      font-weight: bold;
-    }
-
-    .updateInput:focus {
-      box-shadow: none;
-    }
-    
