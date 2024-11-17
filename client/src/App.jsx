@@ -39,6 +39,7 @@ function App() {
          <Route path="/Selectlanguage" element={<LanguageSelector setLanguage={setLanguage} />} />
        {language && <Route path="/lessons" element={<Lessons language={language} />} />}
          <Route path="/questions/:lessonId" element={<Questions />} />
+
        </Routes>
      </div>
    </>

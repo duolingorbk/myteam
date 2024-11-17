@@ -1,7 +1,6 @@
 import React from 'react';
-import { Button, Stack } from '@mui/material';
 import { useNavigate } from 'react-router-dom';
-import './LanguageSelector.css';
+import './LanguageSelector.css'; // Import the updated CSS file
 
 function LanguageSelector({ setLanguage }) {
   const navigate = useNavigate();
@@ -13,27 +12,21 @@ function LanguageSelector({ setLanguage }) {
 
   return (
     <div className="language-selector">
-      <h2>Select a Language</h2>
-      <Stack direction="row" spacing={3}>
-        <Button
-          variant="contained"
-          color="primary"
-          size="large"
-          startIcon={<span>🇬🇧</span>}
+      <h2>Select Language</h2>
+      <div className="language-buttons">
+        <button
+          className="btn btn-english"
           onClick={() => handleLanguageSelect('english')}
         >
-          English
-        </Button>
-        <Button
-          variant="contained"
-          color="secondary"
-          size="large"
-          startIcon={<span>🇫🇷</span>}
+          <span role="img" aria-label="english">🇬🇧</span> English
+        </button>
+        <button
+          className="btn btn-french"
           onClick={() => handleLanguageSelect('french')}
         >
-          French
-        </Button>
-      </Stack>
+          <span role="img" aria-label="french">🇫🇷</span> French
+        </button>
+      </div>
     </div>
   );
 }
