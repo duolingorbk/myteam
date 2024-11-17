@@ -10,7 +10,7 @@
   background: linear-gradient(to right, #ff7e5f, #feb47b); /* Gradient color */
   -webkit-background-clip: text;
   color: transparent;
-  animation: typing 5s steps(30) 1s forwards, glow 3s ease-in-out infinite alternate; /* Slower typing and glow animations */
+  animation: typing 3s steps(30) 1s forwards, glow 1.5s ease-in-out infinite alternate;
   text-shadow: 0 0 10px rgba(255, 255, 255, 0.6), 0 0 20px rgba(255, 255, 255, 0.5);
   letter-spacing: 2px;
 }
@@ -36,7 +36,7 @@
 /* Card container */
 .lesson-cards-container {
   display: grid;
-  grid-template-columns: repeat(4, 1fr); /* Create a 4-column grid */
+  grid-template-columns: repeat(auto-fill, minmax(250px, 1fr));
   gap: 20px;
   padding: 20px 0;
 }
