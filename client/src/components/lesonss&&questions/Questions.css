@@ -40,16 +40,19 @@
 }
 
 /* Styles for the question content */
-.question-number-render {
+.question-item {
+  background-color: #fff;
+  border-radius: 10px;
+  box-shadow: 0 4px 10px rgba(0, 0, 0, 0.1);
+  padding: 15px;
+  width: 100%;
+  margin-bottom: 20px;
+}
+
+.question-item h3 {
   font-size: 1.8rem;
   color: #333;
   margin-bottom: 10px;
-}
-
-.question-render {
-  font-size: 1.5rem;
-  color: #333;
-  margin-bottom: 20px;
 }
 
 /* Styles for the answers list */
@@ -62,20 +65,28 @@
 
 .answer-item {
   background-color: #fff;
+  border: 2px solid #4caf50;
   border-radius: 8px;
-  padding: 12px;
+  padding: 12px 20px;
   margin: 10px 0;
   box-shadow: 0 2px 6px rgba(0, 0, 0, 0.1);
   font-size: 1.2rem;
-  color: #333;
+  color: #4caf50;
   cursor: pointer;
   transition: all 0.3s ease;
+  width: 100%;
+  text-align: center;
 }
 
 .answer-item:hover {
   background-color: #4caf50;
   color: #fff;
   transform: scale(1.05);
+  box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2);
+}
+
+.answer-item:active {
+  transform: scale(0.98);
 }
 
 /* Style for the "Next Question" and "Next Lesson" buttons */
@@ -88,11 +99,34 @@ button {
   border: none;
   border-radius: 5px;
   cursor: pointer;
-  transition: background-color 0.3s ease;
+  transition: background-color 0.3s ease, transform 0.2s ease;
 }
 
 button:hover {
   background-color: #45a049;
+  transform: scale(1.05);
+}
+
+button:active {
+  transform: scale(0.95);
+}
+
+/* Card style for each answer */
+.answers-container .answer-item {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  background-color: #fff;
+  padding: 15px;
+  margin: 10px;
+  border-radius: 8px;
+  box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+}
+
+.answers-container .answer-item:hover {
+  background-color: #f0fdf4;
+  color: #4caf50;
+  cursor: pointer;
 }
 
 /* Responsive Design */
@@ -102,20 +136,12 @@ button:hover {
     padding: 15px;
   }
 
-  .question-number-render {
+  .question-item h3 {
     font-size: 1.5rem;
-  }
-
-  .question-render {
-    font-size: 1.3rem;
   }
 
   .answer-item {
     font-size: 1rem;
     padding: 10px;
-  }
-
-  .answers-container {
-    width: 100%;
   }
 }

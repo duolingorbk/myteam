@@ -27,6 +27,7 @@ export default function Questions() {
       setCurrentQuestionIndex(0);
       setProgress(0);
       setResultProgress(0);
+      setLessonCompleted(false);
       setShowProgress(false);
     } catch (err) {
       console.log("Error fetching questions:", err);
@@ -87,10 +88,12 @@ export default function Questions() {
     }
   };
 
-  // Toggle between lessons
+  // Handle toggling to the next lesson
   const handleNextLesson = () => {
-    if (lessonIDD < lessons.length) {
-      setLessonIDD(prevLessonId => prevLessonId + 1);
+    const currentLessonIndex = lessons.findIndex(lesson => lesson.id === lessonIDD);
+    if (currentLessonIndex < lessons.length - 1) {
+      const nextLessonId = lessons[currentLessonIndex + 1].id;
+      setLessonIDD(nextLessonId);
     } else {
       console.log("No more lessons available.");
       navigate('/lessons');

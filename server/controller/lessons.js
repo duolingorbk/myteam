@@ -7,7 +7,7 @@ const getAllLessons = async (req, res) => {
         const { language } = req.params;  // Use language from params
         const lessons = await db.Lessons.findAll({
             where: { language },  // Filter lessons by language
-            order: [['level', 'ASC']],  // Order by level
+           
         });
 
         res.send(lessons);  // Send the fetched lessons
