@@ -11,10 +11,7 @@ SET @OLD_SQL_MODE=@@SQL_MODE, SQL_MODE='ONLY_FULL_GROUP_BY,STRICT_TRANS_TABLES,N
 -- Schema speakeasy
 -- -----------------------------------------------------
 
-<<<<<<< HEAD
-=======
 
->>>>>>> d5f379452837e36204e5a77bfea1e1ec74ffb324
 -- -----------------------------------------------------
 -- Schema speakeasy
 -- -----------------------------------------------------
@@ -34,17 +31,9 @@ CREATE TABLE IF NOT EXISTS `speakeasy`.`users` (
   `type` ENUM('user', 'admin') NULL DEFAULT 'user',
   PRIMARY KEY (`id`))
 ENGINE = InnoDB
-<<<<<<< HEAD
-AUTO_INCREMENT = 6
 DEFAULT CHARACTER SET = utf8mb4
 COLLATE = utf8mb4_0900_ai_ci;
 
-
-=======
-DEFAULT CHARACTER SET = utf8mb4
-COLLATE = utf8mb4_0900_ai_ci;
-
->>>>>>> d5f379452837e36204e5a77bfea1e1ec74ffb324
 -- -----------------------------------------------------
 -- Table `speakeasy`.`lessons`
 -- -----------------------------------------------------
@@ -55,10 +44,7 @@ CREATE TABLE IF NOT EXISTS `speakeasy`.`lessons` (
   `progress` INT NULL DEFAULT NULL,
   `UserId` INT NULL DEFAULT NULL,
   PRIMARY KEY (`id`),
-<<<<<<< HEAD
-=======
   INDEX `UserId` (`UserId` ASC) VISIBLE,
->>>>>>> d5f379452837e36204e5a77bfea1e1ec74ffb324
   CONSTRAINT `lessons_ibfk_1`
     FOREIGN KEY (`UserId`)
     REFERENCES `speakeasy`.`users` (`id`)
@@ -77,12 +63,8 @@ CREATE TABLE IF NOT EXISTS `speakeasy`.`questions` (
   `content` VARCHAR(255) NULL DEFAULT NULL,
   `LessonId` INT NULL DEFAULT NULL,
   PRIMARY KEY (`id`),
-<<<<<<< HEAD
-  CONSTRAINT `questions_ibfk_2`
-=======
   INDEX `LessonId` (`LessonId` ASC) VISIBLE,
   CONSTRAINT `questions_ibfk_1`
->>>>>>> d5f379452837e36204e5a77bfea1e1ec74ffb324
     FOREIGN KEY (`LessonId`)
     REFERENCES `speakeasy`.`lessons` (`id`)
     ON DELETE SET NULL
@@ -101,10 +83,7 @@ CREATE TABLE IF NOT EXISTS `speakeasy`.`answers` (
   `status` TINYINT NULL DEFAULT NULL,
   `QuestionId` INT NULL DEFAULT NULL,
   PRIMARY KEY (`id`),
-<<<<<<< HEAD
-=======
   INDEX `QuestionId` (`QuestionId` ASC) VISIBLE,
->>>>>>> d5f379452837e36204e5a77bfea1e1ec74ffb324
   CONSTRAINT `answers_ibfk_1`
     FOREIGN KEY (`QuestionId`)
     REFERENCES `speakeasy`.`questions` (`id`)
@@ -118,11 +97,8 @@ COLLATE = utf8mb4_0900_ai_ci;
 SET SQL_MODE=@OLD_SQL_MODE;
 SET FOREIGN_KEY_CHECKS=@OLD_FOREIGN_KEY_CHECKS;
 SET UNIQUE_CHECKS=@OLD_UNIQUE_CHECKS;
-<<<<<<< HEAD
-=======
 
 
 
 
 
->>>>>>> d5f379452837e36204e5a77bfea1e1ec74ffb324

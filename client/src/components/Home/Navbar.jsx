@@ -10,7 +10,7 @@ const Navbar = () => {
     <div className="navbar">
       <div className="nav-links">
         <a onClick={()=>navigate("/")}>Home</a>
-        <a >Lessons</a>
+        <a onClick={()=>navigate("/lessons")}>Lessons</a>
       </div>
       <div className="profile-icon" onClick={()=>navigate("/Profile")} >
         <FontAwesomeIcon icon={faUserCircle} />
