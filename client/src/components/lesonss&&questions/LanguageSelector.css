@@ -1,37 +1,50 @@
-/* .language-selector {
-    display: flex;
-    flex-direction: column;
-    align-items: center;
-    justify-content: center;
-    height: 100vh;
-    background-color: #f4f4f9;
-  }
-  
-  .language-selector button {
-    font-size: 20px;
-    margin: 10px;
-    padding: 10px 20px;
-    border: none;
-    border-radius: 5px;
-    background-color: #4CAF50;
-    color: white;
-    cursor: pointer;
-    transition: background-color 0.3s ease;
-  }
-  
-  .language-selector button:hover {
-    background-color: #45a049;
-  }
-  
-  .gif-container {
-    width: 100%;
-    height: 500px;
-    overflow: hidden;
-  }
-  
-  .gif-container iframe {
-    width: 100%;
-    height: 100%;
-    border: none;
-  }
-   */
+.language-selector {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  height: 100vh;
+  background-color: #f9f9f9;
+  font-family: 'Roboto', sans-serif;
+}
+
+.language-selector h2 {
+  font-size: 2rem;
+  margin-bottom: 2rem;
+  color: #333;
+}
+
+.language-selector .btn {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  margin: 0.5rem;
+  padding: 0.8rem 1.5rem;
+  font-size: 1rem;
+  border-radius: 5px;
+  text-transform: capitalize;
+}
+
+.language-selector .btn i {
+  margin-right: 0.5rem;
+}
+
+.language-selector .btn-english {
+  background-color: #007bff;
+  color: #fff;
+  border: none;
+}
+
+.language-selector .btn-english:hover {
+  background-color: #0056b3;
+}
+
+.language-selector .btn-french {
+  background-color: #6c757d;
+  color: #fff;
+  border: none;
+}
+
+.language-selector .btn-french:hover {
+  background-color: #5a6268;
+}

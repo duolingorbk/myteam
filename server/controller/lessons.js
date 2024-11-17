@@ -15,4 +15,18 @@ const getAllLessons = async (req, res) => {
     }
 };
 
-module.exports = { getAllLessons };
+const getLessonsByLevel = async (req, res) => {
+    try {
+      const { levelId } = req.params;  // Get levelId from the URL params
+      const lessons = await db.Lessons.findAll({
+        where: { level: levelId },  // Filter lessons by level
+        order: [['id', 'ASC']],     // Order lessons by ID or any other field you prefer
+      });
+  
+      res.send(lessons);
+    } catch (error) {
+      console.error("Error fetching lessons by level:", error);
+      res.status(500).send("Failed to fetch lessons by level");
+    }
+  };
+module.exports = { getAllLessons ,getLessonsByLevel};
