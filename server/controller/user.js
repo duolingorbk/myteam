@@ -4,12 +4,10 @@ const jwt = require('jsonwebtoken');//to generate the token
 const dotenv = require('dotenv').config
 JWT_SECRET='ascefbth,plnihcdxuwy'
 
-
-
-
 const validatePassword=(password)=>{
     const errors=[]
     const passwordChecking=/^(?=.*[a-z])(?=.*[A-Z])(?=.*\d)(?=.*[!@#$%^&*(),.?":{}|<>])[a-zA-Z\d!@#$%^&*(),.?":{}|<>]{8,}$/;
+
     if(password.length < 8){
         errors.push("Password must contain at least 8 characters.")
     }
