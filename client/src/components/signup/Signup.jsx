@@ -49,7 +49,7 @@ const Signup = () => {
       const passwordValidation = validatePassword(password);
       if (!passwordValidation.isValid) {
         setError("Password is too weak:");
-        passwordValidation.errors.forEach((err) => setError((prev) => prev + " \n " + err));
+        passwordValidation.errors.forEach((err) => setError((element) => element + "  " + err));
         return;
       }
 

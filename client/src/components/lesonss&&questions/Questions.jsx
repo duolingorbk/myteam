@@ -1,123 +1,153 @@
 import React, { useState, useEffect } from 'react';
 import axios from 'axios';
-import { useParams, useNavigate } from 'react-router-dom';
-import './Questions.css';
+import { useParams, useLocation, useNavigate } from 'react-router-dom';
 
-function Questions() {
-  const { lessonId } = useParams(); // Get the lessonId from the URL
+export default function Questions() {
+  const { lessonId } = useParams();
+  const location = useLocation();
+  const lessons = location.state?.lessons || []; // Default to an empty array if lessons is undefined
+
   const navigate = useNavigate();
 
   const [questions, setQuestions] = useState([]);
   const [answers, setAnswers] = useState([]);
-  const [counter, setCounter] = useState(0);
-  const [points, setPoints] = useState(0);
-  const [isComplete, setIsComplete] = useState(false); // Track if the lesson is complete
-  const [showButtons, setShowButtons] = useState(false); // Control button visibility
+  const [currentQuestionIndex, setCurrentQuestionIndex] = useState(0);
+  const [lessonIDD, setLessonIDD] = useState(parseInt(lessonId)); // Using lessonId from URL
+  const [progress, setProgress] = useState(0);
+  const [resultProgress, setResultProgress] = useState(0);
+  const [lessonCompleted, setLessonCompleted] = useState(false);
+  const [showProgress, setShowProgress] = useState(false);
 
-  // Fetch questions and answers when the component mounts
+  // Fetch questions for the lesson based on lessonId
+  const fetchQuestions = async () => {
+    try {
+      const res = await axios.get(`http://localhost:3000/questions/all/${lessonIDD}`);
+      setQuestions(res.data);
+      setCurrentQuestionIndex(0);
+      setProgress(0);
+      setResultProgress(0);
+      setShowProgress(false);
+    } catch (err) {
+      console.log("Error fetching questions:", err);
+    }
+  };
+
+  // Fetch answers for the current question based on questionId
+  const fetchAnswers = async (questionId) => {
+    try {
+      const res = await axios.get(`http://localhost:3000/Answers/all/${questionId}`);
+      setAnswers(res.data);
+    } catch (err) {
+      console.log("Error fetching answers:", err);
+    }
+  };
+
+  // Fetch questions initially when the component mounts
   useEffect(() => {
-    const fetchQuestions = async () => {
-      try {
-        const questionRes = await axios.get(`http://localhost:3000/questions/all/${lessonId}`);
-        setQuestions(questionRes.data);
-
-        if (questionRes.data.length > 0) {
-          fetchAnswers(questionRes.data[0].id); // Fetch answers for the first question
-        }
-      } catch (err) {
-        console.error('Failed to fetch questions', err);
-      }
-    };
-
-    const fetchAnswers = async (questionId) => {
-      try {
-        const answerRes = await axios.get(`http://localhost:3000/Answers/all/${questionId}`);
-        setAnswers(answerRes.data);
-      } catch (err) {
-        console.error('Failed to fetch answers', err);
-      }
-    };
-
     fetchQuestions();
-  }, [lessonId]); // Refetch questions when lessonId changes
+  }, [lessonIDD]);
 
-  const handleAnswerClick = (answerId, status) => {
-    if (status === 'incorrect') {
-      // Handle incorrect answer logic if needed
-    } else {
-      setPoints(points + 1); // Increase points for correct answers
+  // Fetch answers whenever the current question index changes
+  useEffect(() => {
+    if (questions.length > 0) {
+      fetchAnswers(questions[currentQuestionIndex].id);
     }
+  }, [currentQuestionIndex, questions]);
 
-    if (counter < questions.length - 1) {
-      setCounter(counter + 1); // Move to the next question
-      fetchAnswers(questions[counter + 1].id); // Fetch next question's answers
+  // Handle incrementing to the next question
+  const incrementQuestion = () => {
+    if (currentQuestionIndex < questions.length - 1) {
+      setCurrentQuestionIndex(prevIndex => prevIndex + 1);
     } else {
-      handleLessonCompletion(); // If all questions are answered, complete the lesson
+      setLessonCompleted(true);
+      setShowProgress(true);
     }
   };
 
-  const handleLessonCompletion = () => {
-    setIsComplete(true); // Mark the lesson as complete
-    setShowButtons(true); // Show the buttons after completing the lesson
+  // Progress calculation
+  const progressForLesson = function (answerId) {
+    const answer = answers.find(elem => elem.id === answerId);
+    if (answer && answer.status === 1) {
+      setProgress(prev => prev + 1);
+    }
   };
 
+  const handleProgress = function (id) {
+    progressForLesson(id);
+    percentageProgress();
+    incrementQuestion();
+  };
+
+  const percentageProgress = function () {
+    if (answers.length > 0) {
+      const result = (progress / answers.length) * 100;
+      setResultProgress(result);
+    }
+  };
+
+  // Toggle between lessons
   const handleNextLesson = () => {
-    const nextLessonId = parseInt(lessonId) + 1; // Get the next lesson ID
-    navigate(`/questions/${nextLessonId}`); // Navigate to the next lesson
+    if (lessons.length > 0 && lessonIDD < lessons.length - 1) {
+      const nextLessonId = lessonIDD + 1;
+      setLessonIDD(nextLessonId); // Update lessonIDD to the next one
+    } else {
+      console.log("No more lessons available.");
+      navigate('/lessons'); // Go back to the lessons page
+    }
   };
 
-  const handleCancel = () => {
-    navigate('/lessons'); // Navigate back to the lessons page
-  };
-
-  const currentQuestion = questions[counter];
-
+  // Render the current question and its answers
   return (
-    <div className="questions-container">
-      <h2>Lesson {lessonId} Questions</h2>
-
-      {/* Show current question and answers */}
-      {!isComplete && currentQuestion && (
-        <div className="question-item">
-          <h3>{currentQuestion.content}</h3>
-          <div className="answers-container">
-            <ul className="answers-list">
-              {answers.map((answer) => (
-                <li
-                  key={answer.id}
-                  className="answer-item"
-                  onClick={() => handleAnswerClick(answer.id, answer.status)} // Track answer click
-                >
-                  {answer.content}
-                </li>
-              ))}
-            </ul>
+    <div className='questions-container'>
+      {lessonCompleted ? (
+        <div>
+          <h2>Good Job! You've completed this lesson!</h2>
+          <h3>Your Progress: {resultProgress}%</h3>
+          <div>
+            <button onClick={handleNextLesson}>
+              Go to Next Lesson
+            </button>
+            <button onClick={() => navigate('/lessons')}>
+              Back to Lessons
+            </button>
           </div>
         </div>
-      )}
+      ) : (
+        <>
+          <h2>Questions for Lesson {lessonIDD}</h2>
 
-      {/* Show completion message and buttons after completing the lesson */}
-      {isComplete && (
-        <div className="completion-message">
-          <h3>Good Job! You completed this lesson!</h3>
-          <p>Points: {points} / {questions.length}</p>
-          <p>You are progressing to the next level...</p>
-
-          {/* Buttons to either go to the next lesson or cancel */}
-          {showButtons && (
-            <div className="completion-buttons">
-              <button onClick={handleNextLesson}>
-                Go to Next Lesson
-              </button>
-              <button onClick={handleCancel}>
-                Cancel and Go Back to Lessons
-              </button>
+          {showProgress && (
+            <div className="progress-bar">
+              <div className="progress-bar-filled" style={{ width: `${resultProgress}%` }}></div>
             </div>
           )}
-        </div>
+
+          {questions.length ? (
+            <>
+              <h1 className='question-number-render'>
+                Question {currentQuestionIndex + 1}
+              </h1>
+              <h3 className='question-render'>{questions[currentQuestionIndex].content}</h3>
+
+              <div className="answers-container">
+                {answers.map((answer, index) => (
+                  <button 
+                    className="answer-item" 
+                    key={index} 
+                    onClick={() => handleProgress(answer.id)}
+                  >
+                    {answer.content}
+                  </button>
+                ))}
+              </div>
+            </>
+          ) : (
+            <div>
+              <h2>Loading...</h2>
+            </div>
+          )}
+        </>
       )}
     </div>
   );
 }
-
-export default Questions;

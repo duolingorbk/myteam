@@ -1,105 +1,95 @@
 .lessons-container {
-  display: flex;
-  flex-direction: column;
-  align-items: center;
-  margin: 20px 0;
-  font-family: Arial, sans-serif; /* Set a clear and readable font */
-}
-
-.lesson-path {
-  display: flex;
-  flex-direction: row;
-  align-items: center;
-  justify-content: center;
-  position: relative;
-  margin-top: 20px;
-}
-
-.lesson-item {
-  background-color: #f1f1f1;
   padding: 20px;
-  border-radius: 50%;
-  box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
-  width: 100px;
-  height: 100px;
-  display: flex;
-  justify-content: center;
-  align-items: center;
-  cursor: pointer;
-  transition: transform 0.3s ease-in-out;
-  font-size: 16px;
-  font-weight: bold;
-  color: #333; /* Dark text color for better readability */
-  text-align: center;
-  position: relative;
-  transition: transform 0.5s ease;
-}
-
-.lesson-item:hover {
-  transform: scale(1.1);
-  background-color: #6c63ff;
-  color: white;
-}
-
-.lesson-item.completed {
-  background-color: #6c63ff;
-  color: white;
-}
-
-.lesson-item button {
-  background-color: transparent;
-  border: none;
-  color: inherit;
-  cursor: pointer;
-  font-size: inherit;
-}
-
-.lesson-tail {
-  height: 4px;
-  width: 60px;
-  background-color: #6c63ff; /* Bright, clear color for the tail */
-  position: absolute;
-  top: 50%;
-  left: 100%;
-  transform: translateY(-50%);
-}
-
-.lesson-path .lesson-item:last-child .lesson-tail {
-  display: none;
-}
-
-/* Zigzag positioning for lesson items */
-.lesson-path .lesson-item:nth-child(odd) {
-  transform: translateY(-20px); /* Move up for odd items */
-}
-
-.lesson-path .lesson-item:nth-child(even) {
-  transform: translateY(20px); /* Move down for even items */
-}
-
-.lesson-status {
-  font-size: 18px;
-  font-weight: bold;
-  margin-top: 20px;
-  color: #6c63ff; /* Keep the theme consistent */
   text-align: center;
 }
 
-h2 {
-  font-size: 28px;
+.title {
+  font-size: 2.5rem;
   font-weight: bold;
-  margin-bottom: 20px;
-  color: #333; /* Dark color for the header */
+  text-align: center;
+  background: linear-gradient(to right, #ff7e5f, #feb47b); 
+  color: transparent;
+  animation: typing 5s steps(30) 1s forwards, glow 3s ease-in-out infinite alternate; /* Slower typing and glow animations */
+  text-shadow: 0 0 10px rgba(255, 255, 255, 0.6), 0 0 20px rgba(255, 255, 255, 0.5);
+  letter-spacing: 2px;
 }
 
-h3 {
-  font-size: 22px;
-  font-weight: bold;
-  margin-bottom: 15px;
-  color: #333; /* Dark color for the level title */
+@keyframes typing {
+  from {
+    width: 0;
+  }
+  to {
+    width: 100%;
+  }
 }
 
-.lesson-path {
+@keyframes glow {
+  0% {
+    text-shadow: 0 0 5px #ff7e5f, 0 0 10px #feb47b, 0 0 15px #ff7e5f;
+  }
+  100% {
+    text-shadow: 0 0 20px #ff7e5f, 0 0 30px #feb47b, 0 0 40px #ff7e5f;
+  }
+}
+
+/* Card container */
+.lesson-cards-container {
+  display: grid;
+  grid-template-columns: repeat(4, 1fr); /* Create a 4-column grid */
+  gap: 20px;
   padding: 20px 0;
-  margin-bottom: 20px;
+}
+
+/* Individual lesson card */
+.lesson-card {
+  background-color: #fff;
+  border-radius: 10px;
+  padding: 20px;
+  box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+  transition: transform 0.3s ease, box-shadow 0.3s ease;
+  cursor: pointer;
+  text-align: left;
+  position: relative;
+  transform: perspective(500px) rotateX(0) rotateY(0);
+  transform-style: preserve-3d;
+  transition: all 0.3s ease-in-out;
+}
+
+.lesson-card:hover {
+  box-shadow: 0 6px 12px rgba(0, 0, 0, 0.2);
+}
+
+.lesson-card h3 {
+  font-size: 1.5rem;
+  margin: 10px 0;
+}
+
+.lesson-card p {
+  font-size: 1rem;
+  color: #555;
+}
+
+/* Emoji styling */
+.emoji {
+  position: absolute;
+  top: 10px;
+  right: 10px;
+  font-size: 2.5rem;
+  transition: transform 0.3s ease-in-out;
+}
+
+.lesson-card:hover .emoji {
+  /* transform: rotate(15deg) scale(1.2); 3D and scaling effect */
+}
+
+.emoji.easy {
+  color: green;
+}
+
+.emoji.medium {
+  color: orange;
+}
+
+.emoji.hard {
+  color: red;
 }

@@ -16,16 +16,16 @@
   box-shadow: 10px 5px 5px 10px rgba(0, 0, 0, 0.1);
 }
 
-.language-buttons {
+.languageButtons {
   display: flex;
   justify-content: space-between;
 }
 
-.language-buttons .language-container {
+.languageButtons .language-container {
   width: 48%;
 }
 
-.language-buttons button {
+.languageButtons button {
   width: 100%;
   margin-right: 20px;
   padding: 20px;
@@ -36,19 +36,19 @@
   font-weight: 600;
 }
 
-.language-buttons .english {
+.languageButtons .english {
   background-color: #e93427;
     color: white;
     cursor: pointer;
 }
 
-.language-buttons .french {
+.languageButtons .french {
   background-color: #0c77ce;
   color: white;
   cursor: pointer;
 }
 
-.language-buttons button:hover {
+.languageButtons button:hover {
   opacity: 0.9;
 }
 
