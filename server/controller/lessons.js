@@ -35,6 +35,7 @@ const getLessons = async (req, res) => {
 
 
 module.exports = {
+
     getAllLessons,
     getLessons,
    

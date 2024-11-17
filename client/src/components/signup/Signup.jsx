@@ -49,7 +49,7 @@ const Signup = () => {
       const passwordValidation = validatePassword(password);
       if (!passwordValidation.isValid) {
         setError("Password is too weak:");
-        passwordValidation.errors.forEach((err) => setError((prev) => prev + " \n " + err));
+        passwordValidation.errors.forEach((err) => setError((element) => element + "  " + err));
         return;
       }
 
@@ -79,7 +79,7 @@ const Signup = () => {
   return (
     <div className="signup-container">
       <h3>Join us!</h3>
-      <form>
+      <form className='signup-form'>
         <div>
           <label htmlFor="fullName"></label>
           <input

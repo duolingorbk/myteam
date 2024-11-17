@@ -1,8 +1,10 @@
-const {getAllLessons,getLessonsByLevel} = require("../controller/lessons")
+
+const {getAllLessons,getLessonsByLevel , getLessons } = require("../controller/lessons")
+
 const express = require("express")
 
 const lessonroute = express.Router()
-
+lessonroute.get("/allLessons" , getLessons)
 lessonroute.get("/all/:language" ,getAllLessons)
 lessonroute.get("/all" ,getAllLessons)
 

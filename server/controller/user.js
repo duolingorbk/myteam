@@ -4,12 +4,10 @@ const jwt = require('jsonwebtoken');//to generate the token
 const dotenv = require('dotenv').config
 JWT_SECRET='ascefbth,plnihcdxuwy'
 
-
-
-
 const validatePassword=(password)=>{
     const errors=[]
     const passwordChecking=/^(?=.*[a-z])(?=.*[A-Z])(?=.*\d)(?=.*[!@#$%^&*(),.?":{}|<>])[a-zA-Z\d!@#$%^&*(),.?":{}|<>]{8,}$/;
+
     if(password.length < 8){
         errors.push("Password must contain at least 8 characters.")
     }
@@ -160,14 +158,14 @@ const login = async (req, res) => {
         }
 
         const token = jwt.sign(//json web token to give a token to the user once they are logged in 
-            { id: user.id, name: user.name, email: user.email },
+            { id: user.id, name: user.name, email: user.email },//the token will include these
             JWT_SECRET,
             { expiresIn: '1h' }
         );
 
         return res.status(200).json({
             message: 'Login successful',
-            user: {//the token will include all these 
+            user: {
                 id: user.id,
                 name: user.name,
                 email: user.email,

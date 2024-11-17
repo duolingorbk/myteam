@@ -23,10 +23,8 @@ const Login = () => {
                 localStorage.setItem("token", token);
             
                 
-                // Store all users with 'user' key for consistency
                 localStorage.setItem("user", JSON.stringify(user));
                 
-                // Redirect based on user type
                 if (user.type === 'admin') {                    
                     navigate("/admin-dashboard");
                     window.location.reload()
@@ -39,7 +37,7 @@ const Login = () => {
             }
         } catch (err) {
             console.error(err);
-            if (err.response?.data?.message === "Invalid credentials") {
+            if (err.response.data.message === "Invalid credentials") {
                 setError("Incorrect password. Please try again.");
             } else {
                 setError("An error occurred during login. Please try again later.");
