@@ -2,26 +2,25 @@ const db = require("../database/index");
 const bcrypt = require('bcryptjs'); //to hash the pasword
 const jwt = require('jsonwebtoken');//to generate the token
 const dotenv = require('dotenv').config
+JWT_SECRET='ascefbth,plnihcdxuwy'
 
-const validateStrongPassword = (password) => {
-    const minLength = 8;
-    const passwordCheck = /^(?=.*[a-z])(?=.*[A-Z])(?=.*\d)(?=.*[!@#$%^&*(),.?":{}|<>])[a-zA-Z\d!@#$%^&*(),.?":{}|<>]{8,}$/;
 
-    const errors = [];
 
-    if (password.length < minLength) {
-        errors.push(`Password must be at least ${minLength} characters long`);//this is shown when the password length is below 8 
+
+const validatePassword=(password)=>{
+    const errors=[]
+    const passwordChecking=/^(?=.*[a-z])(?=.*[A-Z])(?=.*\d)(?=.*[!@#$%^&*(),.?":{}|<>])[a-zA-Z\d!@#$%^&*(),.?":{}|<>]{8,}$/;
+    if(password.length < 8){
+        errors.push("Password must contain at least 8 characters.")
     }
-
-    if (!passwordCheck.test(password)) {//if the entered password does not include any of the above password check,this error will appear
-        errors.push("Password must contain at least one uppercase letter, one lowercase letter, one number, and one special character");
+    if(!passwordChecking.test(password)){
+        errors.push("Password must contain at least one upper case, one lower case, and one symbol")
     }
-
     return {
-        isValid: errors.length === 0,//this is a returned oject that shows if the password is valid the errors array will have 0 length
-        errors: errors//this is an array that includes all of the above errors if any of them is not included in the password 
-    };
-};
+        isValid:errors.length===0,
+        errors:errors
+    }
+}
 const signup = async (req, res) => {
     try {
         const {
@@ -40,7 +39,7 @@ const signup = async (req, res) => {
             return res.status(400).send('Missing required fields');
         }
 
-        const passwordValidation = validateStrongPassword(password);
+        const passwordValidation = validatePassword(password);
         if (!passwordValidation.isValid) {
             return res.status(400).json({
                 message: 'Password is too weak',
@@ -75,6 +74,46 @@ const signup = async (req, res) => {
 };
 
 
+const findAllUsers = async (req, res) => {
+    try {
+        const users = await db.User.findAll();
+        res.send(users);
+    } catch (error) {
+        res.send(error);
+    }
+}
+
+
+const deleteUser = async (req, res) => {
+    try {
+        const { id } = req.params;
+        await db.User.destroy({
+            where: { id: id }
+        });
+
+        res.send("Deleted");
+    } catch (error) {
+        res.send(error);
+    }
+}
+
+const updateUser = async (req, res) => {
+    try {
+        const { id } = req.params;
+        const { email, password, name } = req.body;
+
+        const user = await db.User.update(
+            { email, password, name },
+            { where: { id } }
+        );
+
+        res.send(user);
+    } catch (error) {
+        res.send(error);
+    }
+}
+
+
 const login = async (req, res) => {
     try {
         const {
@@ -96,7 +135,7 @@ const login = async (req, res) => {
 
         const token = jwt.sign(//json web token to give a token to the user once they are logged in 
             { id: user.id, name: user.name, email: user.email },
-            process.env.JWT_SECRET,
+            JWT_SECRET,
             { expiresIn: '1h' }
         );
 
@@ -118,4 +157,7 @@ const login = async (req, res) => {
     }
 };
 
-module.exports = { signup, login };
+
+
+
+module.exports = { signup, login , findAllUsers , deleteUser , updateUser };

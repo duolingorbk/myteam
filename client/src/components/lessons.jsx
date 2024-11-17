@@ -7,13 +7,14 @@ function Lessons({ language }) {
   const [loading, setLoading] = useState(true);
   const [error, setError] = useState(null);
   
-  // console.log("lessons in lesson comp:", lessons)
+  console.log("lessons in lesson comp:", lessons)
   const navigate = useNavigate();
 
   useEffect(() => {
     const fetchLessons = async () => {
       try {
-        const res = await axios.get(`http://localhost:3000/lesson/all?language=${language}`);
+        const res = await axios.get(`http://localhost:3000/lesson/all?language=${language}`); // there is an error fetching lessons 
+        
         setLessons(res.data);
       } catch (err) {
         setError('Failed to fetch lessons');
