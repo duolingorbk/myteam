@@ -2,7 +2,7 @@ const db = require("../database/index");
 
 const getAllAnswers = async (req, res) => {
     try {
-        const answers = await db.Answers.findAll({ where: { lessonId: req.params.questionId } });
+        const answers = await db.Answers.findAll({ where: { questionId: req.params.questionId } });
         res.send(answers);
     } catch (error) {
         console.error("Error fetching answers:", error);

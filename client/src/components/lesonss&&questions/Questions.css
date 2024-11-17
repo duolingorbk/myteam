@@ -1,0 +1,122 @@
+/* General container for the questions section */
+.questions-container {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  background-color: #f4f4f9;
+  padding: 20px;
+  border-radius: 10px;
+  box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+  width: 80%;
+  margin: 20px auto;
+}
+
+/* Title styles */
+.questions-container h2 {
+  font-size: 2.5rem;
+  color: #333;
+  margin-bottom: 10px;
+}
+
+/* Progress bar style */
+.questions-container h3 {
+  font-size: 1.2rem;
+  color: #4caf50;
+  margin-bottom: 20px;
+}
+
+.progress-bar {
+  width: 100%;
+  background-color: #ddd;
+  border-radius: 10px;
+  height: 10px;
+}
+
+.progress-bar-filled {
+  height: 100%;
+  border-radius: 10px;
+  background-color: #4caf50;
+  transition: width 0.3s ease;
+}
+
+/* Styles for the question content */
+.question-item {
+  background-color: #fff;
+  border-radius: 10px;
+  box-shadow: 0 4px 10px rgba(0, 0, 0, 0.1);
+  padding: 15px;
+  width: 100%;
+  margin-bottom: 20px;
+}
+
+.question-item h3 {
+  font-size: 1.8rem;
+  color: #333;
+  margin-bottom: 10px;
+}
+
+/* Styles for the answers list */
+.answers-container {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+}
+
+.answers-list {
+  list-style: none;
+  padding: 0;
+  margin: 0;
+  width: 100%;
+}
+
+.answer-item {
+  background-color: #fff;
+  border-radius: 8px;
+  padding: 12px;
+  margin: 10px 0;
+  box-shadow: 0 2px 6px rgba(0, 0, 0, 0.1);
+  font-size: 1.2rem;
+  color: #333;
+  cursor: pointer;
+  transition: all 0.3s ease;
+}
+
+.answer-item:hover {
+  background-color: #4caf50;
+  color: #fff;
+  transform: scale(1.05);
+}
+
+/* Style for the "Next Question" and "Next Lesson" buttons */
+button {
+  background-color: #4caf50;
+  color: white;
+  font-size: 1rem;
+  padding: 10px 20px;
+  margin-top: 20px;
+  border: none;
+  border-radius: 5px;
+  cursor: pointer;
+  transition: background-color 0.3s ease;
+}
+
+button:hover {
+  background-color: #45a049;
+}
+
+/* Responsive Design */
+@media screen and (max-width: 768px) {
+  .questions-container {
+    width: 90%;
+    padding: 15px;
+  }
+
+  .question-item h3 {
+    font-size: 1.5rem;
+  }
+
+  .answer-item {
+    font-size: 1rem;
+    padding: 10px;
+  }
+}

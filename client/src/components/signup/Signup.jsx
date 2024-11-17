@@ -79,7 +79,7 @@ const Signup = () => {
   return (
     <div className="signup-container">
       <h3>Join us!</h3>
-      <form>
+      <form className='signup-form'>
         <div>
           <label htmlFor="fullName"></label>
           <input
