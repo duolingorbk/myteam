@@ -1,4 +1,5 @@
 const { getAllAnswers , getAnswersByQuestion ,deleteAnswer , updateAnswer , getAnswers} = require("../controller/Answers"); 
+
 const express = require("express");
 
 const answerRoute = express.Router();

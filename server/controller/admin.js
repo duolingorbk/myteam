@@ -1,43 +1,38 @@
-const db = require("../database/index");
 
+const db = require("../database/index");
 
 const createLesson = async (req, res) => {
   try {
+    const { title, language, progress = 0, questions } = req.body;
 
-    const lessonData = {
-      title: req.body.title,
-      language: req.body.language,
-      progress: req.body.progress || 0,
-      questions: req.body.questions.map(question => ({
+    if (!Array.isArray(questions)) {
+      return res.status(400).json({ message: "'questions' must be an array." });
+    }
+
+    const lesson = await db.Lessons.create({ title, language, progress });
+
+    for (const question of questions) {
+      const createdQuestion = await db.Questions.create({
         content: question.content,
-        answers: question.answers.map(answer => ({
+        LessonId: lesson.id,
+      });
+
+      for (const answer of question.answers) {
+        const status = answer.status === 'correct' ? 1 : 0;
+
+        await db.Answers.create({
           content: answer.content,
-          status: answer.status
-        }))
-      }))
-    };
+          status,
+          QuestionId: createdQuestion.id,
+        });
+      }
+    }
 
-    const lesson = await db.Lessons.create(lessonData, {
-      include: [{
-        model: db.Questions,
-        include: [{
-          model: db.Answers
-        }]
-      }]
-    });
-
-    return res.status(201).json({
-      message: 'Lesson created successfully',
-      lesson
-    });
-
+    return res.status(201).json({ message: "Lesson created successfully", lesson });
   } catch (error) {
-    console.error('Error creating lesson:', error);
-    return res.status(500).json({
-      message: 'Error creating lesson',
-      error: error.message
-    });
-  }}
-module.exports=createLesson
+    console.error("Error creating lesson:", error);
+    return res.status(500).json({ message: "Error creating lesson", error: error.message });
+  }
+};
 
-
+module.exports = createLesson;

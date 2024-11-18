@@ -1,5 +1,4 @@
-
-const {getAllLessons,getLessonsByLevel , getLessons } = require("../controller/lessons")
+const {getAllLessons , getLessons } = require("../controller/lessons")
 
 const express = require("express")
 

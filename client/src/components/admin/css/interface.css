@@ -3,7 +3,7 @@ body {
   font-weight: bolder;
   margin: 0;
   padding: 0;
-  background-color: #f4f4f4;
+  background-color: #ffffff;
 }
 
 .Admin-header {
@@ -21,7 +21,7 @@ body {
 
 .sidebar {
   height: 100%;
-  width: 300px;
+  width: 270px;
   background-color: #333;
   color: white;
   position: fixed;
@@ -40,6 +40,10 @@ body {
   margin-top: 50px;
   border-radius: 50%;
   margin-left: 10px;
+  width: 60px ;
+  height : 60px ; 
+  margin-bottom: 15px;
+
 }
 
 .sidebar .profile span {
@@ -47,6 +51,8 @@ body {
   border-radius: 50%;
   margin-left: 20px;
   font-weight: bold;
+  font-size: 25px
+
 }
 
 .sidebar h2 {
@@ -54,8 +60,12 @@ body {
   color: white;
   background-color: #333;
   cursor: pointer;
-  font-size: 25px;
-  margin-left: 10px;
+  font-size: 30px;
+   margin-bottom: 35px; 
+   display: flex ;
+   padding: 0 10px;
+  
+
 }
 
 .sidebar h2:hover {
@@ -63,18 +73,11 @@ body {
 }
 
 .main-content {
-  margin-left: 300px; /* Ensure the content is pushed to the right of the sidebar */
+  margin-left: 300px;
   padding-top: 60px;
   background-color: #fff;
-  padding-left: 30px; /* Add padding on the left so content doesn't touch sidebar */
-  padding-right: 30px; /* Add some padding on the right */
-}
-
-.content {
-  width: 100%;
-  padding: 20px;
-  background-color: #fff;
-  height: 100%;
+  padding-left: 30px; 
+  padding-right: 30px;
 }
 
 .adminCard {
@@ -100,6 +103,8 @@ body {
 .adminCard table {
   width: 80%;
   border-collapse: collapse;
+  margin-left: 25px;
+
 }
 
 .adminCard table,
@@ -133,14 +138,6 @@ body {
   background-color: #45a049;
 }
 
-.edit-btn {
-  background-color: #4caf50;
-}
-
-.edit-btn:hover {
-  background-color: #45a049;
-}
-
 .delete-btn {
   background-color: #f44336;
 }
@@ -157,6 +154,7 @@ body {
   display: inline-block;
   border-radius: 5px;
   margin-left: -1400px; 
+  color: rgb(203, 203, 203);
 
 }
 
@@ -168,12 +166,12 @@ body {
   font-weight: bolder;
   text-align: left;
   font-size: 16px;
-  margin-left: 30px; /* Ensure it's not touching the sidebar */
+  margin-left: 30px;
 }
 
 .dashboard {
   font-weight: bolder;
   margin-top: 0;
   text-align: left;
-  margin-left: 30px; /* Ensure the dashboard title is not touching the sidebar */
+  margin-left: 30px;
 }

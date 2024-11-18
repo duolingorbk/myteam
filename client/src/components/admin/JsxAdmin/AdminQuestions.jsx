@@ -6,7 +6,6 @@ import "../../admin/css/questionsAnswers.css";
 const AdminQuestions = () => {
   const { lessonId } = useParams();
   const [questions, setQuestions] = useState([]);
-  const [showUpdate, setShowUpdate] = useState(false);
   const [questionContent, setQuestionContent] = useState("");
   const [answerContent, setAnswerContent] = useState("");
   const [selectedQuestionId, setSelectedQuestionId] = useState(null);
@@ -50,7 +49,6 @@ const AdminQuestions = () => {
       .then((response) => {
         console.log('Question updated:', response.data);
         setRefresh(!refresh);
-        setShowUpdate(false);
         setSelectedQuestionId(null);
         setQuestionContent('');
       })
@@ -93,10 +91,11 @@ const AdminQuestions = () => {
                   <tr className="question-row">
                     <td>Question</td>
                     <td>
-                      {showUpdate && selectedQuestionId === question.id ? (
+                      {selectedQuestionId === question.id ? (
                         <input
+                        className='updateInput'
                           type="text"
-                          defaultValue={question.content}
+                          value={questionContent}
                           onChange={(e) => setQuestionContent(e.target.value)}
                         />
                       ) : (
@@ -110,16 +109,37 @@ const AdminQuestions = () => {
                       >
                         Delete
                       </button>
-                      <button
-                        className="update"
-                        onClick={() => {
-                          setShowUpdate(true);
-                          setSelectedQuestionId(question.id);
-                          setQuestionContent(question.content);
-                        }}
-                      >
-                        Update
-                      </button>
+
+                      {selectedQuestionId === question.id ? (
+                        <button
+                          className="cancel"
+                          onClick={() => {
+                            setSelectedQuestionId(null);
+                            setQuestionContent(question.content);
+                          }}
+                        >
+                          Cancel
+                        </button>
+                      ) : (
+                        <button
+                          className="update"
+                          onClick={() => {
+                            setSelectedQuestionId(question.id);
+                            setQuestionContent(question.content);
+                          }}
+                        >
+                          Update
+                        </button>
+                      )}
+
+                      {selectedQuestionId === question.id && (
+                        <button
+                          className="saveUpdate"
+                          onClick={() => handleQuestionUpdate(question.id)}
+                        >
+                          Save Changes
+                        </button>
+                      )}
                     </td>
                   </tr>
 
@@ -127,10 +147,11 @@ const AdminQuestions = () => {
                     <tr key={answer.id} className="answer">
                       <td>Answer {index + 1}</td>
                       <td>
-                        {showUpdate && selectedAnswerId === answer.id ? (
+                        {selectedAnswerId === answer.id ? (
                           <input
+                          className='updateInput'
                             type="text"
-                            defaultValue={answer.content}
+                            value={answerContent}
                             onChange={(e) => setAnswerContent(e.target.value)}
                           />
                         ) : (
@@ -140,31 +161,46 @@ const AdminQuestions = () => {
                       <td>
                         <button
                           className="delete"
-                          onClick={() =>{ handleDeleteAnswer(answer.id ) ;
-                          }}
+                          onClick={() => handleDeleteAnswer(answer.id)}
                         >
                           Delete
                         </button>
-                        <button
-                          className="update"
-                          onClick={() => {
-                            setShowUpdate(true);
-                            setSelectedAnswerId(answer.id);
-                            setAnswerContent(answer.content);
-                          }}
-                        >
-                          Update
-                        </button>
+
+                        {selectedAnswerId === answer.id ? (
+                          <button
+                            className="cancel"
+                            onClick={() => {
+                              setSelectedAnswerId(null);
+                              setAnswerContent(answer.content);
+                            }}
+                          >
+                            Cancel
+                          </button>
+                        ) : (
+                          <button
+                            className="update"
+                            onClick={() => {
+                              setSelectedAnswerId(answer.id);
+                              setAnswerContent(answer.content);
+                            }}
+                          >
+                            Update
+                          </button>
+                        )}
+
+                        {selectedAnswerId === answer.id && (
+                          <button
+                            className="saveUpdate"
+                            onClick={() => handleAnswerUpdate(answer.id)}
+                          >
+                            Save Changes
+                          </button>
+                        )}
                       </td>
                     </tr>
                   ))}
                 </tbody>
               </table>
-              {showUpdate && selectedQuestionId === question.id && (
-                <div>
-                  <button className='saveUpdate' onClick={()=>handleQuestionUpdate(question.id)}>Save Changes</button>
-                </div>
-              )}
             </div>
           ))
         )}

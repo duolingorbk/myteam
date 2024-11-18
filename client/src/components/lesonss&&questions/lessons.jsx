@@ -14,10 +14,9 @@ function Lessons({ language }) {
     return localStorage.getItem(`lesson${lessonId}Progress`) === '100';
   };
 
-  // Set lesson progress in local storage
-  const setLessonProgress = (lessonId, progress) => {
-    localStorage.setItem(`lesson${lessonId}Progress`, progress.toString());
-  };
+  // Unlock lessons sequentially: Lesson 1 is unlocked, then next lessons depend on previous one's progress
+  const unlockedLessons = lessons.map((lesson, index) => {
+    const isPreviousLessonUnlocked = index === 0 || getLessonProgress(lessons[index].id - 1);
 
   // Unlock lessons based on progress
   const unlockedLessons = lessons.map((lesson, index) => {
@@ -26,7 +25,6 @@ function Lessons({ language }) {
   });
 
   useEffect(() => {
-    const fetchLessons = async () => {
       try {
         const res = await axios.get(`http://localhost:3000/lesson/all/${language}`);
         setLessons(res.data);

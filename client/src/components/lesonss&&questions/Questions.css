@@ -87,8 +87,6 @@ h1.question-number-render {
     padding: 15px;
   }
 
-  .answer-item, .bt {
-    width: 100%; /* Full width on smaller screens */
   }
 
   h1.question-number-render {
@@ -98,4 +96,4 @@ h1.question-number-render {
   .question-render {
     font-size: 1.2em; /* Smaller font size for mobile */
   }
-}
+

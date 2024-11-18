@@ -30,10 +30,10 @@ const Languages = () => {
 
   return (
     <div className="lessonsInterface">
-      <button onClick={() => navigate("/createLesson")}>Add New Lesson</button>
+      <button className='newLesson' onClick={() => navigate("/createLesson")}>Add New Lesson</button>
       <div className="language-Box">
         <h2>Languages</h2>
-        <div className="language-buttons">
+        <div className="languageButtons">
           <div className="language-container">
             <button
               className="english"

@@ -45,7 +45,6 @@ export default function Questions() {
       setCurrentQuestionIndex(0);
       setProgress(0);
       setResultProgress(0);
-      setLessonCompleted(false);
       setShowProgress(false);
     } catch (err) {
       console.log("Error fetching questions:", err);
@@ -144,8 +143,6 @@ export default function Questions() {
         </div>
       ) : (
         <>
-          <h2>Questions for Lesson {lessonIDD}</h2>
-
           {showProgress && (
             <div className="progress-bar">
               <div className="progress-bar-filled" style={{ width: `${resultProgress}%` }}></div>
@@ -154,9 +151,9 @@ export default function Questions() {
 
           {questions.length ? (
             <>
-              <h1 className='question-number-render'>
+              <h2 className='question-number-render'>
                 Question {currentQuestionIndex + 1}
-              </h1>
+              </h2>
               <h3 className='question-render'>{questions[currentQuestionIndex].content}</h3>
 
               <div className="answers-container">
