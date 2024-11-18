@@ -1,25 +1,42 @@
 import React, { useState, useEffect } from 'react';
 import axios from 'axios';
 import { useParams, useLocation, useNavigate } from 'react-router-dom';
-import "../lesonss&&questions/Questions.css"
+import './Questions.css'
 
 export default function Questions() {
   const { lessonId } = useParams();
   const location = useLocation();
-  const { lessons } = location.state || []; // Retrieve lessons from location state
-
   const navigate = useNavigate();
 
   const [questions, setQuestions] = useState([]);
   const [answers, setAnswers] = useState([]);
   const [currentQuestionIndex, setCurrentQuestionIndex] = useState(0);
-  const [lessonIDD, setLessonIDD] = useState(parseInt(lessonId)); // Using lessonId from URL
+  const [lessonIDD, setLessonIDD] = useState(parseInt(lessonId));
   const [progress, setProgress] = useState(0);
   const [resultProgress, setResultProgress] = useState(0);
   const [lessonCompleted, setLessonCompleted] = useState(false);
   const [showProgress, setShowProgress] = useState(false);
+  const [lessons, setLessons] = useState([]);
 
-  // Fetch questions for the lesson based on lessonId
+  
+  useEffect(() => {
+    const fetchLessons = async () => {
+      try {
+        if (!location.state?.lessons) {
+          const response = await axios.get('http://localhost:3000/lessons');
+          setLessons(response.data);
+        } else {
+          setLessons(location.state.lessons);
+        }
+      } catch (err) {
+        console.log("Error fetching lessons:", err);
+        setLessons([]);
+      }
+    };
+    fetchLessons();
+  }, [location.state]);
+
+
   const fetchQuestions = async () => {
     try {
       const res = await axios.get(`http://localhost:3000/questions/all/${lessonIDD}`);
@@ -32,9 +49,8 @@ export default function Questions() {
     } catch (err) {
       console.log("Error fetching questions:", err);
     }
-  };
+  }
 
-  // Fetch answers for the current question based on questionId
   const fetchAnswers = async (questionId) => {
     try {
       const res = await axios.get(`http://localhost:3000/Answers/all/${questionId}`);
@@ -45,29 +61,25 @@ export default function Questions() {
     }
   };
 
-  // Fetch questions initially when the component mounts
   useEffect(() => {
     fetchQuestions();
   }, [lessonIDD]);
 
-  // Fetch answers whenever the current question index changes
   useEffect(() => {
     if (questions.length > 0) {
       fetchAnswers(questions[currentQuestionIndex].id);
     }
   }, [currentQuestionIndex, questions]);
 
-  // Handle incrementing to the next question
   const incrementQuestion = () => {
     if (currentQuestionIndex < questions.length - 1) {
-      setCurrentQuestionIndex(prevIndex => prevIndex + 1);
+      setCurrentQuestionIndex((prevIndex) => prevIndex + 1);
     } else {
       setLessonCompleted(true);
       setShowProgress(true);
     }
   };
 
-  // Progress calculation
   const progressForLesson = function (answerId) {
     const answer = answers.find(elem => elem.id === answerId);
     if (answer && answer.status === 1) {
@@ -88,17 +100,32 @@ export default function Questions() {
     }
   };
 
-  // Toggle between lessons
   const handleNextLesson = () => {
-    if (lessonIDD < lessons.length) {
-      setLessonIDD(prevLessonId => prevLessonId + 1);
-    } else {
-      console.log("No more lessons available.");
+    if (lessons.length === 0) {
+      console.log("No lessons available.");
       navigate('/lessons');
+      return;
     }
+
+    const currentLessonIndex = lessons.findIndex(lesson => lesson.id === lessonIDD);
+    
+    if (currentLessonIndex === -1 || currentLessonIndex >= lessons.length - 1) {
+      navigate('/lessons');
+      return;
+    }
+
+ 
+    const nextLesson = lessons[currentLessonIndex + 1];
+    
+    
+    navigate(`/questions/${nextLesson.id}`, {
+      state: { lessons: lessons }
+    });
+
+
+    setLessonIDD(nextLesson.id);
   };
 
-  // Render the current question and its answers
   return (
     <div className='questions-container'>
       {lessonCompleted ? (
@@ -106,10 +133,10 @@ export default function Questions() {
           <h2>Good Job! You've completed this lesson!</h2>
           <h3>Your Progress: {resultProgress}%</h3>
           <div>
-            <button className='next-lesson-btn' onClick={()=>{handleNextLesson ,  navigate('/lessons') }}>
+            <button className='bt' onClick={handleNextLesson}>
               Go to Next Lesson
             </button>
-            <button className='back-to-lessons-btn' onClick={() => navigate('/lessons')}>
+            <button className='bt' onClick={() => navigate('/lessons')}>
               Back to Lessons
             </button>
           </div>

@@ -1,278 +1,99 @@
-/* General container for the questions section */
+/* Questions.css */
+
 .questions-container {
-  display: flex;
-  flex-direction: column;
-  align-items: center;
-  background-color: #f4f4f9;
-  padding: 20px;
-  border-radius: 10px;
-  box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
-  width: 80%;
+  max-width: 800px;
   margin: 20px auto;
+  padding: 20px;
+  border-radius: 8px;
+  background-color: #f9f9f9;
+  box-shadow: 0 4px 10px rgba(0, 0, 0, 0.1);
+  font-family: 'Arial', sans-serif;
 }
 
-/* Title styles */
-.questions-container h2 {
-  font-size: 2.5rem;
+h2, h3 {
   color: #333;
-  margin-bottom: 10px;
+  text-align: center;
 }
 
-/* Progress bar style */
-.questions-container h3 {
-  font-size: 1.2rem;
-  color: #4caf50;
-  margin-bottom: 20px;
-}
-
-.progress-bar {
-  width: 100%;
-  background-color: #ddd;
-  border-radius: 10px;
-  height: 10px;
-}
-
-.progress-bar-filled {
-  height: 100%;
-  border-radius: 10px;
-  background-color: #4caf50;
-  transition: width 0.3s ease;
-}
-
-/* Styles for the question content */
-.question-number-render {
-  font-size: 1.8rem;
-  color: #333;
-  margin-bottom: 10px;
+h1.question-number-render {
+  font-size: 2em;
+  margin: 20px 0;
+  color: #007bff; /* Bright blue for question number */
 }
 
 .question-render {
-  font-size: 1.5rem;
-  color: #333;
+  font-size: 1.5em;
   margin-bottom: 20px;
+  color: #555;
 }
 
-/* Styles for the answers list */
 .answers-container {
   display: flex;
   flex-direction: column;
   align-items: center;
-  width: 100%;
 }
 
 .answer-item {
-  background-color: #fff;
-  border-radius: 8px;
-  padding: 12px;
-  margin: 10px 0;
-  box-shadow: 0 2px 6px rgba(0, 0, 0, 0.1);
-  font-size: 1.2rem;
-  color: #333;
-  cursor: pointer;
-  transition: all 0.3s ease;
-}
-
-.answer-item:hover {
-  background-color: #4caf50;
-  color: #fff;
-  transform: scale(1.05);
-}
-
-/* Style for the "Next Question" and "Next Lesson" buttons */
-
-
-/* button {
-  background-color: #4caf50;
+  background-color: #007bff; /* Bright blue */
   color: white;
-  font-size: 1rem;
-  padding: 10px 20px;
-  margin-top: 20px;
   border: none;
   border-radius: 5px;
-  cursor: pointer;
-  transition: background-color 0.3s ease;
-}
-
-/* button:hover {
-  background-color: #45a049;
-} 
-/* General container for the questions section */
-.questions-container {
-  display: flex;
-  flex-direction: column;
-  align-items: center;
-  background-color: #f9fafb;
-  padding: 40px;
-  border-radius: 20px;
-  box-shadow: 0 10px 20px rgba(0, 0, 0, 0.1);
-  width: 80%;
-  max-width: 900px;
-  margin: 40px auto;
-  transition: transform 0.3s ease;
-}
-
-.questions-container:hover {
-  transform: translateY(-5px); /* Subtle hover effect for the container */
-}
-
-/* Title styles */
-.questions-container h2 {
-  font-size: 2.5rem;
-  font-weight: 600;
-  color: #333;
-  margin-bottom: 10px;
-  text-align: center;
-}
-
-/* Progress bar style */
-.questions-container h3 {
-  font-size: 1.2rem;
-  color: #4caf50;
-  margin-bottom: 20px;
-  text-align: center;
-}
-
-.progress-bar {
-  width: 100%;
-  background-color: #ddd;
-  border-radius: 10px;
-  height: 8px;
-  margin-bottom: 20px;
-}
-
-.progress-bar-filled {
-  height: 100%;
-  border-radius: 10px;
-  background-color: #4caf50;
-  transition: width 0.3s ease;
-}
-
-/* Styles for the question content */
-.question-number-render {
-  font-size: 1.8rem;
-  font-weight: 500;
-  color: #333;
-  margin-bottom: 10px;
-  text-align: center;
-}
-
-.question-render {
-  font-size: 1.6rem;
-  color: #333;
-  margin-bottom: 20px;
-  text-align: center;
-  line-height: 1.6;
-  font-weight: 400;
-  padding: 0 20px;
-}
-
-/* Styles for the answers list */
-.answers-container {
-  display: flex;
-  flex-direction: column;
-  align-items: center;
-  width: 100%;
-}
-
-.answer-item {
-  background-color: #fff;
-  border-radius: 12px;
-  padding: 15px 20px;
+  padding: 15px 30px;
   margin: 10px 0;
-  box-shadow: 0 2px 6px rgba(0, 0, 0, 0.1);
-  font-size: 1.2rem;
-  color: #333;
   cursor: pointer;
-  width: 80%;
-  text-align: left;
-  transition: all 0.3s ease;
+  font-size: 1.2em;
+  transition: background-color 0.3s, transform 0.2s;
+  width: 100%; /* Full width on smaller screens */
+  max-width: 300px; /* Limit width on larger screens */
 }
 
 .answer-item:hover {
-  background-color: #4caf50;
-  color: #fff;
-  transform: scale(1.05);
+  background-color: #0056b3; /* Darker blue on hover */
+  transform: translateY(-2px); /* Slight lift effect */
 }
 
-/* Style for the "Next Question" and "Next Lesson" buttons */
-
-/* Responsive Design */
-@media screen and (max-width: 768px) {
-  .questions-container {
-    width: 90%;
-    padding: 25px;
-  }
-
-  .question-number-render {
-    font-size: 1.6rem;
-  }
-
-  .question-render {
-    font-size: 1.4rem;
-  }
-
-  .answer-item {
-    font-size: 1rem;
-    padding: 10px;
-    width: 90%;
-  }
-
-  button {
-    width: 80%;
-  }
+.progress-bar {
+  background-color: #e0e0e0;
+  border-radius: 5px;
+  overflow: hidden;
+  height: 20px;
+  margin: 20px 0;
 }
 
-/* Responsive Design */
-@media screen and (max-width: 768px) {
+.progress-bar-filled {
+  background-color: #28a745; /* Green for progress */
+  height: 100%;
+  transition: width 0.5s ease-in-out;
+}
+
+.bt {
+  background-color: #28a745; /* Green for buttons */
+  color: white;
+  border: none;
+  border-radius: 5px;
+  padding: 10px 20px;
+  margin: 10px;
+  cursor: pointer;
+  font-size: 1.2em;
+  transition: background-color 0.3s;
+}
+
+.bt:hover {
+  background-color: #218838; /* Darker green on hover */
+}
+
+@media (max-width: 600px) {
   .questions-container {
-    width: 90%;
     padding: 15px;
   }
 
-  .question-number-render {
-    font-size: 1.5rem;
+  }
+
+  h1.question-number-render {
+    font-size: 1.5em; /* Smaller font size for mobile */
   }
 
   .question-render {
-    font-size: 1.3rem;
+    font-size: 1.2em; /* Smaller font size for mobile */
   }
 
-  .answer-item {
-    font-size: 1rem;
-    padding: 10px;
-  }
-
-  .answers-container {
-    width: 100%;
-  }
-
-}
-/* Styles for the "Go to Next Lesson" and "Back to Lessons" buttons */
-.next-lesson-btn, .back-to-lessons-btn {
-  background-color: #4caf50; /* Same green as the answer buttons */
-  color: white;
-  font-size: 1.1rem;
-  padding: 12px 24px;
-  margin-top: 20px;
-  border: none;
-  border-radius: 8px;
-  cursor: pointer;
-  transition: background-color 0.3s ease, transform 0.3s ease;
-  width: 45%; /* Adjust the width to make them consistent */
-  margin: 10px 2.5%;
-  text-align: center;
-  display: inline-block;
-}
-
-.next-lesson-btn:hover, .back-to-lessons-btn:hover {
-  background-color: #45a049;
-  transform: scale(1.05);
-}
-
-/* Make buttons adjust on smaller screens */
-@media screen and (max-width: 768px) {
-  .next-lesson-btn, .back-to-lessons-btn {
-    width: 80%;
-    margin: 10px auto;
-  }
-}
