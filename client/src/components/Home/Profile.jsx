@@ -1,65 +1,109 @@
-
 import React, { useEffect, useState } from 'react';
-import { jwtDecode } from 'jwt-decode'
+import { jwtDecode } from 'jwt-decode';
 import './Profile.css';
 import { useNavigate } from 'react-router-dom';
 import axios from 'axios';
 
 const Profile = () => {
-    const navigate=useNavigate()
-    const [avatar, setavatar] = useState(null);
+  const navigate = useNavigate();
+  const [avatar, setAvatar] = useState(null);
+  const [user, setUser] = useState(null);
+  const [lessons, setLessons] = useState([]);
+  const [averageProgress, setAverageProgress] = useState(0);
+  const [loading, setLoading] = useState(true);
 
-  const [user, setuser] = useState(null);
+  // Get lesson progress from localStorage
+  const getLessonProgress = (lessonId) => {
+    const progress = localStorage.getItem(`lesson${lessonId}Progress`);
+    return progress ? parseInt(progress) : 0;
+  };
+
+  // Calculate average progress
+  const calculateAverageProgress = (lessonsArray) => {
+    if (!lessonsArray.length) return 0;
+    
+    const totalProgress = lessonsArray.reduce((sum, lesson) => {
+      const progress = getLessonProgress(lesson.id);
+      return sum + progress;
+    }, 0);
+
+    return Math.round(totalProgress / lessonsArray.length);
+  };
+
+  // Fetch lessons and calculate progress
+  const fetchLessonsAndProgress = async () => {
+    try {
+      const res = await axios.get(`http://localhost:3000/lesson/all/${language}`);
+      setLessons(res.data);
+      const average = calculateAverageProgress(res.data);
+      setAverageProgress(average);
+    } catch (err) {
+      console.error("Error fetching lessons:", err);
+    }
+  };
+
+  const handleAvatar = async (id) => {
+    try {
+      const res = await axios.get(`http://localhost:3000/user/image/${id}`);
+      setAvatar(res.data.image);
+    } catch (err) {
+      console.error("Error fetching avatar:", err);
+    }
+  };
+
+  useEffect(() => {
+    const token = localStorage.getItem('token');
+    if (token) {
+      try {
+        const decodedToken = jwtDecode(token);
+        setUser({
+          id: decodedToken.id,
+          name: decodedToken.name || 'Unknown',
+          email: decodedToken.email || 'Unknown',
+          joinDate: new Date(decodedToken.iat * 1000).toLocaleDateString(),
+        });
+
+        if (decodedToken.id) {
+          handleAvatar(decodedToken.id);
+        }
+
+        fetchLessonsAndProgress();
+      } catch (error) {
+        console.error("Error decoding token:", error);
+        navigate("/user/login");
+      }
+    } else {
+      navigate("/user/login");
+    }
+    setLoading(false);
+  }, [navigate]);
 
   const handleLogout = () => {
     localStorage.clear();
-    navigate("/user/login")
+    navigate("/user/login");
   };
-  const handleavatar = (id) => {
-    axios.get(`http://localhost:3000/user/image/${id}`)
-    .then((res)=> setavatar(res.data.image) && console.log("data",res.data))
-    .catch((err)=> console.log(err))
+
+  if (loading || !user) {
+    return <div className="loading">Loading profile...</div>;
   }
-
-  useEffect(() => {
-    
-    const token = localStorage.getItem('token'); 
-    if (token) {
-      try {
-        const decodedtoken = jwtDecode(token);
-        console.log(decodedtoken)
-
-        setuser({
-          id:decodedtoken.id,
-          name: decodedtoken.name || 'Unknown',
-          email: decodedtoken.email || 'Unknown',
-          joinDate: decodedtoken.joinDate || 'Unknown',  
-          level: decodedtoken.level || 'Beginner',
-          languagesLearning: decodedtoken.languages || ["english","french"],
-          progress: decodedtoken.progress || 0,
-        });
-        if (decodedtoken.id) {
-            handleavatar(decodedtoken.id);
-        }
-      } catch (error) {
-        console.error("Error decoding the token:", error);
-      }
-    } else {
-      console.log("No token found.");
-    }
-
-  }, []); 
-
-  if (!user) {
-    return <div>Loading...</div>;
-  }
-
 
   return (
     <div className="profile-container">
       <div className="profile-header">
         <div className="profile-avatar">
-          <img src={avatar} alt="Profile" />
+          {avatar ? (
+            <img 
+              src={avatar} 
+              alt="Profile" 
+              onError={(e) => {
+                e.target.src = '/default-avatar.png';
+              }}
+            />
+          ) : (
+            <div className="avatar-placeholder">
+              {user.name.charAt(0).toUpperCase()}
+            </div>
+          )}
         </div>
         <h1>{user.name}</h1>
         <p className="email">{user.email}</p>
@@ -73,132 +117,50 @@ const Profile = () => {
         </div>
         <div className="stat-card">
           <i className="fas fa-chart-line"></i>
-          <h3>Level</h3>
-          <p>{user.level}</p>
+          <h3>Overall Progress</h3>
+          <div className="progress-container">
+            <div className="progress-bar">
+              <div 
+                className="progress-fill" 
+                style={{ width: `${averageProgress}%` }}
+              />
+            </div>
+            <span className="progress-text">{averageProgress}%</span>
+          </div>
         </div>
         <div className="stat-card">
-          <i className="fas fa-fire"></i>
-          <h3>Current Streak</h3>
-          <p>{user.streakDays} days</p>
+          <i className="fas fa-book"></i>
+          <h3>Lessons Completed</h3>
+          <p>{lessons.filter(lesson => getLessonProgress(lesson.id) === 100).length}</p>
         </div>
       </div>
 
-      <div className="profile-details">
-        <div className="languages-section">
-          <h2>Languages Learning</h2>
-          <div className="language-list">
-            {user.languagesLearning.map((language, index) => (
-              <span key={index} className="language-tag">{language}</span>
-            ))}
-          </div>
-        </div>
-
-        <div className="progress-section">
-          <h2>Learning Progress</h2>
-          <div className="progress-info">
-            <p>Your progress: {user.progress}</p>
-            <div className="progress-bar">
-              <div className="progress" style={{ width: `${(user.progress / 100) * 100}%` }}></div>
-            </div>
-          </div>
+      <div className="lessons-progress">
+        <h2>Lesson Progress</h2>
+        <div className="lessons-grid">
+          {lessons.map((lesson) => {
+            const progress = getLessonProgress(lesson.id);
+            return (
+              <div key={lesson.id} className="lesson-progress-card">
+                <h4>{lesson.title}</h4>
+                <div className="progress-bar">
+                  <div 
+                    className="progress-fill"
+                    style={{ width: `${progress}%` }}
+                  />
+                </div>
+                <span className="progress-text">{progress}%</span>
+              </div>
+            );
+          })}
         </div>
       </div>
+
       <button className="logout-button" onClick={handleLogout}>
-          <i></i> Logout
-        </button>
+        Logout
+      </button>
     </div>
   );
 };
 
 export default Profile;
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-// import React from 'react';
-// import './Profile.css';
-
-// const Profile = () => {
-//   const userInfo = {
-//     name: "John Doe",
-//     email: "john.doe@example.com",
-//     joinDate: "January 2024",
-//     level: "Intermediate",
-//     languagesLearning: ["French", "Spanish", "German"],
-//     completedLessons: 42,
-//     streakDays: 15
-//   };
-
-//   return (
-//     <div className="profile-container">
-//       <div className="profile-header">
-//         <div className="profile-avatar">
-//           <img src="https://via.placeholder.com/150" alt="Profile" />
-//         </div>
-//         <h1>{userInfo.name}</h1>
-//         <p className="email">{userInfo.email}</p>
-//       </div>
-
-//       <div className="profile-stats">
-//         <div className="stat-card">
-//           <i className="fas fa-calendar-alt"></i>
-//           <h3>Member Since</h3>
-//           <p>{userInfo.joinDate}</p>
-//         </div>
-//         <div className="stat-card">
-//           <i className="fas fa-chart-line"></i>
-//           <h3>Level</h3>
-//           <p>{userInfo.level}</p>
-//         </div>
-//         <div className="stat-card">
-//           <i className="fas fa-fire"></i>
-//           <h3>Current Streak</h3>
-//           <p>{userInfo.streakDays} days</p>
-//         </div>
-//       </div>
-
-//       <div className="profile-details">
-//         <div className="languages-section">
-//           <h2>Languages Learning</h2>
-//           <div className="language-list">
-//             {userInfo.languagesLearning.map((language, index) => (
-//               <span key={index} className="language-tag">{language}</span>
-//             ))}
-//           </div>
-//         </div>
-
-//         <div className="progress-section">
-//           <h2>Learning Progress</h2>
-//           <div className="progress-info">
-//             <p>Completed Lessons: {userInfo.completedLessons}</p>
-//             <div className="progress-bar">
-//               <div className="progress" style={{ width: '60%' }}></div>
-//             </div>
-//           </div>
-//         </div>
-//       </div>
-//     </div>
-//   );
-// };
-
-// export default Profile;
