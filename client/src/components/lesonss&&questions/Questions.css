@@ -1,147 +1,101 @@
-/* General container for the questions section */
+/* Questions.css */
+
 .questions-container {
-  display: flex;
-  flex-direction: column;
-  align-items: center;
-  background-color: #f4f4f9;
-  padding: 20px;
-  border-radius: 10px;
-  box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
-  width: 80%;
+  max-width: 800px;
   margin: 20px auto;
-}
-
-/* Title styles */
-.questions-container h2 {
-  font-size: 2.5rem;
-  color: #333;
-  margin-bottom: 10px;
-}
-
-/* Progress bar style */
-.questions-container h3 {
-  font-size: 1.2rem;
-  color: #4caf50;
-  margin-bottom: 20px;
-}
-
-.progress-bar {
-  width: 100%;
-  background-color: #ddd;
-  border-radius: 10px;
-  height: 10px;
-}
-
-.progress-bar-filled {
-  height: 100%;
-  border-radius: 10px;
-  background-color: #4caf50;
-  transition: width 0.3s ease;
-}
-
-/* Styles for the question content */
-.question-item {
-  background-color: #fff;
-  border-radius: 10px;
+  padding: 20px;
+  border-radius: 8px;
+  background-color: #f9f9f9;
   box-shadow: 0 4px 10px rgba(0, 0, 0, 0.1);
-  padding: 15px;
-  width: 100%;
-  margin-bottom: 20px;
+  font-family: 'Arial', sans-serif;
 }
 
-.question-item h3 {
-  font-size: 1.8rem;
+h2, h3 {
   color: #333;
-  margin-bottom: 10px;
+  text-align: center;
 }
 
-/* Styles for the answers list */
+h1.question-number-render {
+  font-size: 2em;
+  margin: 20px 0;
+  color: #007bff; /* Bright blue for question number */
+}
+
+.question-render {
+  font-size: 1.5em;
+  margin-bottom: 20px;
+  color: #555;
+}
+
 .answers-container {
   display: flex;
   flex-direction: column;
   align-items: center;
-  width: 100%;
 }
 
 .answer-item {
-  background-color: #fff;
-  border: 2px solid #4caf50;
-  border-radius: 8px;
-  padding: 12px 20px;
+  background-color: #007bff; /* Bright blue */
+  color: white;
+  border: none;
+  border-radius: 5px;
+  padding: 15px 30px;
   margin: 10px 0;
-  box-shadow: 0 2px 6px rgba(0, 0, 0, 0.1);
-  font-size: 1.2rem;
-  color: #4caf50;
   cursor: pointer;
-  transition: all 0.3s ease;
-  width: 100%;
-  text-align: center;
+  font-size: 1.2em;
+  transition: background-color 0.3s, transform 0.2s;
+  width: 100%; /* Full width on smaller screens */
+  max-width: 300px; /* Limit width on larger screens */
 }
 
 .answer-item:hover {
-  background-color: #4caf50;
-  color: #fff;
-  transform: scale(1.05);
-  box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2);
+  background-color: #0056b3; /* Darker blue on hover */
+  transform: translateY(-2px); /* Slight lift effect */
 }
 
-.answer-item:active {
-  transform: scale(0.98);
+.progress-bar {
+  background-color: #e0e0e0;
+  border-radius: 5px;
+  overflow: hidden;
+  height: 20px;
+  margin: 20px 0;
 }
 
-/* Style for the "Next Question" and "Next Lesson" buttons */
-button {
-  background-color: #4caf50;
+.progress-bar-filled {
+  background-color: #28a745; /* Green for progress */
+  height: 100%;
+  transition: width 0.5s ease-in-out;
+}
+
+.bt {
+  background-color: #28a745; /* Green for buttons */
   color: white;
-  font-size: 1rem;
-  padding: 10px 20px;
-  margin-top: 20px;
   border: none;
   border-radius: 5px;
-  cursor: pointer;
-  transition: background-color 0.3s ease, transform 0.2s ease;
-}
-
-button:hover {
-  background-color: #45a049;
-  transform: scale(1.05);
-}
-
-button:active {
-  transform: scale(0.95);
-}
-
-/* Card style for each answer */
-.answers-container .answer-item {
-  display: flex;
-  justify-content: center;
-  align-items: center;
-  background-color: #fff;
-  padding: 15px;
+  padding: 10px 20px;
   margin: 10px;
-  border-radius: 8px;
-  box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
-}
-
-.answers-container .answer-item:hover {
-  background-color: #f0fdf4;
-  color: #4caf50;
   cursor: pointer;
+  font-size: 1.2em;
+  transition: background-color 0.3s;
 }
 
-/* Responsive Design */
-@media screen and (max-width: 768px) {
+.bt:hover {
+  background-color: #218838; /* Darker green on hover */
+}
+
+@media (max-width: 600px) {
   .questions-container {
-    width: 90%;
     padding: 15px;
   }
 
-  .question-item h3 {
-    font-size: 1.5rem;
+  .answer-item, .bt {
+    width: 100%; /* Full width on smaller screens */
   }
 
-  .answer-item {
-    font-size: 1rem;
-    padding: 10px;
+  h1.question-number-render {
+    font-size: 1.5em; /* Smaller font size for mobile */
+  }
+
+  .question-render {
+    font-size: 1.2em; /* Smaller font size for mobile */
   }
 }

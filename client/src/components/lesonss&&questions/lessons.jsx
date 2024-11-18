@@ -1,13 +1,29 @@
 import React, { useState, useEffect } from 'react';
 import axios from 'axios';
 import { useNavigate } from 'react-router-dom';
-import './Lessons.css'; // Updated CSS file for lessons
+import './Lessons.css';
 
 function Lessons({ language }) {
   const [lessons, setLessons] = useState([]);
   const [loading, setLoading] = useState(true);
   const [error, setError] = useState(null);
   const navigate = useNavigate();
+
+  // Get lesson progress from local storage
+  const getLessonProgress = (lessonId) => {
+    return localStorage.getItem(`lesson${lessonId}Progress`) === '100';
+  };
+
+  // Set lesson progress in local storage
+  const setLessonProgress = (lessonId, progress) => {
+    localStorage.setItem(`lesson${lessonId}Progress`, progress.toString());
+  };
+
+  // Unlock lessons based on progress
+  const unlockedLessons = lessons.map((lesson, index) => {
+    const isUnlocked = index === 0 || getLessonProgress(lessons[index - 1].id); // Check previous lesson's progress
+    return { ...lesson, isUnlocked };
+  });
 
   useEffect(() => {
     const fetchLessons = async () => {
@@ -24,6 +40,8 @@ function Lessons({ language }) {
   }, [language]);
 
   const handleLessonClick = (lessonId) => {
+    // Simulating lesson completion
+    setLessonProgress(lessonId, 100); // Set current lesson progress to 100%
     navigate(`/questions/${lessonId}`);
   };
 
@@ -38,11 +56,6 @@ function Lessons({ language }) {
     }
   };
 
-  const getEmojiForLesson = (lesson) => {
-    // Return emoji based on the lesson's language
-    return getLanguageEmoji(language); // Emoji for the language of the lesson
-  };
-
   if (loading) return <p>Loading lessons...</p>;
   if (error) return <p>{error}</p>;
 
@@ -50,19 +63,20 @@ function Lessons({ language }) {
     <div className="lessons-container">
       <h2>{language.toUpperCase()} Lessons</h2>
       <div className="lesson-cards">
-        {lessons.map((lesson) => (
+        {unlockedLessons.map((lesson) => (
           <div key={lesson.id} className="lesson-card">
             <div className="lesson-card-header">
               <span role="img" aria-label={language}>
-                {getEmojiForLesson(lesson)} {/* Language-specific emoji */}
+                {getLanguageEmoji(language)} {/* Language-specific emoji */}
               </span>
-              <h3>{lesson.title}</h3>
+              <h3>{lesson.title} {lesson.isUnlocked ? '' : '(Locked)'}</h3>
             </div>
             <button
               className="btn btn-lesson"
-              onClick={() => handleLessonClick(lesson.id)}
+              onClick={() => lesson.isUnlocked && handleLessonClick(lesson.id)}
+              disabled={!lesson.isUnlocked}
             >
-              Start Lesson
+              {lesson.isUnlocked ? 'Start Lesson' : 'Complete Previous Lesson to Unlock'}
             </button>
           </div>
         ))}
