@@ -12,6 +12,7 @@ function LanguageSelector({ setLanguage }) {
 
   return (
     <div className="language-selector">
+      <div className='userLanguageButtons'> 
       <h2>Select Language</h2>
       <div className="language-buttons">
         <button
@@ -26,6 +27,7 @@ function LanguageSelector({ setLanguage }) {
         >
           <span role="img" aria-label="french">🇫🇷</span> French
         </button>
+        </div>
       </div>
     </div>
   );

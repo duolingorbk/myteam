@@ -1,153 +1,180 @@
 .profile-container {
-    position: relative;
-    max-width: 900px;
-    margin: 40px auto;
-    padding: 20px;
-    background-color: #ffffff;
-    border-radius: 15px;
-    box-shadow: 0 0 20px rgba(0, 0, 0, 0.1);
-  }
-  
-  .profile-header {
-    text-align: center;
-    margin-bottom: 40px;
-  }
-  
-  .profile-avatar {
-    margin-bottom: 20px;
-    width: 150px;  
-    height: 150px; 
-    border-radius: 50%;
-    position: relative;
-    margin: 0 auto;    
-    background: #f0f0f0;
-  }
-  
-  .profile-avatar img {
-    width: 100%;
-    height: 100%;
-    border-radius: 50%;
-    border: 4px solid #4a90e2;
-    object-fit: cover;
-    position: absolute;
-    top: 0;
-    left: 0;
-  }
-  
-  .profile-header h1 {
-    margin: 10px 0;
-    color: #333;
-  }
-  
-  .email {
-    color: #666;
-    font-size: 1.1em;
-  }
-  
-  .profile-stats {
-    display: flex;
-    justify-content: space-around;
-    margin: 40px 0;
-    flex-wrap: wrap;
-    gap: 20px;
-  }
-  
-  .stat-card {
-    background-color: #f8f9fa;
-    padding: 20px;
-    border-radius: 10px;
-    text-align: center;
-    min-width: 200px;
-    box-shadow: 0 2px 5px rgba(0, 0, 0, 0.05);
-  }
-  
-  .stat-card i {
-    font-size: 24px;
-    color: #4a90e2;
-    margin-bottom: 10px;
-  }
-  
-  .stat-card h3 {
-    margin: 10px 0;
-    color: #555;
-    font-size: 1.1em;
-  }
-  
-  .stat-card p {
-    color: #333;
-    font-size: 1.2em;
-    font-weight: bold;
-  }
-  
-  .profile-details {
-    margin-top: 40px;
-  }
-  
-  .languages-section, .progress-section {
-    margin-bottom: 30px;
-  }
-  
-  .languages-section h2, .progress-section h2 {
-    color: #333;
-    margin-bottom: 20px;
-    border-bottom: 2px solid #4a90e2;
-    padding-bottom: 10px;
-  }
-  
-  .language-list {
-    display: flex;
-    flex-wrap: wrap;
-    gap: 10px;
-  }
-  
-  .language-tag {
-    background-color: #4a90e2;
-    color: white;
-    padding: 8px 15px;
-    border-radius: 20px;
-    font-size: 0.9em;
-  }
-  
-  .progress-info {
-    background-color: #f8f9fa;
-    padding: 20px;
-    border-radius: 10px;
-  }
-  
-  .progress-bar {
-    background-color: #e9ecef;
-    height: 20px;
-    border-radius: 10px;
-    margin-top: 10px;
-    overflow: hidden;
-  }
-  
-  .progress {
-    background-color: #4a90e2;
-    height: 100%;
-    border-radius: 10px;
-    transition: width 0.3s ease;
-  }
-  .logout-button {
-    position: absolute;
-    top: 20px;
-    right: 20px;
-    padding: 10px 20px;
-    background-color: #dc3545;
-    color: white;
-    border: none;
-    border-radius: 5px;
-    cursor: pointer;
-    display: flex;
-    align-items: center;
-    gap: 8px;
-    transition: background-color 0.3s ease;
-  }
-  
-  .logout-button:hover {
-    background-color: #c82333;
-  }
-  
-  .logout-button i {
-    font-size: 16px;
-  }
+  position: relative;
+  max-width: 900px;
+  margin: 40px auto;
+  padding: 30px;
+  background-color: #ffffff;
+  border-radius: 20px;
+  box-shadow: 0 8px 30px rgba(0, 0, 0, 0.15);
+  font-family: 'Roboto', sans-serif;
+}
+
+.profile-header {
+  text-align: center;
+  margin-bottom: 50px;
+}
+
+.profile-avatar {
+  margin-bottom: 20px;
+  width: 150px;
+  height: 150px;
+  border-radius: 50%;
+  position: relative;
+  margin: 0 auto;
+  background: #f0f0f0;
+  overflow: hidden;
+  box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+}
+
+.profile-avatar img {
+  width: 100%;
+  height: 100%;
+  border-radius: 50%;
+  border: 4px solid #4a90e2;
+  object-fit: cover;
+  position: absolute;
+  top: 0;
+  left: 0;
+}
+
+.profile-header h1 {
+  margin: 10px 0;
+  color: #333;
+  font-size: 2em;
+  font-weight: 600;
+}
+
+.email {
+  color: #777;
+  font-size: 1.1em;
+}
+
+.profile-stats {
+  display: flex;
+  justify-content: space-between;
+  margin: 40px 0;
+  flex-wrap: wrap;
+  gap: 20px;
+}
+
+.stat-card {
+  background-color: #f8f9fa;
+  padding: 25px;
+  border-radius: 15px;
+  text-align: center;
+  min-width: 200px;
+  box-shadow: 0 10px 20px rgba(0, 0, 0, 0.05);
+  transition: transform 0.3s ease, box-shadow 0.3s ease;
+}
+
+.stat-card:hover {
+  transform: translateY(-5px);
+  box-shadow: 0 15px 30px rgba(0, 0, 0, 0.1);
+}
+
+.stat-card i {
+  font-size: 30px;
+  color: #4a90e2;
+  margin-bottom: 10px;
+}
+
+.stat-card h3 {
+  margin: 10px 0;
+  color: #555;
+  font-size: 1.2em;
+}
+
+.stat-card p {
+  color: #333;
+  font-size: 1.3em;
+  font-weight: 600;
+}
+
+.profileLessons-progress {
+  margin-top: 40px;
+}
+
+.profileLessons-progress h2 {
+  color: #333;
+  margin-bottom: 20px;
+  font-size: 1.5em;
+  font-weight: 600;
+  border-bottom: 3px solid #4a90e2;
+  padding-bottom: 10px;
+}
+
+.lessons-grid {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 20px;
+}
+
+.lesson-progress-card {
+  background-color: #f8f9fa;
+  padding: 20px;
+  border-radius: 12px;
+  width: 250px;
+  box-shadow: 0 3px 8px rgba(0, 0, 0, 0.1);
+  text-align: center;
+  transition: transform 0.3s ease, box-shadow 0.3s ease;
+}
+
+.lesson-progress-card:hover {
+  transform: translateY(-5px);
+  box-shadow: 0 10px 20px rgba(0, 0, 0, 0.1);
+}
+
+.lesson-progress-card h4 {
+  margin: 10px 0;
+  color: #333;
+  font-size: 1.1em;
+  font-weight: 600;
+}
+
+.progress-bar {
+  background-color: #e9ecef;
+  height: 20px;
+  border-radius: 15px;
+  margin-top: 10px;
+  overflow: hidden;
+}
+
+.progress-fill {
+  background-color: #4a90e2;
+  height: 100%;
+  border-radius: 15px;
+  transition: width 0.3s ease;
+}
+
+.progress-text {
+  color: #333;
+  font-size: 1em;
+  font-weight: 600;
+  margin-top: 10px;
+}
+
+.logout-button {
+  position: absolute;
+  top: 20px;
+  right: 20px;
+  padding: 12px 25px;
+  background-color: #dc3545;
+  color: white;
+  border: none;
+  border-radius: 8px;
+  cursor: pointer;
+  display: flex;
+  align-items: center;
+  gap: 8px;
+  font-weight: 600;
+  transition: background-color 0.3s ease, transform 0.3s ease;
+}
+
+.logout-button:hover {
+  background-color: #c82333;
+  transform: scale(1.05);
+}
+
+.logout-button i {
+  font-size: 18px;
+}

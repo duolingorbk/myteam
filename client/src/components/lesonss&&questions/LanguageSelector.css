@@ -4,14 +4,17 @@
   align-items: center;
   justify-content: center;
   height: 100vh;
-  background-color: #f9f9f9;
+  background: linear-gradient(135deg, #2b00ffcc, #000000b7);
   font-family: 'Roboto', sans-serif;
+  color: white;
+  overflow: hidden;
 }
 
 .language-selector h2 {
-  font-size: 2rem;
+  font-size: 2.5rem;
   margin-bottom: 2rem;
-  color: #333;
+  color: #fff;
+  text-shadow: 2px 2px 4px rgba(0, 0, 0, 0.2);
 }
 
 .language-buttons {
@@ -27,10 +30,13 @@
   margin: 0.5rem;
   padding: 0.8rem 1.5rem;
   font-size: 1.2rem;
-  border-radius: 5px;
+  border-radius: 10px;
   text-transform: capitalize;
-  transition: transform 0.3s ease;
+  transition: transform 0.3s ease, box-shadow 0.3s ease, background 0.3s ease;
   cursor: pointer;
+  font-weight: bold;
+  letter-spacing: 1px;
+  box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2);
 }
 
 .language-selector .btn i {
@@ -38,32 +44,51 @@
 }
 
 .language-selector .btn-english {
-  background-color: #007bff;
+  background: linear-gradient(90deg, #6a1b9a, #9c27b0);
   color: #fff;
   border: none;
 }
 
 .language-selector .btn-english:hover {
-  background-color: #0056b3;
+  background: linear-gradient(90deg, #9c27b0, #6a1b9a);
   transform: scale(1.05);
+  box-shadow: 0 6px 12px rgba(0, 0, 0, 0.2);
 }
 
 .language-selector .btn-french {
-  background-color: #6c757d;
+  background: linear-gradient(90deg, #00bcd4, #009688);
   color: #fff;
   border: none;
 }
 
 .language-selector .btn-french:hover {
-  background-color: #5a6268;
+  background: linear-gradient(90deg, #009688, #00bcd4);
   transform: scale(1.05);
+  box-shadow: 0 6px 12px rgba(0, 0, 0, 0.2);
 }
 
 .language-selector .btn span {
   margin-right: 0.5rem;
-  font-size: 1.5rem; /* Increase emoji size /
+  font-size: 1.5rem;
 }
 
-.language-selector .btn:hover span {
-  transform: rotate(10deg); / Rotate emoji slightly on hover */
+.userLanguageButtons {
+  background: linear-gradient(90deg, #4a00e0, #8e2de2);
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  gap: 40px;
+  flex-direction: column;
+  padding: 20px;
+  background-color: #fff;
+  border-radius: 12px;
+  box-shadow: 0 6px 15px rgba(0, 0, 0, 0.1);
+  width: 500px;
+  margin: 20px auto;
+  transition: box-shadow 0.3s ease, transform 0.3s ease;
+}
+
+.userLanguageButtons:hover {
+  transform: translateY(-5px);
+  box-shadow: 0 8px 20px rgba(0, 0, 0, 0.2);
 }
