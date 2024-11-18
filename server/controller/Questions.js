@@ -44,6 +44,7 @@ const getQuestionsByLessonId = async (req, res) => {
 
   const deleteQuestion = async (req, res) => {
     try {
+      
       const { id } = req.params;
       await db.Questions.destroy({
         where: { id: id }
