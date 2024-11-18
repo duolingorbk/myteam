@@ -8,7 +8,7 @@ function Lessons({ language }) {
   const [loading, setLoading] = useState(true);
   const [error, setError] = useState(null);
   const navigate = useNavigate();
-
+    localStorage.setItem("language",language)
   // Get lesson progress from local storage
   const getLessonProgress = (lessonId) => {
     return localStorage.getItem(`lesson${lessonId}Progress`) === '100';

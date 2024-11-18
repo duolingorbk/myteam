@@ -12,16 +12,22 @@ const Profile = () => {
   const [averageProgress, setAverageProgress] = useState(0);
   const [loading, setLoading] = useState(true);
 
-  // Get lesson progress from localStorage
   const getLessonProgress = (lessonId) => {
     const progress = localStorage.getItem(`lesson${lessonId}Progress`);
-    return progress ? parseInt(progress) : 0;
+    if (progress) {
+      return parseInt(progress);
+    } else {
+      return 0;
+    }
   };
 
-  // Calculate average progress
+  const setLessonProgress = (lessonId, progress) => {
+    localStorage.setItem(`lesson${lessonId}Progress`, progress.toString());
+  };
+
   const calculateAverageProgress = (lessonsArray) => {
     if (!lessonsArray.length) return 0;
-    
+
     const totalProgress = lessonsArray.reduce((sum, lesson) => {
       const progress = getLessonProgress(lesson.id);
       return sum + progress;
@@ -30,8 +36,7 @@ const Profile = () => {
     return Math.round(totalProgress / lessonsArray.length);
   };
 
-  // Fetch lessons and calculate progress
-  const fetchLessonsAndProgress = async () => {
+  const fetchLessonsAndProgress = async (language) => {
     try {
       const res = await axios.get(`http://localhost:3000/lesson/all/${language}`);
       setLessons(res.data);
@@ -67,7 +72,7 @@ const Profile = () => {
           handleAvatar(decodedToken.id);
         }
 
-        fetchLessonsAndProgress();
+        fetchLessonsAndProgress('english');
       } catch (error) {
         console.error("Error decoding token:", error);
         navigate("/user/login");
