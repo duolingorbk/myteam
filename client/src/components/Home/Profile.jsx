@@ -12,16 +12,22 @@ const Profile = () => {
   const [averageProgress, setAverageProgress] = useState(0);
   const [loading, setLoading] = useState(true);
 
-  // Get lesson progress from localStorage
   const getLessonProgress = (lessonId) => {
     const progress = localStorage.getItem(`lesson${lessonId}Progress`);
-    return progress ? parseInt(progress) : 0;
+    if (progress) {
+      return parseInt(progress);
+    } else {
+      return 0;
+    }
   };
 
-  // Calculate average progress
+  const setLessonProgress = (lessonId, progress) => {
+    localStorage.setItem(`lesson${lessonId}Progress`, progress.toString());
+  };
+
   const calculateAverageProgress = (lessonsArray) => {
     if (!lessonsArray.length) return 0;
-    
+
     const totalProgress = lessonsArray.reduce((sum, lesson) => {
       const progress = getLessonProgress(lesson.id);
       return sum + progress;
@@ -30,8 +36,7 @@ const Profile = () => {
     return Math.round(totalProgress / lessonsArray.length);
   };
 
-  // Fetch lessons and calculate progress
-  const fetchLessonsAndProgress = async () => {
+  const fetchLessonsAndProgress = async (language) => {
     try {
       const res = await axios.get(`http://localhost:3000/lesson/all/${language}`);
       setLessons(res.data);
@@ -45,6 +50,7 @@ const Profile = () => {
   const handleAvatar = async (id) => {
     try {
       const res = await axios.get(`http://localhost:3000/user/image/${id}`);
+      console.log(res.data); 
       setAvatar(res.data.image);
     } catch (err) {
       console.error("Error fetching avatar:", err);
@@ -67,7 +73,7 @@ const Profile = () => {
           handleAvatar(decodedToken.id);
         }
 
-        fetchLessonsAndProgress();
+        fetchLessonsAndProgress('english');
       } catch (error) {
         console.error("Error decoding token:", error);
         navigate("/user/login");
@@ -118,7 +124,7 @@ const Profile = () => {
         <div className="stat-card">
           <i className="fas fa-chart-line"></i>
           <h3>Overall Progress</h3>
-          <div className="progress-container">
+          <div className="Profileprogress-container">
             <div className="progress-bar">
               <div 
                 className="progress-fill" 
@@ -135,7 +141,7 @@ const Profile = () => {
         </div>
       </div>
 
-      <div className="lessons-progress">
+      <div className="profileLessons-progress">
         <h2>Lesson Progress</h2>
         <div className="lessons-grid">
           {lessons.map((lesson) => {
