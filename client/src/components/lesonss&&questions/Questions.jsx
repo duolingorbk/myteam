@@ -1,11 +1,12 @@
 import React, { useState, useEffect } from 'react';
 import axios from 'axios';
 import { useParams, useLocation, useNavigate } from 'react-router-dom';
+import "../lesonss&&questions/Questions.css"
 
 export default function Questions() {
   const { lessonId } = useParams();
   const location = useLocation();
-  const lessons = location.state?.lessons || []; // Default to an empty array if lessons is undefined
+  const { lessons } = location.state || []; // Retrieve lessons from location state
 
   const navigate = useNavigate();
 
@@ -23,6 +24,7 @@ export default function Questions() {
     try {
       const res = await axios.get(`http://localhost:3000/questions/all/${lessonIDD}`);
       setQuestions(res.data);
+      console.log('Questions:', res.data);
       setCurrentQuestionIndex(0);
       setProgress(0);
       setResultProgress(0);
@@ -37,6 +39,7 @@ export default function Questions() {
     try {
       const res = await axios.get(`http://localhost:3000/Answers/all/${questionId}`);
       setAnswers(res.data);
+      console.log('Answers for question', questionId, ':', res.data);
     } catch (err) {
       console.log("Error fetching answers:", err);
     }
@@ -87,12 +90,11 @@ export default function Questions() {
 
   // Toggle between lessons
   const handleNextLesson = () => {
-    if (lessons.length > 0 && lessonIDD < lessons.length - 1) {
-      const nextLessonId = lessonIDD + 1;
-      setLessonIDD(nextLessonId); // Update lessonIDD to the next one
+    if (lessonIDD < lessons.length) {
+      setLessonIDD(prevLessonId => prevLessonId + 1);
     } else {
       console.log("No more lessons available.");
-      navigate('/lessons'); // Go back to the lessons page
+      navigate('/lessons');
     }
   };
 
@@ -104,18 +106,16 @@ export default function Questions() {
           <h2>Good Job! You've completed this lesson!</h2>
           <h3>Your Progress: {resultProgress}%</h3>
           <div>
-            <button onClick={handleNextLesson}>
+            <button className='next-lesson-btn' onClick={()=>{handleNextLesson ,  navigate('/lessons') }}>
               Go to Next Lesson
             </button>
-            <button onClick={() => navigate('/lessons')}>
+            <button className='back-to-lessons-btn' onClick={() => navigate('/lessons')}>
               Back to Lessons
             </button>
           </div>
         </div>
       ) : (
         <>
-          <h2>Questions for Lesson {lessonIDD}</h2>
-
           {showProgress && (
             <div className="progress-bar">
               <div className="progress-bar-filled" style={{ width: `${resultProgress}%` }}></div>
@@ -124,9 +124,9 @@ export default function Questions() {
 
           {questions.length ? (
             <>
-              <h1 className='question-number-render'>
+              <h2 className='question-number-render'>
                 Question {currentQuestionIndex + 1}
-              </h1>
+              </h2>
               <h3 className='question-render'>{questions[currentQuestionIndex].content}</h3>
 
               <div className="answers-container">

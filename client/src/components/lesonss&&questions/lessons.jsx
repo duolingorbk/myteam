@@ -9,6 +9,17 @@ function Lessons({ language }) {
   const [error, setError] = useState(null);
   const navigate = useNavigate();
 
+  // Fetch and check lesson progress for all lessons dynamically
+  const getLessonProgress = (lessonId) => {
+    return localStorage.getItem(`lesson${lessonId}Progress`) === '100';
+  };
+
+  // Unlock lessons sequentially: Lesson 1 is unlocked, then next lessons depend on previous one's progress
+  const unlockedLessons = lessons.map((lesson, index) => {
+    const isPreviousLessonUnlocked = index === 0 || getLessonProgress(lessons[index].id - 1);
+    return { ...lesson, isUnlocked: isPreviousLessonUnlocked };
+  });
+
   useEffect(() => {
     const fetchLessons = async () => {
       try {
@@ -39,7 +50,6 @@ function Lessons({ language }) {
   };
 
   const getEmojiForLesson = (lesson) => {
-    // Return emoji based on the lesson's language
     return getLanguageEmoji(language); // Emoji for the language of the lesson
   };
 
@@ -50,19 +60,20 @@ function Lessons({ language }) {
     <div className="lessons-container">
       <h2>{language.toUpperCase()} Lessons</h2>
       <div className="lesson-cards">
-        {lessons.map((lesson) => (
+        {unlockedLessons.map((lesson) => (
           <div key={lesson.id} className="lesson-card">
             <div className="lesson-card-header">
               <span role="img" aria-label={language}>
                 {getEmojiForLesson(lesson)} {/* Language-specific emoji */}
               </span>
-              <h3>{lesson.title}</h3>
+              <h3>{lesson.title} {lesson.isUnlocked ? '' : '(Locked)'}</h3>
             </div>
             <button
               className="btn btn-lesson"
-              onClick={() => handleLessonClick(lesson.id)}
+              onClick={() => lesson.isUnlocked && handleLessonClick(lesson.id)}
+              disabled={!lesson.isUnlocked}
             >
-              Start Lesson
+              {lesson.isUnlocked ? 'Start Lesson' : 'Complete Previous Lesson to Unlock'}
             </button>
           </div>
         ))}
