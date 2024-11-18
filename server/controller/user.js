@@ -28,7 +28,7 @@ const signup = async (req, res) => {
             name
         } = req.body;
 
-        const hashedPassword = await bcrypt.hash(password, 10);
+        const hashedPassword = await bcrypt.hash(password,10);
         //to hash the password, 10 rounds of salting for better security 
         //(the salt is a random string added to the password (the "salt")before hashing it)
 
