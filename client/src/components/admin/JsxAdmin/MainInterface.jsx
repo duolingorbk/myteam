@@ -6,9 +6,6 @@ const AdminInterface = () => {
   const [users, setUsers] = useState([]);
   const [show, setShow] = useState(false);
   const [refresh, setRefresh] = useState(false);
-
-  console.log("Local Storage" , JSON.parse(localStorage.getItem('user')));
-  
   
 
   useEffect(() => {

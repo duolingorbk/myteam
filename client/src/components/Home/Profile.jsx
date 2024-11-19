@@ -21,10 +21,6 @@ const Profile = () => {
     }
   };
 
-  const setLessonProgress = (lessonId, progress) => {
-    localStorage.setItem(`lesson${lessonId}Progress`, progress.toString());
-  };
-
   const calculateAverageProgress = (lessonsArray) => {
     if (!lessonsArray.length) return 0;
 
