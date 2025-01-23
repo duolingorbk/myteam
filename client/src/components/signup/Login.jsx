@@ -46,8 +46,8 @@ const Login = () => {
     };
     return (
         <div className="login-container">
-            <h2 className="login-title">Login</h2>
             <form className="login-form" onSubmit={handleLogin}>
+            <h2 className="login-title">Login</h2>
                 <div className="form-group">
                     <label htmlFor="email" className="form-label">Email Address</label>
                     <input
@@ -85,14 +85,14 @@ const Login = () => {
                 <button type="submit" className="login-button"  >Login</button>
 
               
-
-               
-            </form>
             <div className="signup-link">
                     <p>
                         Don't have an account? <a  className="signup-link-text" onClick={()=>navigate("/user/signup")}>Sign up</a>
                     </p>
                 </div>
+
+               
+            </form>
         </div>
     );
 };

@@ -50,6 +50,7 @@ const Profile = () => {
   const handleAvatar = async (id) => {
     try {
       const res = await axios.get(`http://localhost:3000/user/image/${id}`);
+      console.log(res.data); 
       setAvatar(res.data.image);
     } catch (err) {
       console.error("Error fetching avatar:", err);
@@ -123,7 +124,7 @@ const Profile = () => {
         <div className="stat-card">
           <i className="fas fa-chart-line"></i>
           <h3>Overall Progress</h3>
-          <div className="progress-container">
+          <div className="Profileprogress-container">
             <div className="progress-bar">
               <div 
                 className="progress-fill" 
@@ -140,7 +141,7 @@ const Profile = () => {
         </div>
       </div>
 
-      <div className="lessons-progress">
+      <div className="profileLessons-progress">
         <h2>Lesson Progress</h2>
         <div className="lessons-grid">
           {lessons.map((lesson) => {

@@ -1,7 +1,7 @@
 import React, { useState, useEffect } from 'react';
 import axios from 'axios';
 import { useParams, useLocation, useNavigate } from 'react-router-dom';
-import './Questions.css'
+import './Questions.css';
 
 export default function Questions() {
   const { lessonId } = useParams();
@@ -11,59 +11,33 @@ export default function Questions() {
   const [questions, setQuestions] = useState([]);
   const [answers, setAnswers] = useState([]);
   const [currentQuestionIndex, setCurrentQuestionIndex] = useState(0);
-  const [lessonIDD, setLessonIDD] = useState(parseInt(lessonId));
-  const [progress, setProgress] = useState(0);
-  const [resultProgress, setResultProgress] = useState(0);
+  const [correctAnswersCount, setCorrectAnswersCount] = useState(0);
   const [lessonCompleted, setLessonCompleted] = useState(false);
   const [showProgress, setShowProgress] = useState(false);
-  const [lessons, setLessons] = useState([]);
 
-  
   useEffect(() => {
-    const fetchLessons = async () => {
+    const fetchQuestions = async () => {
       try {
-        if (!location.state?.lessons) {
-          const response = await axios.get('http://localhost:3000/lessons');
-          setLessons(response.data);
-        } else {
-          setLessons(location.state.lessons);
-        }
+        const res = await axios.get(`http://localhost:3000/questions/all/${lessonId}`);
+        setQuestions(res.data);
+        setCurrentQuestionIndex(0);
+        setCorrectAnswersCount(0);
+        setShowProgress(false);
       } catch (err) {
-        console.log("Error fetching lessons:", err);
-        setLessons([]);
+        console.log("Error fetching questions:", err);
       }
     };
-    fetchLessons();
-  }, [location.state]);
-
-
-  const fetchQuestions = async () => {
-    try {
-      const res = await axios.get(`http://localhost:3000/questions/all/${lessonIDD}`);
-      setQuestions(res.data);
-      console.log('Questions:', res.data);
-      setCurrentQuestionIndex(0);
-      setProgress(0);
-      setResultProgress(0);
-      setShowProgress(false);
-    } catch (err) {
-      console.log("Error fetching questions:", err);
-    }
-  }
+    fetchQuestions();
+  }, [lessonId]);
 
   const fetchAnswers = async (questionId) => {
     try {
       const res = await axios.get(`http://localhost:3000/Answers/all/${questionId}`);
       setAnswers(res.data);
-      console.log('Answers for question', questionId, ':', res.data);
     } catch (err) {
       console.log("Error fetching answers:", err);
     }
   };
-
-  useEffect(() => {
-    fetchQuestions();
-  }, [lessonIDD]);
 
   useEffect(() => {
     if (questions.length > 0) {
@@ -73,95 +47,76 @@ export default function Questions() {
 
   const incrementQuestion = () => {
     if (currentQuestionIndex < questions.length - 1) {
-      setCurrentQuestionIndex((prevIndex) => prevIndex + 1);
+      setCurrentQuestionIndex(prevIndex => prevIndex + 1);
     } else {
       setLessonCompleted(true);
       setShowProgress(true);
     }
   };
 
-  const progressForLesson = function (answerId) {
+  const handleAnswerClick = (answerId) => {
     const answer = answers.find(elem => elem.id === answerId);
     if (answer && answer.status === 1) {
-      setProgress(prev => prev + 1);
+      setCorrectAnswersCount(prevCount => prevCount + 1);
     }
-  };
-
-  const handleProgress = function (id) {
-    progressForLesson(id);
-    percentageProgress();
     incrementQuestion();
   };
 
-  const percentageProgress = function () {
-    if (answers.length > 0) {
-      const result = (progress / answers.length) * 100;
-      setResultProgress(result);
-    }
+  const calculateProgress = () => {
+    if (correctAnswersCount === 1) return 33.33;
+    if (correctAnswersCount === 2) return 66.67;
+    if (correctAnswersCount === 3) return 100;
+    return 0;
   };
 
+  useEffect(() => {
+    const progress = calculateProgress();
+    localStorage.setItem(`lesson${lessonId}Progress`, progress);
+  }, [correctAnswersCount, lessonId]);
+
   const handleNextLesson = () => {
-    if (lessons.length === 0) {
-      console.log("No lessons available.");
-      navigate('/lessons');
-      return;
-    }
-
-    const currentLessonIndex = lessons.findIndex(lesson => lesson.id === lessonIDD);
-    
-    if (currentLessonIndex === -1 || currentLessonIndex >= lessons.length - 1) {
-      navigate('/lessons');
-      return;
-    }
-
- 
-    const nextLesson = lessons[currentLessonIndex + 1];
-    
-    
-    navigate(`/questions/${nextLesson.id}`, {
-      state: { lessons: lessons }
-    });
-
-
-    setLessonIDD(nextLesson.id);
+    navigate(`/lessons`);
   };
 
   return (
     <div className='questions-container'>
       {lessonCompleted ? (
-        <div>
-          <h2>Good Job! You've completed this lesson!</h2>
-          <h3>Your Progress: {resultProgress}%</h3>
-          <div>
-            <button className='bt' onClick={handleNextLesson}>
+        correctAnswersCount === 3 ? (
+          <>
+            <h2>Good Job! You've completed this lesson!</h2>
+            <h3>Your Progress: {calculateProgress()}%</h3>
+            <button className='gotonext' onClick={handleNextLesson}>
               Go to Next Lesson
             </button>
-            <button className='bt' onClick={() => navigate('/lessons')}>
+          </>
+        ) : (
+          <>
+            <h2>Sorry! You failed this lesson!</h2>
+            <h3>Your Progress: {calculateProgress()}%</h3>
+            <button className='backtolesson' onClick={() => navigate('/lessons')}>
               Back to Lessons
             </button>
-          </div>
-        </div>
+          </>
+        )
       ) : (
         <>
           {showProgress && (
             <div className="progress-bar">
-              <div className="progress-bar-filled" style={{ width: `${resultProgress}%` }}></div>
+              <div className="progress-bar-filled" style={{ width: `${calculateProgress()}%` }}></div>
             </div>
           )}
-
           {questions.length ? (
             <>
               <h2 className='question-number-render'>
                 Question {currentQuestionIndex + 1}
               </h2>
               <h3 className='question-render'>{questions[currentQuestionIndex].content}</h3>
-
               <div className="answers-container">
                 {answers.map((answer, index) => (
-                  <button 
-                    className="answer-item" 
-                    key={index} 
-                    onClick={() => handleProgress(answer.id)}
+                  <button
+                    className="answer-item"
+                    key={index}
+                    onClick={() => handleAnswerClick(answer.id)}
                   >
                     {answer.content}
                   </button>
@@ -169,12 +124,11 @@ export default function Questions() {
               </div>
             </>
           ) : (
-            <div>
-              <h2>Loading...</h2>
-            </div>
+            <h2>Loading...</h2>
           )}
         </>
       )}
     </div>
   );
+  
 }

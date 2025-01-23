@@ -1,7 +1,7 @@
 import React, { useState, useEffect } from 'react';
 import axios from 'axios';
 import { useNavigate } from 'react-router-dom';
-import "../../admin/css/Lessons.css";
+import "../../admin/css/AdminLessons.css";
 
 const Languages = () => {
   const navigate = useNavigate();

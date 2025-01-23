@@ -31,11 +31,11 @@ const Signup = () => {
     const data = new FormData();
     data.append('file', image);
     data.append('upload_preset', 'speakeasy');
-    data.append('cloud_name', 'dog9364lq');
+    data.append('cloud_name', 'dc9siq9ry');
     console.log(image)
 
     try {
-      const response = await axios.post("https://api.cloudinary.com/v1_1/dog9364lq/image/upload", data);
+      const response = await axios.post("https://api.cloudinary.com/v1_1/dc9siq9ry/image/upload", data);
       setImageUrl(response.data.secure_url);
       console.log(imageUrl)
     } catch (error) {
@@ -78,8 +78,8 @@ const Signup = () => {
 
   return (
     <div className="signup-container">
-      <h3>Join us!</h3>
       <form className='signup-form'>
+      <h3>Join us!</h3>
         <div>
           <label htmlFor="fullName"></label>
           <input
@@ -125,7 +125,7 @@ const Signup = () => {
             type="file"
             onChange={(e) => setImage(e.target.files[0])}
           />
-          <button onClick={handleImageUpload}>Upload</button>
+          <button className='upload-button' onClick={handleImageUpload}>Upload</button>
         </div>
 
         {error && (
@@ -134,15 +134,15 @@ const Signup = () => {
           </div>
         )}
 
-        <button type="button" onClick={handleAddUser}>
+        <button  className='signup-button'type="button" onClick={handleAddUser}>
           Sign Up
         </button>
-      </form>
       <div className="signup-link">
                     <p>
                         You already have an account? <a  className="login-link-text" onClick={()=>navigate("/user/login")}>Login</a>
                     </p>
                 </div>
+      </form>
     </div>
   );
 };

@@ -1,30 +1,146 @@
-/* General container for lessons */
-.lessons-container {
-  padding: 20px;
-  text-align: center;
+.lesson-cards-container {
+  display: grid;
+  grid-template-columns: repeat(auto-fill, minmax(250px, 1fr));
+  gap: 20px;
+  padding: 20px 0;
 }
+
+.lesson-card {
+  background: linear-gradient(135deg, #4a00e0, #8e2de2);
+  border-radius: 15px;
+  padding: 25px;
+  box-shadow: 0 6px 12px rgba(0, 0, 0, 0.15);
+  transition: transform 0.3s ease, box-shadow 0.3s ease;
+  cursor: pointer;
+  text-align: left;
+  position: relative;
+  overflow: hidden;
+  height: 250px;
+  display: flex;
+  flex-direction: column;
+  justify-content: space-between;
+  color: #fff;
+}
+
+.lesson-card:hover {
+  transform: translateY(-10px);
+  box-shadow: 0 12px 24px rgba(0, 0, 0, 0.25);
+}
+
+.lesson-card h3 {
+  font-size: 1.6rem;
+  margin: 10px 0;
+  font-weight: bold;
+  color: #fff;
+  text-shadow: 0 0 5px rgba(255, 255, 255, 0.3);
+}
+
+.lesson-card p {
+  font-size: 1rem;
+  color: #f0f0f0;
+  margin: 10px 0;
+  text-shadow: 0 0 5px rgba(255, 255, 255, 0.2);
+}
+
+.lesson-card .lesson-info {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  font-size: 1rem;
+  color: #f0f0f0;
+}
+
+.lesson-card .lesson-info .difficulty {
+  display: flex;
+  align-items: center;
+}
+
+.lesson-card .lesson-info .difficulty .emoji {
+  font-size: 1.5rem;
+  margin-right: 5px;
+}
+
+.emoji.easy { color: #4CAF50; }
+.emoji.medium { color: #FF9800; }
+.emoji.hard { color: #F44336; }
+
+.lesson-card .lesson-info .date {
+  font-size: 0.9rem;
+  color: #f0f0f0;
+}
+
+.lesson-card .lesson-info .date span { color: #f7f7f7; }
+
+.lesson-card .lesson-info .date:hover {
+  text-decoration: underline;
+  cursor: pointer;
+}
+
+.lesson-card .emoji {
+  position: absolute;
+  top: 10px;
+  right: 10px;
+  font-size: 3rem;
+  transition: transform 0.3s ease-in-out;
+}
+
+.lesson-card:hover .emoji {
+  transform: rotate(15deg) scale(1.2);
+}
+
+.btn-lesson{
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  padding: 1rem 2rem;
+  font-size: 1.2rem;
+  border-radius: 8px;
+  text-transform: capitalize;
+  font-weight: bold;
+  cursor: pointer;
+  letter-spacing: 1px;
+  transition: transform 0.3s ease, box-shadow 0.3s ease;
+}
+
+
+
+
+.btn-lesson{
+  background: linear-gradient(135deg, #00bcd4, #009688);
+  color: #fff;
+  border: none;
+  box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+}
+
+.btn-lesson:hover {
+  background: linear-gradient(135deg, #009688, #00bcd4);
+  transform: scale(1.05);
+  box-shadow: 0 6px 12px rgba(0, 0, 0, 0.2);
+}
+ 
 
 .title {
   font-size: 2.5rem;
   font-weight: bold;
   text-align: center;
-  background: linear-gradient(to right, #ff7e5f, #feb47b); /* Gradient color */
-  -webkit-background-clip: text;
+  background: linear-gradient(to right, #ff7e5f, #feb47b);
+  -webkit-background-clip: text; 
   color: transparent;
-  animation: typing 3s steps(30) 1s forwards, glow 1.5s ease-in-out infinite alternate;
+  animation: typing 3s steps(30) 1s forwards, glow 1.2s ease-in-out infinite alternate;
   text-shadow: 0 0 10px rgba(255, 255, 255, 0.6), 0 0 20px rgba(255, 255, 255, 0.5);
   letter-spacing: 2px;
 }
 
 @keyframes typing {
   from {
+    width: 0; 
     opacity: 0;
   }
   to {
+    width: 100%; 
     opacity: 1;
   }
 }
-
 @keyframes glow {
   0% {
     text-shadow: 0 0 5px #ff7e5f, 0 0 10px #feb47b, 0 0 15px #ff7e5f;
@@ -34,65 +150,3 @@
   }
 }
 
-/* Card container */
-.lesson-cards-container {
-  display: grid;
-  grid-template-columns: repeat(auto-fill, minmax(250px, 1fr));
-  gap: 20px;
-  padding: 20px 0;
-}
-
-/* Individual lesson card */
-.lesson-card {
-  background-color: #fff;
-  border-radius: 10px;
-  padding: 20px;
-  box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
-  transition: transform 0.3s ease, box-shadow 0.3s ease;
-  cursor: pointer;
-  text-align: left;
-  position: relative;
-  transform: perspective(500px) rotateX(0) rotateY(0);
-  transform-style: preserve-3d;
-  transition: all 0.3s ease-in-out;
-}
-
-.lesson-card:hover {
-  transform: perspective(500px) rotateX(10deg) rotateY(10deg); /* 3D effect */
-  box-shadow: 0 6px 12px rgba(0, 0, 0, 0.2);
-}
-
-.lesson-card h3 {
-  font-size: 1.5rem;
-  margin: 10px 0;
-}
-
-.lesson-card p {
-  font-size: 1rem;
-  color: #555;
-}
-
-/* Emoji styling */
-.emoji {
-  position: absolute;
-  top: 10px;
-  right: 10px;
-  font-size: 2.5rem;
-  transition: transform 0.3s ease-in-out;
-}
-
-.lesson-card:hover .emoji {
-  transform: rotate(15deg) scale(1.2); /* 3D and scaling effect */
-}
-
-.emoji.easy {
-  color: green;
-}
-
-.emoji.medium {
-  color: orange;
-}
-
-.emoji.hard {
-  color: red;
-}
