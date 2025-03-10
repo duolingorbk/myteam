@@ -46,8 +46,6 @@ const signup = async (req, res) => {
             });
         }
 
-
-
         const getuser = await db.User.findOne({//to check if we already have the user in the database with the same email address
             where: {
                 email: email
@@ -140,29 +138,38 @@ const updateUser = async (req, res) => {
 
 const login = async (req, res) => {
     try {
-        const {
-            email,
-            password,
-        } = req.body;
+        console.log('Login attempt - Request body:', req.body);
+        const { email, password } = req.body;
 
-        const user = await db.User.findOne({ where: { email } });//this is to find the user in the database with the email address the user used to login 
+        if (!email || !password) {
+            console.log('Login failed - Missing credentials');
+            return res.status(400).json({ message: 'Email and password are required' });
+        }
 
-        if (!user) {//if the email address is not in our database, an error message will be shown indicaing that we do not have this user
+        console.log('Searching for user with email:', email);
+        const user = await db.User.findOne({ where: { email } });
+
+        if (!user) {
+            console.log('Login failed - User not found:', email);
             return res.status(404).json({ message: 'User not found' });
         }
 
-        const isMatch = await bcrypt.compare(password, user.password);//this to compare if the given password is the same as the hashed one in our database
+        console.log('User found, comparing passwords');
+        const isMatch = await bcrypt.compare(password, user.password);
 
         if (!isMatch) {
-            return res.status(400).json({ message: 'Invalid credentials' });//if the password is not the same, it displays an error 
+            console.log('Login failed - Invalid password for user:', email);
+            return res.status(400).json({ message: 'Invalid credentials' });
         }
 
-        const token = jwt.sign(//json web token to give a token to the user once they are logged in 
-            { id: user.id, name: user.name, email: user.email },//the token will include these
+        console.log('Password match, generating token');
+        const token = jwt.sign(
+            { id: user.id, name: user.name, email: user.email },
             JWT_SECRET,
             { expiresIn: '1h' }
         );
 
+        console.log('Login successful for user:', email);
         return res.status(200).json({
             message: 'Login successful',
             user: {
@@ -175,12 +182,15 @@ const login = async (req, res) => {
         });
 
     } catch (error) {
-        console.log(error);
-        res.status(500).send(error);
+        console.error('Login error - Full error object:', error);
+        console.error('Login error - Stack trace:', error.stack);
+        console.error('Login error - Error message:', error.message);
+        return res.status(500).json({ 
+            message: 'Server error during login',
+            error: error.message,
+            stack: process.env.NODE_ENV === 'development' ? error.stack : undefined
+        });
     }
 };
-
-
-
 
 module.exports = { signup, login , findAllUsers , deleteUser , updateUser , getUserImage};

@@ -18,11 +18,13 @@ const createLesson = async (req, res) => {
       });
 
       for (const answer of question.answers) {
-        const status = answer.status === 'correct' ? 1 : 0;
+        const status = answer.status === 1 ? 1 : 0;
+        console.log(status);
+        
 
         await db.Answers.create({
           content: answer.content,
-          status,
+          status : status,
           QuestionId: createdQuestion.id,
         });
       }

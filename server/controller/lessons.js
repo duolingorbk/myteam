@@ -1,7 +1,6 @@
 // controller/lessons.js
 const db = require("../database/index");
 
-// Get all lessons by language
 const getAllLessons = async (req, res) => {
   try {
       const { language } = req.params;

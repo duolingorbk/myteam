@@ -13,13 +13,12 @@ const getAllAnswers = async (req, res) => {
 
 const getAnswers = async (req, res) => {
   try {
-      const answers = await db.Answers.findAll();  // fetch all questions
-  // log the fetched data
+      const answers = await db.Answers.findAll();  
 
-      res.send(answers);  // send the data in response
+      res.send(answers); 
   } catch (error) {
-      console.error("Error fetching questions:", error);  // log any errors
-      res.status(500).send(error);  // send a 500 error if something goes wrong
+      console.error("Error fetching questions:", error);
+      res.status(500).send(error);  
   }
 };
 

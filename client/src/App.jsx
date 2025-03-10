@@ -5,7 +5,7 @@ import Lessons from '../src/components/lesonss&&questions/lessons.jsx';
 import Questions from '../src/components/lesonss&&questions/Questions.jsx';
 import Home from './components/Home/Home.jsx';
 import Profile from './components/Home/Profile.jsx';
-import Navbar from './components/Home/Navbar.jsx';
+
 import Signup from "./components/signup/Signup.jsx"
 import Login from "./components/signup/Login.jsx"
 import AdminQuestions from './components/admin/JsxAdmin/AdminQuestions.jsx';
@@ -32,7 +32,7 @@ function App() {
   {user &&user.type === "user"  ? (
      <>
 
-     <Navbar />
+
      <div className="app-container">
        <Routes>
             <Route path="/" element={<Home />} />
